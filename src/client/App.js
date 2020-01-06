@@ -8,7 +8,15 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
 import React from 'react';
+import { Route, HashRouter, Switch } from 'react-router-dom';
 import './App.css';
+
+//Components
+import Overview from './components/Overview';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import Signup from './components/Signup';
+import Settings from './components/Settings';
 
 
 class App extends React.Component {
@@ -21,7 +29,7 @@ class App extends React.Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="#/">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
                   <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -38,6 +46,16 @@ class App extends React.Component {
               </Navbar.Collapse>
           </Navbar>
         </header>
+
+        <HashRouter>
+          <Switch>
+            <Route path="/" exact component={Overview}></Route>
+            <Route path="/login" component={Login}></Route>
+            <Route path="/profile" component={Profile}></Route>
+            <Route path="/signup" component={Signup}></Route>
+            <Route path="/settings" component={Settings}></Route>
+          </Switch>
+        </HashRouter>
 
         <h1 className="animated">splash</h1>
         <p>Your water measuring app</p>
