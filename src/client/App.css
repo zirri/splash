@@ -36,12 +36,16 @@ p {
     text-align: center;
 }
 
+.logoname {
+    font-family: 'Comfortaa';
+}
+
 .animated {
     margin: 30px auto 10px auto; 
     font-family: 'Comfortaa';
     font-size: 8rem;
     color: rgba(209, 233, 243, 0.534);
-    background-image: url('services/hicliparttwo.com.png');
+    background-image: url('../hicliparttwo.com.png');
     background-size: 200px;
     background-clip: text;
     -webkit-background-clip: text;
@@ -81,7 +85,7 @@ p {
         font-family: 'Comfortaa';
         font-size: 5rem;
         color: rgba(209, 233, 243, 0.534);
-        background-image: url('services/hicliparttwo.com.png');
+        background-image: url('../hicliparttwo.com.png');
         background-size: 120px;
         background-clip: text;
         -webkit-background-clip: text;

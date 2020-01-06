@@ -17,7 +17,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Brand href="#home" className="logoname">splash</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
@@ -39,7 +39,7 @@ class App extends React.Component {
           </Navbar>
         </header>
 
-        <h1 className="animated">Splash</h1>
+        <h1 className="animated">splash</h1>
         <p>Your water measuring app</p>
       </div>
     );
