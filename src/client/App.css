@@ -1,0 +1,76 @@
+/*GREEN-BLUE*/
+/* .App {
+    text-align: center;
+}
+
+.App h1 {
+    margin: 30px auto 10px auto;
+    font-family: 'Comfortaa';
+    font-size: 8rem;
+    color: rgba(248, 248, 200, 0.534);
+    background-image: url('services/hiclipart.com.png');
+    background-size: 800px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-repeat: repeat-x;
+    animation: water 15s linear infinite;
+}
+
+
+
+@keyframes water {
+     from {background-position: left 0 top -115px;}
+     to {background-position: left 800px top -115px;}
+}
+
+p {
+    font-family: 'Comfortaa';
+    color: rgb(19, 219, 186);
+} */
+
+
+
+
+/*BLUE*/
+.App {
+    text-align: center;
+}
+
+.App h1 {
+    margin: 30px auto 10px auto; 
+    font-family: 'Comfortaa';
+    font-size: 8rem;
+    color: rgba(209, 233, 243, 0.534);
+    background-image: url('services/hicliparttwo.com.png');
+    background-size: 200px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-repeat: repeat-x;
+    animation: water 8s linear infinite;
+}
+
+/*OR MOVING*/
+/* @keyframes water {
+     from {background-position: left 0 top 0;}
+     to {background-position: left 800px top -100px;}
+     } */
+
+/*OR COLOR GRADIENT*/
+/*
+@keyframes water {
+    from {background-position: left 0 top 0;}
+    to {background-position: left 800px top -100px;
+       color: rgba(0, 183, 255, 0.527);}
+    }
+*/
+
+/*OR STATIC*/
+
+@keyframes water {
+     from {background-position: left 0 top 0;}
+     to {background-position: left 800px top 0;}
+}
+p {
+    font-family: 'Comfortaa';
+    color: rgb(12, 140, 179);
+}
