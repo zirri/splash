@@ -17,6 +17,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Settings from './components/Settings';
+import Authenticate from './components/Authenticate';
 
 
 class App extends React.Component {
@@ -29,7 +30,7 @@ class App extends React.Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="#/">Home</Nav.Link>
+                <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
                   <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -49,7 +50,8 @@ class App extends React.Component {
 
         <HashRouter>
           <Switch>
-            <Route path="/" exact component={Overview}></Route>
+            <Route path="/" exact component={Authenticate}></Route>
+            <Route path="/home" component={Overview}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/profile" component={Profile}></Route>
             <Route path="/signup" component={Signup}></Route>
