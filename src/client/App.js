@@ -40,6 +40,8 @@ class App extends React.Component {
     </Form>
   </Navbar.Collapse>
 </Navbar>
+<h1>Splash</h1>
+      <p>Your water measuring app</p>
       </div>
     );
   }
