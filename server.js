@@ -17,6 +17,7 @@ app.use((req, res, next)=>{
   console.log(`New request of type ${method} to endpoint '${path}'`)
   next();
 })
+
 //Serving static files
 app.use(express.static('build'));
 
