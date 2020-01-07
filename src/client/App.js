@@ -28,21 +28,27 @@ import Week from './components/Week';
 
 class App extends React.Component {
   render(){
+    const DefaultContainer = () => (
+      <div className="container">
+        <Navigation />
+        <Route path="/home" component={Overview}></Route>
+        <Route path="/settings" component={Settings}></Route>
+        <Route path="/profile" component={Profile}></Route>
+      </div>
+    )
+
     return (
       <div className="App">
         <HashRouter >
-          <header className="App-header">
-            <Navigation />
-          </header>
           <Switch>
-            <Route path="/" exact component={Authenticate}></Route>
-            <Route path="/home" component={Overview}></Route>
+            <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={Login}></Route>
-            <Route path="/profile" component={Profile}></Route>
             <Route path="/signup" component={Signup}></Route>
-            <Route path="/settings" component={Settings}></Route>
+            <Route component={ DefaultContainer}></Route>
           </Switch>
         </HashRouter>
+
+        
       </div>
     );
   }
