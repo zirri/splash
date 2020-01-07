@@ -1,5 +1,5 @@
 import React from 'react';
-import { createUser } from '../services/users'
+import { createNewUser } from '../services/users'
 
 
 class Signup extends React.Component {
@@ -13,6 +13,7 @@ class Signup extends React.Component {
                 email: '',
                 password: '',
                 passwordcheck: '',
+                location: ''
             }
         }
     }
@@ -25,12 +26,17 @@ class Signup extends React.Component {
             }
         })
     }
+
+    async handleNewUserSubmit(name, handle, password) {
+        await createNewUser(name, handle, password);
+    }
+
     async checkPass(event) {
         const { history } = this.props;
-        const { name, email, password, passwordcheck} = this.state.SignUpForm;
+        const { name, email, password, passwordcheck, location} = this.state.SignUpForm;
 
         event.preventDefault();
-        if (!name || !email || !password || !passwordcheck) {
+        if (!name || !email || !password || !passwordcheck || !location) {
             throw new Error ('Input missing');
         }
 
@@ -38,7 +44,7 @@ class Signup extends React.Component {
             throw new Error ('Passwords do not match')
             }
 
-        await this.handleNewUserSubmit(name, email, password);
+        await this.handleNewUserSubmit(name, email, password, location);
         history.push('/')
     }
 
@@ -59,6 +65,11 @@ class Signup extends React.Component {
             </label>
             </div>
             <div>
+            <div>
+            <label>Location:
+                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}></input>
+            </label>
+            </div>
             <label>Password:
                 <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}></input>
             </label>
