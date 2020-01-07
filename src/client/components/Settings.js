@@ -3,7 +3,11 @@ import React from 'react';
 class Settings extends React.Component {
     render() {
         return (
-            <div>Settings</div>
+            <div>Settings
+                <p>Account</p>
+                <p>Notifications</p>
+                <p>Help</p>
+            </div>
         )
     }
 }
