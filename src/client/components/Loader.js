@@ -1,8 +1,17 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 
 class Loader extends React.Component {
+    componentDidMount() {
+        
+        setTimeout(() => {
+            const { history } = this.props;
+          history.replace('/home')
+          }, 2000);
+    }
+
     render() {
+    
         return (
             <div>
                 <h1 className="animated">splash</h1>
