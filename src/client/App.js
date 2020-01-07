@@ -18,6 +18,9 @@ import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Settings from './components/Settings';
 import Authenticate from './components/Authenticate';
+import RoomsAndMeters from './components/RoomsAndMeters';
+import Today from './components/Today';
+import Week from './components/Week';
 //Stretch:
 //Logout.Component
 //Error.Component
