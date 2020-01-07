@@ -2,7 +2,7 @@ import React from 'react';
 import { createSession } from '../services/session'
 import { Link } from 'react-router-dom'
 import Loader from './Loader'
-import { emailRegex } from 'email-regex';
+// import { emailRegex } from 'email-regex';
 
 class Login extends React.Component {
     constructor(props) {

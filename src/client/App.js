@@ -29,12 +29,12 @@ import Week from './components/Week';
 class App extends React.Component {
   render(){
     const DefaultContainer = () => (
-      <div className="container">
+      <>
         <Navigation />
         <Route path="/home" component={Overview}></Route>
         <Route path="/settings" component={Settings}></Route>
         <Route path="/profile" component={Profile}></Route>
-      </div>
+      </>
     )
 
     return (

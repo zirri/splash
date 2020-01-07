@@ -17,27 +17,24 @@ const stylesButton= {
  
 }
 
-const stylesNavbarNav= {
-  height: "100vh",
-  textAlign: "left"
-}
+
 
 
 class Navigation extends React.Component {
 
-    handleClick(){
-      console.log("I clicked this")
-    }
+    
     render() {
         return(
           <>
-            <Navbar className="ml-auto" bg="light" expand="lg">
+            <Navbar className="ml-auto "  bg="light" expand="lg" >
               <Navbar.Brand className="logoname ">splash</Navbar.Brand>
               <Navbar.Toggle type="button" aria-controls="responsive-navbar-nav"/>
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto" style={ stylesNavbarNav }>
-                  <Nav.Link href="/settings">Settings</Nav.Link>
-                  <Nav.Link href="/facts">Facts</Nav.Link>
+              <Navbar.Collapse id="basic-navbar-nav" >
+                <Nav className="mr-auto text-left"  >
+                  <Link to="/settings">Settings</Link>
+                  <Link to="/facts">Facts</Link>
+                  <Link to="/facts">Rooms and water </Link>
+                  <Link to="/logout">Log out</Link>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
