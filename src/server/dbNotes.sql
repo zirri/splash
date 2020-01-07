@@ -1,7 +1,10 @@
+-- create database
 CREATE DATABASE splash;
 
--- change to the new database
+-- change to the new database:
+\c splash
 
+-- create tables and dummy data
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR,

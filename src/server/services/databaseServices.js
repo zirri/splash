@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 const camelcaseKeys = require('camelcase-keys');
-const snakeCaseKeys = require('snakecase-keys')
+const snakeCaseKeys = require('snakecase-keys');
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL, 
@@ -18,6 +18,21 @@ async function getUserInformation(userid){
       users 
     WHERE 
       users.user_id=${userid};`
+  let user = await pool.query(sql);
+  user = camelcaseKeys(user.rows[0]);
+  return user;
+}
+
+async function getUserByEmail(email){
+  const sql = `
+    SELECT 
+      email, 
+      user_id, 
+      password
+    FROM 
+      users 
+    WHERE 
+      users.email='${email}';`
   let user = await pool.query(sql);
   user = camelcaseKeys(user.rows[0]);
   return user;
@@ -49,6 +64,7 @@ function getWaterUsage(userid){
 
 module.exports = {
   getUserInformation,
+  getUserByEmail,
   createNewUser,
   getWaterUsage
 }
