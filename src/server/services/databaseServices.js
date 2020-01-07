@@ -21,45 +21,51 @@ const users = [
 const waterUsage = [
   {
     id: 0,
-    userid: 1,
+    meterId: 123456,
     date: "2020-01-01 12:22",
     amount: 4,
+    userId: 1,
     room: 'bathroom',
     source: 'sink'
   },
   {
     id: 1,
-    userid: 1,
+    meterId: 123456,
     date: "2020-01-02 12:52",
     amount: 3,
+    userId: 1,
     room: 'bathroom',
-    source: 'shower'
+    source: 'sink'
   },
   {
     id: 2,
-    userid: 1,
+    meterId: 6789678,
     date: "2020-01-01 14:44",
     amount: 4,
-    room: 'kitchen',
+    userId: 1,
+    room: 'bathroom',
     source: 'sink'
   },
   {
     id: 3,
-    userid: 2,
+    meterId: 6789678,
     date: "2020-01-01 14:44",
     amount: 1,
-    room: 'kitchen',
+    userId: 1,
+    room: 'bathroom',
     source: 'sink'
   },
   {
     id: 4,
-    userid: 2,
+    meterId: 345678,
     date: "2020-01-01 14:44",
     amount: 1,
-    room: 'bathroom',
+    userId: 2,
+    room: 'kitchen',
     source: 'sink'
   }
 ];
+
 
 function getUserInformation(userid){
   const user = users.filter(user => user.userid == userid);
