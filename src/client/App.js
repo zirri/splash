@@ -34,7 +34,7 @@ class App extends React.Component {
         <Navigation />
         <Route path="/home" component={Overview}></Route>
         <Route path="/settings" component={Settings}></Route>
-        <Route path="/profile" component={Profile}></Route>
+        <Route path="/account" component={Account}></Route>
       </div>
     )
 
@@ -44,10 +44,6 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={Login}></Route>
-<<<<<<< HEAD
-            <Route path="/account" component={Account}></Route>
-=======
->>>>>>> 12abf7e9230146e8dab7badea3473fcbba56af48
             <Route path="/signup" component={Signup}></Route>
             <Route component={ DefaultContainer}></Route>
           </Switch>
