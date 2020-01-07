@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { Navbar,  } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const stylesBrand= {
@@ -14,27 +14,34 @@ const stylesBrand= {
 
 const stylesButton= {
   position: "absolute",
-
+ 
 }
+
+
 
 
 class Navigation extends React.Component {
 
-    handleClick(){
-      console.log("I clicked this")
-    }
+    
     render() {
         return(
           <>
-            <Navbar className="ml-auto" bg="light" expand="lg" fixed="top">
-              <Navbar.Brand style={ stylesBrand } href="#home" className="logoname navbar-center">splash</Navbar.Brand>
-              <Navbar.Toggle style= { stylesButton } onClick={this.handleClick.bind(this)}/>
-        
+            <Navbar className="ml-auto "  bg="light" expand="lg" >
+              <Navbar.Brand className="logoname ">splash</Navbar.Brand>
+              <Navbar.Toggle type="button" aria-controls="responsive-navbar-nav"/>
+              <Navbar.Collapse id="basic-navbar-nav" >
+                <Nav className="mr-auto text-left"  >
+                  <Link to="/settings">Settings</Link>
+                  <Link to="/facts">Facts</Link>
+                  <Link to="/facts">Rooms and water </Link>
+                  <Link to="/logout">Log out</Link>
+                </Nav>
+              </Navbar.Collapse>
             </Navbar>
             
-            <nav>
+            {/* <nav id="navbar-collapse">
               
-            </nav>
+            </nav> */}
           </>
         )
     }

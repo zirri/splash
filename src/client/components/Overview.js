@@ -1,21 +1,24 @@
 import React from 'react';
-import Today from './Today'
+import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import Today from './Today';
+import Week from './Week';
 
 
-
-
-//TODO: Create Today and Week and add into overview
 
 class Overview extends React.Component {
+    
+ 
     render() {
         return (
-            <div>Overview
+            
+            <div>
+                Overview
             <Today />
             <p>This week</p>
             </div>
-            
         )
     }
 }
 
-export default Overview
+export default Overview;
