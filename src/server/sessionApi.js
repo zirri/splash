@@ -1,7 +1,5 @@
 //Router file for endpoint /session. setting and cheking token 
 
-require('dotenv').config();
-
 const express = require('express');
 const router = express.Router();
 
