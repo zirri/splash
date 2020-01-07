@@ -2,7 +2,7 @@ import React from 'react';
 import { createSession } from '../services/session'
 import { Link } from 'react-router-dom'
 import Loader from './Loader'
-import { emailRegex } from 'email-regex';
+//import { emailRegex } from 'email-regex';
 
 class Login extends React.Component {
     constructor(props) {
@@ -55,7 +55,7 @@ class Login extends React.Component {
                     Email:
                     <input 
                     type="text"
-                    value = {this.state.loginForm.handle}
+                    value = {this.state.loginForm.email}
                     onChange={this.handleInputChange.bind(this, "email")}
                     ></input>
                 </label>

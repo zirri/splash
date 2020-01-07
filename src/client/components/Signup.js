@@ -45,7 +45,8 @@ class Signup extends React.Component {
 
        render() {
         return (
-            <div><h1>Sign up</h1>
+            <>
+            <h1>Sign up</h1>
             <form>
                 <div>
             <label>Full name:
@@ -54,7 +55,7 @@ class Signup extends React.Component {
             </div>
             <div>
             <label>Email:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.emailInputChange.bind(this, "email")}></input>
+                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}></input>
             </label>
             </div>
             <div>
@@ -68,7 +69,7 @@ class Signup extends React.Component {
             </label>
             </div>
             <button onClick={this.checkPass.bind(this)}>Sign up</button>
-            </form></div>
+            </form></>
         )
     }
 }
