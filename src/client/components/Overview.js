@@ -1,16 +1,19 @@
 import React from 'react';
-import Today from './Today'
+import { Link } from 'react-router-dom';
+import Today from './Today';
+import Week from './Week';
 
 
-
-
-//TODO: Create Today and Week and add into overview
 
 class Overview extends React.Component {
+ 
     render() {
         return (
-            <div>Overview
-            <Today />
+            <div>
+                <br />
+                Overview
+            <p>Today</p>
+            <Link to='/today'>Today</Link>
             <p>This week</p>
             </div>
             
@@ -18,4 +21,4 @@ class Overview extends React.Component {
     }
 }
 
-export default Overview
+export default Overview;

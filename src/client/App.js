@@ -14,13 +14,14 @@ import './App.css';
 import Navigation from './components/Navigation';
 import Overview from './components/Overview';
 import Login from './components/Login';
-import Profile from './components/Profile';
+import Account from './components/Account';
 import Signup from './components/Signup';
 import Settings from './components/Settings';
 import Authenticate from './components/Authenticate';
 import RoomsAndMeters from './components/RoomsAndMeters';
 import Today from './components/Today';
 import Week from './components/Week';
+import Facts from './components/Facts';
 //Stretch:
 //Logout.Component
 //Error.Component
@@ -38,7 +39,7 @@ class App extends React.Component {
             <Route path="/" exact component={Authenticate}></Route>
             <Route path="/home" component={Overview}></Route>
             <Route path="/login" component={Login}></Route>
-            <Route path="/profile" component={Profile}></Route>
+            <Route path="/account" component={Account}></Route>
             <Route path="/signup" component={Signup}></Route>
             <Route path="/settings" component={Settings}></Route>
           </Switch>
