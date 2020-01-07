@@ -11,12 +11,12 @@ class Overview extends React.Component {
  
     render() {
         return (
-            <main>
+            
+            <div>
                 Overview
-            <p>Today</p>
-            <Link to='/today'>Today</Link>
+            <Today />
             <p>This week</p>
-            </main>
+            </div>
         )
     }
 }

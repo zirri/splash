@@ -29,21 +29,31 @@ import Facts from './components/Facts';
 
 class App extends React.Component {
   render(){
+    const DefaultContainer = () => (
+      <div className="container">
+        <Navigation />
+        <Route path="/home" component={Overview}></Route>
+        <Route path="/settings" component={Settings}></Route>
+        <Route path="/profile" component={Profile}></Route>
+      </div>
+    )
+
     return (
       <div className="App">
         <HashRouter >
-          <header className="App-header">
-            <Navigation />
-          </header>
           <Switch>
-            <Route path="/" exact component={Authenticate}></Route>
-            <Route path="/home" component={Overview}></Route>
+            <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={Login}></Route>
+<<<<<<< HEAD
             <Route path="/account" component={Account}></Route>
+=======
+>>>>>>> 12abf7e9230146e8dab7badea3473fcbba56af48
             <Route path="/signup" component={Signup}></Route>
-            <Route path="/settings" component={Settings}></Route>
+            <Route component={ DefaultContainer}></Route>
           </Switch>
         </HashRouter>
+
+        
       </div>
     );
   }
