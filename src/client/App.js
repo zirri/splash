@@ -40,9 +40,6 @@ class App extends React.Component {
             <Route path="/settings" component={Settings}></Route>
           </Switch>
         </HashRouter>
-
-        <h1 className="animated">splash</h1>
-        <p>Your water measuring app</p>
       </div>
     );
   }
