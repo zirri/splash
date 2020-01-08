@@ -56,8 +56,7 @@ class Login extends React.Component {
     render() {
         const { error, isLoggingIn } = this.state;
         return (
-           
-            <>
+            <main>
                 <h1 className="animated">splash</h1>
                  <div>
                 {isLoggingIn ? <Loader {...this.props} /> : 
@@ -85,7 +84,7 @@ class Login extends React.Component {
                 {error && <p>Unable to log in: {error.message}</p>}
                 </div>
             
-            </>
+            </main>
         )
     }
 }

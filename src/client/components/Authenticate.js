@@ -13,7 +13,7 @@ class Authenticate extends React.Component {
     }
   }
   render() {
-    return <div>Authenticating...</div>;
+    return <main>Authenticating...</main>;
   }
 }
 

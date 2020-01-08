@@ -16,7 +16,7 @@ class Signup extends React.Component {
                 password: '',
                 passwordcheck: '',
                 location: '',
-                household: 0
+                household: 0,
             }
         }
     }
@@ -54,7 +54,7 @@ class Signup extends React.Component {
 
        render() {
         return (
-            <>
+            <main>
             <h1>Sign up</h1>
             <Form>
                 <Form.Group controlId="name">
@@ -94,7 +94,8 @@ class Signup extends React.Component {
             </Form.Label>
             </Form.Group>
             <Button onClick={this.checkPass.bind(this)}>Sign up</Button>
-            </Form></>
+            </Form>
+            </main>
         )
     }
 }
