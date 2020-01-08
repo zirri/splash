@@ -33,8 +33,17 @@ class Login extends React.Component {
     
         try { 
             this.setState({ isLoggingIn: true })
-     
+            const { token, error } = await createSession({ email, password });
+            if (error) {
+                throw new Error(error);
+            }
 
+            if (!token) {
+                throw new Error('No token received, try again.');
+            }
+            
+            localStorage.setItem('json_web_token', token)
+            history.push('/home');
         //try to implement emailRegex({exact: true}).test(email);
          
      } catch (error) {
@@ -48,6 +57,7 @@ class Login extends React.Component {
         return (
            
             <div>
+                <h1 className="animated">splash</h1>
                  <div>
                 {isLoggingIn ? <Loader {...this.props} /> : <form>
             <div>
