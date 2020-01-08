@@ -19,6 +19,9 @@ async function getUserInformation(userid){
     WHERE 
       users.user_id=${userid};`
   let user = await pool.query(sql);
+  if(!user.rows[0]){
+    return;
+  }
   user = camelcaseKeys(user.rows[0]);
   return user;
 }
@@ -34,6 +37,9 @@ async function getUserByEmail(email){
     WHERE 
       users.email='${email}';`
   let user = await pool.query(sql);
+  if(!user.rows[0]){
+    return;
+  }
   user = camelcaseKeys(user.rows[0]);
   return user;
 }
