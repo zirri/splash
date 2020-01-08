@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Tab, Tabs } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
 import settings from '../svg/Settings.svg';
@@ -12,6 +12,14 @@ import profile from '../svg/Profile.svg';
 
 
 class Navigation extends React.Component {
+
+  componentDidMount(){
+    try{
+
+    } catch(error){
+      console.log(error)
+    }
+  }
     
     render() {
         return(
@@ -25,6 +33,7 @@ class Navigation extends React.Component {
                 
                 <Nav  className="mr-auto text-left"  >
                   <img src={profile} alt="Logo"/> <h2 className="text-center">Full name</h2>
+                  <Nav.Link as={NavLink} to="/home" eventKey="home" >Home</Nav.Link>
                   <Nav.Link as={Link} eventKey="settings" to="/settings"style={{backgroundColor:"#F1F9FF"}} > 
                     <img src={settings} alt="Logo"/>
                     Settings
@@ -43,6 +52,7 @@ class Navigation extends React.Component {
                   </Nav.Link>
                 </Nav>
               </Navbar.Collapse>
+
             </Navbar>
             
           </header>
