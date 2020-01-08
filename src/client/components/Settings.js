@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Header from './Header';
 
 
 class Settings extends React.Component {
@@ -8,7 +7,6 @@ class Settings extends React.Component {
         
         return (
             <div>
-                <Header />
                 Settings
                 <p>Account</p>
                 <p>Notifications</p>
