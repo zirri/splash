@@ -1,5 +1,7 @@
+
 import React from 'react';
-// import ApexCharts from 'apexcharts';
+import ApexCharts from 'apexcharts';
+
 
 import { Button, ListGroup } from "react-bootstrap";
 
@@ -24,6 +26,6 @@ class RoomsAndMeters extends React.Component {
       </div>
     );
   }
-}
+} 
 
 export default RoomsAndMeters;
