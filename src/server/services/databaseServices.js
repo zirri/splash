@@ -57,9 +57,24 @@ async function createNewUser(user){
   return newUser;
 }
 
-function getWaterUsage(userid){
-  const waterUsageUser = waterUsage.filter(record => record.userid == userid);
-  return waterUsageUser;
+async function getWaterUsage(userid){
+  const sql = `
+    SELECT 
+      user_id, 
+      room,
+      source,
+      water_meters.meter_id,
+      timestamp,
+      amount
+    FROM 
+      water_meters, 
+      water_usage
+    WHERE 
+      water_meters.user_id = ${userid} AND
+      water_meters.meter_id = water_usage.meter_id;`
+  let waterUsage = await pool.query(sql);
+  waterUsage = waterUsage.rows.map(record => camelcaseKeys(record));
+  return waterUsage;
 }
 
 module.exports = {
