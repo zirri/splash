@@ -2,7 +2,9 @@ import React from 'react';
 import { createSession } from '../services/session'
 import { Link } from 'react-router-dom'
 import Loader from './Loader'
-// import { emailRegex } from 'email-regex';
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
 
 class Login extends React.Component {
     constructor(props) {
@@ -44,7 +46,6 @@ class Login extends React.Component {
             
             localStorage.setItem('json_web_token', token)
             history.push('/home');
-        //try to implement emailRegex({exact: true}).test(email);
          
      } catch (error) {
          this.setState({ error, isLoggingIn: false });
@@ -59,33 +60,35 @@ class Login extends React.Component {
             <div>
                 <h1 className="animated">splash</h1>
                  <div>
-                {isLoggingIn ? <Loader {...this.props} /> : <form>
-            <div>
-                <label>
+                {isLoggingIn ? <Loader {...this.props} /> : 
+            
+            <Form>
+            <Form.Group controlId="email">
+                <Form.Label>
                     Email:
-                    <input 
+                    {/* <input 
                     type="text"
                     value = {this.state.loginForm.email}
                     onChange={this.handleInputChange.bind(this, "email")}
-                    ></input>
-                </label>
-            </div>
-            <div>
-                <label>
+                    ></input> */}
+                    <Form.Control type="email" placeholder="enter email" />
+                </Form.Label>
+            </Form.Group>
+            <Form.Group controlId="password">
+                <Form.Label>
                     Password:
-                    <input 
+                    {/* <input 
                     type="password"
                     value = {this.state.loginForm.password}
                     onChange={this.handleInputChange.bind(this, "password")}
-                    ></input>
-                </label>
-            </div>
-            <div>
-                <button onClick={this.handleLoginAttempt.bind(this)}>Login</button>
+                    ></input> */}
+                    <Form.Control type="password" placeholder="enter password" />
+                </Form.Label>
+            </Form.Group>
+                <Button onClick={this.handleLoginAttempt.bind(this)}>Login</Button>
                 <br></br>
                 <Link to='/signup'>Sign up</Link>
-            </div>
-        </form>
+        </Form>
 }
                 {error && <p>Unable to log in: {error.message}</p>}
                 </div>

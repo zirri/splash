@@ -1,5 +1,8 @@
 import React from 'react';
 import { createNewUser } from '../services/users'
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
 
 
 class Signup extends React.Component {
@@ -53,39 +56,45 @@ class Signup extends React.Component {
         return (
             <>
             <h1>Sign up</h1>
-            <form>
-                <div>
-            <label>Full name:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "name")}></input>
-            </label>
-            </div>
-            <div>
-            <label>Email:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}></input>
-            </label>
-            </div>
-            <div>
-            <div>
-            <label>Password:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}></input>
-            </label>
-            </div>
-            <div>
-            <label>Confirm password:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "passwordcheck")}></input>
-            </label>
-            </div>
-            <label>Location:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}></input>
-            </label>
-            </div>
-            <div>
-            <label>People in household:
-                <input type="number" min="1" max="6" placeholder="1" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}></input>
-            </label>
-            </div>
-            <button onClick={this.checkPass.bind(this)}>Sign up</button>
-            </form></>
+            <Form>
+                <Form.Group controlId="name">
+            <Form.Label>Full name:
+                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "name")}></input> */}
+                <Form.Control type="name" placeholder="enter full name" />
+            </Form.Label>
+            </Form.Group>
+            <Form.Group controlId="email">
+            <Form.Label>Email:
+                <Form.Control type="email" placeholder="enter email" />
+                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}></input> */}
+            </Form.Label>
+            </Form.Group>
+            <Form.Group controlId="password">
+            <Form.Label>Password:
+                <Form.Control type="password" placeholder="enter password" />
+                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}></input> */}
+            </Form.Label>
+            </Form.Group>
+            <Form.Group controlId="confirmpassword">
+            <Form.Label>Confirm password:
+                <Form.Control type="password" placeholder="repeat password" />
+                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "passwordcheck")}></input> */}
+            </Form.Label>
+            </Form.Group>
+            <Form.Group controlId="location">
+            <Form.Label>Location:
+                <Form.Control type="location" placeholder="enter location" />
+                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}></input> */}
+            </Form.Label>
+            </Form.Group>
+            <Form.Group controlId="household">
+            <Form.Label>People in household:
+                <Form.Control type="number" />
+                {/* <input type="number" min="1" max="6" placeholder="1" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}></input> */}
+            </Form.Label>
+            </Form.Group>
+            <Button onClick={this.checkPass.bind(this)}>Sign up</Button>
+            </Form></>
         )
     }
 }
