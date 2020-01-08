@@ -48,7 +48,7 @@ class Signup extends React.Component {
             }
 
         await this.handleNewUserSubmit(name, email, password, location, household);
-        history.push('/account')
+        history.push('/login')
     }
 
 
@@ -59,38 +59,38 @@ class Signup extends React.Component {
             <Form>
                 <Form.Group controlId="name">
             <Form.Label>Full name:
-                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "name")}></input> */}
-                <Form.Control type="name" placeholder="enter full name" />
+                <Form.Control type="text" placeholder="enter full name" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "name")} />
             </Form.Label>
             </Form.Group>
             <Form.Group controlId="email">
             <Form.Label>Email:
-                <Form.Control type="email" placeholder="enter email" />
-                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}></input> */}
+                <Form.Control type="text" placeholder="enter email" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}/>
             </Form.Label>
             </Form.Group>
             <Form.Group controlId="password">
             <Form.Label>Password:
-                <Form.Control type="password" placeholder="enter password" />
-                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}></input> */}
+                <Form.Control type="password" placeholder="enter password" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}/>
             </Form.Label>
             </Form.Group>
             <Form.Group controlId="confirmpassword">
             <Form.Label>Confirm password:
-                <Form.Control type="password" placeholder="repeat password" />
-                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "passwordcheck")}></input> */}
+                <Form.Control type="password" placeholder="repeat password" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "passwordcheck")}/>
             </Form.Label>
             </Form.Group>
             <Form.Group controlId="location">
             <Form.Label>Location:
-                <Form.Control type="location" placeholder="enter location" />
-                {/* <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}></input> */}
+                <Form.Control type="text" placeholder="enter location" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}/>
             </Form.Label>
             </Form.Group>
             <Form.Group controlId="household">
             <Form.Label>People in household:
-                <Form.Control type="number" />
-                {/* <input type="number" min="1" max="6" placeholder="1" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}></input> */}
+                <Form.Control as="select" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                </Form.Control>
             </Form.Label>
             </Form.Group>
             <Button onClick={this.checkPass.bind(this)}>Sign up</Button>

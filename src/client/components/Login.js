@@ -57,7 +57,7 @@ class Login extends React.Component {
         const { error, isLoggingIn } = this.state;
         return (
            
-            <div>
+            <>
                 <h1 className="animated">splash</h1>
                  <div>
                 {isLoggingIn ? <Loader {...this.props} /> : 
@@ -66,23 +66,15 @@ class Login extends React.Component {
             <Form.Group controlId="email">
                 <Form.Label>
                     Email:
-                    {/* <input 
-                    type="text"
-                    value = {this.state.loginForm.email}
-                    onChange={this.handleInputChange.bind(this, "email")}
-                    ></input> */}
-                    <Form.Control type="email" placeholder="enter email" />
+                    <Form.Control type="text" placeholder="enter email"  value = {this.state.loginForm.email}
+                    onChange={this.handleInputChange.bind(this, "email")} />
                 </Form.Label>
             </Form.Group>
             <Form.Group controlId="password">
                 <Form.Label>
                     Password:
-                    {/* <input 
-                    type="password"
-                    value = {this.state.loginForm.password}
-                    onChange={this.handleInputChange.bind(this, "password")}
-                    ></input> */}
-                    <Form.Control type="password" placeholder="enter password" />
+                    <Form.Control type="password" placeholder="enter password" value = {this.state.loginForm.password}
+                    onChange={this.handleInputChange.bind(this, "password")}/>
                 </Form.Label>
             </Form.Group>
                 <Button onClick={this.handleLoginAttempt.bind(this)}>Login</Button>
@@ -93,7 +85,7 @@ class Login extends React.Component {
                 {error && <p>Unable to log in: {error.message}</p>}
                 </div>
             
-            </div>
+            </>
         )
     }
 }
