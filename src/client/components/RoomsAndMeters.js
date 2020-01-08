@@ -29,6 +29,6 @@ class RoomsAndMeters extends React.Component {
       </div>
     );
   }
- 
+} 
 
 export default RoomsAndMeters;
