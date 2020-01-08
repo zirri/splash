@@ -17,7 +17,7 @@ export async function checkSession() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-Auth-Token': localStorage.getItem('token')
+            'X-Auth-Token': localStorage.getItem('json_web_token')
         }
     });
     return res.status === 200;
