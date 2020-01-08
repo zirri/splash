@@ -5,7 +5,6 @@ import { createNewUser } from '../services/users'
 class Signup extends React.Component {
     constructor(props) {
         super(props);
-
         
         this.state = {
             SignUpForm: {
@@ -14,7 +13,7 @@ class Signup extends React.Component {
                 password: '',
                 passwordcheck: '',
                 location: '',
-                household: 1
+                household: 0
             }
         }
     }
@@ -46,7 +45,7 @@ class Signup extends React.Component {
             }
 
         await this.handleNewUserSubmit(name, email, password, location, household);
-        history.push('/home')
+        history.push('/account')
     }
 
 
@@ -82,7 +81,7 @@ class Signup extends React.Component {
             </div>
             <div>
             <label>People in household:
-                <input type="number" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}></input>
+                <input type="number" min="1" max="6" placeholder="1" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}></input>
             </label>
             </div>
             <button onClick={this.checkPass.bind(this)}>Sign up</button>
