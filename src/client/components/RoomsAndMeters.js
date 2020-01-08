@@ -1,4 +1,7 @@
-import React from "react";
+
+import React from 'react';
+import ApexCharts from 'apexcharts';
+
 
 import { Button, ListGroup } from "react-bootstrap";
 
@@ -7,6 +10,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 
 class RoomsAndMeters extends React.Component {
+
   render() {
     return (
       <div>
@@ -25,6 +29,6 @@ class RoomsAndMeters extends React.Component {
       </div>
     );
   }
-}
+ 
 
 export default RoomsAndMeters;

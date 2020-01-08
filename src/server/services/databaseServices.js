@@ -1,69 +1,60 @@
 const { Pool } = require('pg');
+const camelcaseKeys = require('camelcase-keys');
+const snakeCaseKeys = require('snakecase-keys');
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL, 
   });
 
-const users = [
-  {
-    userid:1,
-    username: 'blobb',
-    password: 'passordblobb',
-    email: 'blobb@123.no'
-  },
-  {
-    userid:2,
-    username: 'blubb',
-    password: 'passordblubb',
-    email: 'blubb@123.no'
-  }
-];
+async function getUserInformation(userid){
+  const sql = `
+    SELECT 
+      email, 
+      full_name, 
+      user_id, 
+      location, 
+      no_in_household 
+    FROM 
+      users 
+    WHERE 
+      users.user_id=${userid};`
+  let user = await pool.query(sql);
+  user = camelcaseKeys(user.rows[0]);
+  return user;
+}
 
-const waterUsage = [
-  {
-    id: 0,
-    userid: 1,
-    date: "2020-01-01 12:22",
-    amount: 4,
-    room: 'bathroom',
-    source: 'sink'
-  },
-  {
-    id: 1,
-    userid: 1,
-    date: "2020-01-02 12:52",
-    amount: 3,
-    room: 'bathroom',
-    source: 'shower'
-  },
-  {
-    id: 2,
-    userid: 1,
-    date: "2020-01-01 14:44",
-    amount: 4,
-    room: 'kitchen',
-    source: 'sink'
-  },
-  {
-    id: 3,
-    userid: 2,
-    date: "2020-01-01 14:44",
-    amount: 1,
-    room: 'kitchen',
-    source: 'sink'
-  },
-  {
-    id: 4,
-    userid: 2,
-    date: "2020-01-01 14:44",
-    amount: 1,
-    room: 'bathroom',
-    source: 'sink'
-  }
-];
+async function getUserByEmail(email){
+  const sql = `
+    SELECT 
+      email, 
+      user_id, 
+      password
+    FROM 
+      users 
+    WHERE 
+      users.email='${email}';`
+  let user = await pool.query(sql);
+  user = camelcaseKeys(user.rows[0]);
+  return user;
+}
 
-function getUserInformation(userid){
-  const user = users.filter(user => user.userid == userid);
-  return user[0];
+async function createNewUser(user){
+  user = snakeCaseKeys(user);
+  const sql = `
+  INSERT INTO users (
+    email, 
+    password, 
+    full_name, 
+    location, 
+    no_in_household
+    )  
+  VALUES
+    ($1, $2, $3, $4, $5)
+  RETURNING *;`
+  const { email, password, full_name, location, no_in_household } = user;
+  let newUser = await pool.query(sql, [email, password, full_name, location, no_in_household]);
+  newUser = camelcaseKeys(newUser.rows[0]);
+  return newUser;
 }
 
 function getWaterUsage(userid){
@@ -73,5 +64,7 @@ function getWaterUsage(userid){
 
 module.exports = {
   getUserInformation,
+  getUserByEmail,
+  createNewUser,
   getWaterUsage
 }
