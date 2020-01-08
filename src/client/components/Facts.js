@@ -1,9 +1,13 @@
 import React from 'react'
 
+
 class Facts extends React.Component {
     render() {
         return (
-            <div>Facts</div>
+            <>
+            
+                <h1>Facts</h1>
+            </>
         )
     }
 }

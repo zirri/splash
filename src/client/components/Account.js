@@ -1,6 +1,8 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode';
 
+import Header from './Header';
+
 class Account extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,11 @@ class Account extends React.Component {
 
     render() {
         return (
+            <>
+            <Header />
+            
             <div>Account</div>
+            </>
         )
     }
 }
