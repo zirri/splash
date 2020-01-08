@@ -33,7 +33,6 @@ class App extends React.Component {
       <>
         <Navigation />
         <Route path="/home" component={Overview}></Route>
-        <Route path="/settings" component={Settings}></Route>
         <Route path="/account" component={Account}></Route>
       </>
     )
@@ -46,6 +45,8 @@ class App extends React.Component {
             <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/signup" component={Signup}></Route>
+            <Route path="/settings" component={Settings}></Route>
+            <Route path="/roomsandmeters" component={RoomsAndMeters}></Route>
             <Route component={ DefaultContainer}></Route>
           </Switch>
         </HashRouter>
