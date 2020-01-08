@@ -39,6 +39,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <main>
         <HashRouter >
           <Switch>
             <Route exact path="/" component={Authenticate}></Route>
@@ -49,7 +50,7 @@ class App extends React.Component {
             <Route component={ DefaultContainer}></Route>
           </Switch>
         </HashRouter>
-
+        </main>
         
       </div>
     );

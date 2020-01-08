@@ -1,5 +1,5 @@
 import React from 'react';
-import { createUser } from '../services/users'
+import { createNewUser } from '../services/users'
 
 
 class Signup extends React.Component {
@@ -13,6 +13,8 @@ class Signup extends React.Component {
                 email: '',
                 password: '',
                 passwordcheck: '',
+                location: '',
+                household: 1
             }
         }
     }
@@ -25,12 +27,17 @@ class Signup extends React.Component {
             }
         })
     }
+
+    async handleNewUserSubmit(name, handle, password, location, household) {
+        await createNewUser(name, handle, password, location, household);
+    }
+
     async checkPass(event) {
         const { history } = this.props;
-        const { name, email, password, passwordcheck} = this.state.SignUpForm;
+        const { name, email, password, passwordcheck, location, household} = this.state.SignUpForm;
 
         event.preventDefault();
-        if (!name || !email || !password || !passwordcheck) {
+        if (!name || !email || !password || !passwordcheck || !location) {
             throw new Error ('Input missing');
         }
 
@@ -38,14 +45,15 @@ class Signup extends React.Component {
             throw new Error ('Passwords do not match')
             }
 
-        await this.handleNewUserSubmit(name, email, password);
-        history.push('/')
+        await this.handleNewUserSubmit(name, email, password, location, household);
+        history.push('/home')
     }
 
 
        render() {
         return (
-            <div><h1>Sign up</h1>
+            <>
+            <h1>Sign up</h1>
             <form>
                 <div>
             <label>Full name:
@@ -54,9 +62,10 @@ class Signup extends React.Component {
             </div>
             <div>
             <label>Email:
-                <input type="text" value={this.state.SignUpForm.value} onChange={this.emailInputChange.bind(this, "email")}></input>
+                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}></input>
             </label>
             </div>
+            <div>
             <div>
             <label>Password:
                 <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}></input>
@@ -67,8 +76,17 @@ class Signup extends React.Component {
                 <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "passwordcheck")}></input>
             </label>
             </div>
+            <label>Location:
+                <input type="text" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}></input>
+            </label>
+            </div>
+            <div>
+            <label>People in household:
+                <input type="number" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}></input>
+            </label>
+            </div>
             <button onClick={this.checkPass.bind(this)}>Sign up</button>
-            </form></div>
+            </form></>
         )
     }
 }
