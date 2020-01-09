@@ -21,14 +21,14 @@ router.use('/metering/:waterMeterId', (req, res, next) => {
     next();
 })
 
-router.use('/:userid', (req, res, next) => {
+router.use('/user/:userid', (req, res, next) => {
     const { userid } = req.params;
-    if(userid==='metering'){ next();}
     const result = validateUserId(userid);
     if(result.error){
         return res.status(400).json({error: result.error});
+    }else{
+        next();
     }
-    next();
 })
 
 
