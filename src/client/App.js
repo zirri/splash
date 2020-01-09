@@ -22,49 +22,11 @@ import RoomsAndMeters from './components/RoomsAndMeters';
 import Today from './components/Today';
 import Week from './components/Week';
 import Facts from './components/Facts';
-import { extend } from 'joi';
-import { Router } from 'express';
+import withAuthentication from './higher-order-components/withAuthentication.js'
+
 //Stretch:
 //Logout.Component
 //Error.Component
-
-
-// class Authentication extends React.Component{
-//   constructor(props){
-//     super(props);
-
-//     this.state = {
-//       isAuthenicated: false
-//     }
-//   }
-//   componentDidMount(){
-//     const token = localStorage.getItem('json-web-token');
-//     const isValid = true; //her må tokenet sjekkes
-
-//     if(!isValid){
-//       Router.replace('/login');
-//     }else{
-//       this.setState({isAuthenicated:true})
-//     }
-//   }
-
-//   render(){
-//     const { isAuthenicated, children } = this.state;
-//     return isAuthenicated ? children : <div>is authenticaing</div>
-//   }
-// }
-
-function withAuthentication(Component){
-  return class extends React.Component{
-    render(){
-      return (
-        // <Authentication>
-          <Component {...this.props} />
-        // </Authentication>
-      )
-    }
-  }
-}
 
 class App extends React.Component {
   render(){
