@@ -1,104 +1,158 @@
 import React from 'react';
 import { createNewUser } from '../services/users'
-import Form from "react-bootstrap/Form";
-// import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
+import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import { Form, Row, InputGroup, Button, Card, Col } from 'react-bootstrap';
+import Login from './Login';
 
-
+const schema = yup.object({
+    name: yup.string().min(2, 'Name must be more than one character').required(),
+    email: yup.string().email('Please enter a valid email address').required(),
+    password: yup.string().min(6, 'Password too short (must consist of 6 characters)').required(),
+    passwordcheck: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required(),
+    location: yup.string().required(),
+    household: yup.number().min(1, 'Household must consist of at least one person').required(),
+  });
+  
 class Signup extends React.Component {
-    constructor(props) {
-        super(props);
+      render() {
+    return (
+        <main>
+      <Formik
+        validationSchema={schema}
         
-        this.state = {
-            SignUpForm: {
+        initialValues={{
                 name:'',
                 email: '',
                 password: '',
                 passwordcheck: '',
                 location: '',
                 household: 0,
-            }
-        }
-    }
+        }}
+        onSubmit={async (values) => {
+            await createNewUser(values.name, values.email, values.password, values.location, values.household);
+            const { history } = this.props;
+            history.push('/login');
+        }}
+      >
+        {({
+          handleSubmit,
+          handleChange,
+          isValid,
+          handleBlur,
+          values,
+          touched,
+          errors,
+        }) => (
+       
+          <Form noValidate onSubmit={handleSubmit}>
+              <h1>Sign up</h1>
+              <br />
+            <Form.Row>
+              <Form.Group as={Col} md="4" controlId="validationFormik01">
+                <Form.Label>Full name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  isValid={touched.name && !errors.name}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationFormik02">
+                <Form.Label>Email</Form.Label>
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                  </InputGroup.Prepend>
+                <Form.Control
+                  type="text"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  isValid={touched.email && !errors.email}
+                />
+  
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </InputGroup>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationFormikUsername">
+                <Form.Label>password</Form.Label>
+        
+                  <Form.Control
+                    type="password"
+                    placeholder="password"
+                    aria-describedby="inputGroupPrepend"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    isInvalid={!!errors.password}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.password}
+                  </Form.Control.Feedback>
+             
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} md="6" controlId="validationFormik03">
+                <Form.Label>confirm password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="confirm password"
+                  name="passwordcheck"
+                  value={values.passwordcheck}
+                  onChange={handleChange}
+                  isInvalid={!!errors.passwordcheck}
+                />
+  
+                <Form.Control.Feedback type="invalid">
+                  {errors.passwordcheck}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationFormik04">
+                <Form.Label>location</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="location"
+                  name="location"
+                  value={values.location}
+                  onChange={handleChange}
+                  isInvalid={!!errors.location}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.location}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationFormik05">
+                <Form.Label>household</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="number of people"
+                  name="household"
+                  value={values.household}
+                  onChange={handleChange}
+                  isInvalid={!!errors.household}
+                />
+  
+                <Form.Control.Feedback type="invalid">
+                  {errors.household}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            
+            <Button type="submit">Sign up</Button>
+          </Form>
+        )}
+      </Formik>
+      </main>
 
-    handleInputChange(field, event) {
-        this.setState({
-            SignUpForm: {
-                ...this.state.SignUpForm,
-                [field]: event.target.value,
-            }
-        })
-    }
-
-    async handleNewUserSubmit(name, handle, password, location, household) {
-        await createNewUser(name, handle, password, location, household);
-    }
-
-    async checkPass(event) {
-        const { history } = this.props;
-        const { name, email, password, passwordcheck, location, household} = this.state.SignUpForm;
-
-        event.preventDefault();
-        if (!name || !email || !password || !passwordcheck || !location) {
-            throw new Error ('Input missing');
-        }
-
-        if(password !== passwordcheck) {
-            throw new Error ('Passwords do not match')
-            }
-
-        await this.handleNewUserSubmit(name, email, password, location, household);
-        history.push('/login')
-    }
-
-
-       render() {
-        return (
-            <main>
-            <h1>Sign up</h1>
-            <Form>
-                <Form.Group controlId="name">
-            <Form.Label>Full name:
-                <Form.Control required type="text" placeholder="enter full name" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "name")} />
-            </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="email">
-            <Form.Label>Email:
-                <Form.Control required type="text" placeholder="enter email" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "email")}/>
-            </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="password">
-            <Form.Label>Password:
-                <Form.Control required type="password" placeholder="enter password" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "password")}/>
-            </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="confirmpassword">
-            <Form.Label>Confirm password:
-                <Form.Control required type="password" placeholder="repeat password" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "passwordcheck")}/>
-            </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="location">
-            <Form.Label>Location:
-                <Form.Control required type="text" placeholder="enter location" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "location")}/>
-            </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="household">
-            <Form.Label>People in household:
-                <Form.Control defaultValue="1" as="select" value={this.state.SignUpForm.value} onChange={this.handleInputChange.bind(this, "household")}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                </Form.Control>
-            </Form.Label>
-            </Form.Group>
-            <Button onClick={this.checkPass.bind(this)}>Sign up</Button>
-            </Form>
-            </main>
-        )
-    }
+    );
+  }
+  
 }
+  
 
-export default Signup;
-
+  export default Signup;
