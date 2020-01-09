@@ -19,7 +19,7 @@ app.use((req, res, next)=>{
 })
 
 //Serving static files
-app.use(express.static(path.join(__dirname, './build')));
+app.use(express.static(__dirname+'./build'));
 
 //Routing
 app.use('/api/user', userApi);
