@@ -13,11 +13,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-<<<<<<< HEAD
     "formik": "^2.1.1",
-=======
     "joi": "^14.3.1",
->>>>>>> f829bad281ff5e87ffa155d4cedd083ca12e46c2
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "pg": "^7.15.1",
