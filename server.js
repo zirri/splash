@@ -27,7 +27,10 @@ app.use('/api/session', sessionApi);
 app.use('/api/waterusage', waterUsageApi);
 
 //Listening to port
-const port = process.env.PORT;
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
 app.listen(port)
 console.log(`Running on port ${port}`);
