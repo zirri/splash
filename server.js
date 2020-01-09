@@ -28,7 +28,7 @@ app.use('/api/waterusage', waterUsageApi);
 
 //Listening to port
 let port = process.env.PORT;
-if (port == null || port == "") {
+if (port == null || port === "") {
   port = 8000;
 }
 
