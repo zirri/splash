@@ -35,8 +35,9 @@ class Overview extends React.Component {
 
   async componentDidMount() {
     try {
-
+        
       const { session } = this.state;
+      console.log(session.userId)
       const water = await getWaterUsage(session.userId);
       console.log(water);
 
