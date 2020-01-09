@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sessionApi = require('./src/server/sessionApi.js');
 const userApi = require('./src/server/userApi.js');
-const waterUsageApi = require('./src/server/waterUsageApi.js');
+const waterUsageApi = require('./src/server/waterusageApi.js');
 const app = express();
 
 //Middleware
