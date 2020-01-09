@@ -24,7 +24,7 @@ class Navigation extends React.Component {
     render() {
         return(
           <header>
-            <Navbar collapseOnSelect className="ml-auto "  bg="light" expand="lg" >
+            <Navbar collapseOnSelect className="ml-auto " bg="light" expand="lg" >
               <Navbar.Brand className="logoname ">
                 <NavLink to="/home">splash</NavLink>
               </Navbar.Brand>
@@ -37,7 +37,7 @@ class Navigation extends React.Component {
                   <Nav.Link as={Link} eventKey="settings" to="/settings"style={{backgroundColor:"#F1F9FF"}} > 
                     <img src={settings} alt="Logo"/>
                     Settings
-                  </Nav.Link>
+                  </Nav.Link> 
                   <Nav.Link  as={Link} eventKey="facts" to="/facts"style={{backgroundColor:"#BCE0FD"}} > 
                     <img src={facts} alt="Logo"/> 
                     Facts
