@@ -1,10 +1,8 @@
 import React from 'react';
-import { createNewUser } from '../services/users'
-import { Link } from 'react-router-dom';
+import { createNewUser } from '../services/users';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Form, Row, InputGroup, Button, Card, Col } from 'react-bootstrap';
-import Login from './Login';
+import { Form, InputGroup, Button, Col } from 'react-bootstrap';
 
 const schema = yup.object({
     name: yup.string().min(2, 'Name must be more than one character').required(),
