@@ -13,7 +13,7 @@ import './App.css';
 //Components
 import Navigation from './components/Navigation';
 import Overview from './components/Overview';
-import Login from './components/Login';
+import LoginFormik from './components/LoginFormik';
 import Account from './components/Account';
 import Signup from './components/Signup';
 import Settings from './components/Settings';
@@ -44,7 +44,7 @@ class App extends React.Component {
         <HashRouter >
           <Switch>
             <Route exact path="/" component={Authenticate}></Route>
-            <Route path="/login" component={Login}></Route>
+            <Route path="/login" component={LoginFormik}></Route>
             <Route path="/signup" component={Signup}></Route>
             <Route component={ DefaultContainer}></Route>
           </Switch>
