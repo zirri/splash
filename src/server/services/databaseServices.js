@@ -30,7 +30,7 @@ async function getUserByEmail(email){
   const sql = `
     SELECT 
       email, 
-      fullName,
+      full_name,
       user_id, 
       password
     FROM 
@@ -84,9 +84,29 @@ async function getWaterUsage(userid){
   return waterUsage;
 }
 
+
+async function updateWaterMetering(waterData){
+  waterData = snakeCaseKeys(waterData);
+  const sql = `
+  INSERT INTO users (
+    water_meter_id, 
+    timestamp,
+    amount
+    )  
+  VALUES
+    ($1, $2, $3)
+  RETURNING *;`
+  console.log(sql)
+  const { water_meter_id, timestamp, amount } = waterData;
+  let newRecord = await pool.query(sql, [water_meter_id, timestamp, amount]);
+  newRecord = camelcaseKeys(newRecord.rows[0]);
+  return newRecord;
+}
+
 module.exports = {
   getUserInformation,
   getUserByEmail,
   createNewUser,
-  getWaterUsage
+  getWaterUsage,
+  updateWaterMetering
 }
