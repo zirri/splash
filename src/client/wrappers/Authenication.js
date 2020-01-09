@@ -1,5 +1,5 @@
 import React from 'react';
-import jwtDecode from 'jwt-decode';
+import { checkSession } from '../services/session.js';
 
 
 class Authentication extends React.Component {
@@ -11,32 +11,20 @@ class Authentication extends React.Component {
       };
     }
   
-    checkAuth() {
+    async checkAuth() {
         const { history } = this.props;
-        const token = localStorage.getItem('json_web_token');
-        let isValidToken;
-        try{
-            const payload = jwtDecode.decode(token);
-            console.log(payload);
-            isValidToken = true;
-        }catch(error){
-            isValidToken = false;
-        }
+        const isAuthenticated = await checkSession();
   
-        if (!isValidToken) {
+        if (!isAuthenticated) {
             history.replace('/login');
         } else {
             this.setState({
             isAuthenticated: true,
             });
         }
-        }
-  
-    componentDidMount() {
-      this.checkAuth();
     }
   
-    componentDidUpdate() {
+    componentDidMount() {
       this.checkAuth();
     }
   
