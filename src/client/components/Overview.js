@@ -1,12 +1,23 @@
+//Plugins
 import React from "react";
-import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import Today from "./Today";
-import Week from "./Week";
 
-import { getWaterUsage } from "../services/water";
+//REACT-ROUTER-DOM
+import { Link } from "react-router-dom";
 
+
+//REACT-BOOTSTRAP
 import { Tabs, Tab, Card,} from "react-bootstrap";
+
+//REACT-CHARTJS-2
+import { Bar } from 'react-chartjs-2';
+
+//LOCAL COMPONENTS
+// import Today from "./Today";
+// import Week from "./Week";
+import Chart from './Chart';
+import { checkSession } from '../services/session'
+import { getWaterUsage } from "../services/water";
 import RoomsAndMeters from "./RoomsAndMeters";
 
 class Overview extends React.Component {
@@ -24,6 +35,7 @@ class Overview extends React.Component {
 
   async componentDidMount() {
     try {
+
       const { session } = this.state;
       const water = await getWaterUsage(session.userId);
       console.log(water);
@@ -77,6 +89,7 @@ class Overview extends React.Component {
                 <Card.Body>
                     {source}
                 </Card.Body>
+               <Chart />
                
             </Card>
           </Tab>

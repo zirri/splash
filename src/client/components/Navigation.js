@@ -24,7 +24,7 @@ class Navigation extends React.Component {
     render() {
         return(
           <header>
-            <Navbar collapseOnSelect className="ml-auto "  bg="light" expand="lg" >
+            <Navbar collapseOnSelect className="ml-auto " bg="dark" expand="lg" >
               <Navbar.Brand className="logoname ">
                 <NavLink to="/home">splash</NavLink>
               </Navbar.Brand>
