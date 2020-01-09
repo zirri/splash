@@ -34,24 +34,21 @@ class App extends React.Component {
         <Navigation />
         <Route path="/home" component={Overview}></Route>
         <Route path="/account" component={Account}></Route>
+        <Route path="/settings" component={Settings}></Route>
+        <Route path="/roomsandmeters" component={RoomsAndMeters}></Route>
       </>
     )
 
     return (
       <div className="App">
-        <main>
         <HashRouter >
           <Switch>
             <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/signup" component={Signup}></Route>
-            <Route path="/settings" component={Settings}></Route>
-            <Route path="/roomsandmeters" component={RoomsAndMeters}></Route>
             <Route component={ DefaultContainer}></Route>
           </Switch>
         </HashRouter>
-        </main>
-        
       </div>
     );
   }

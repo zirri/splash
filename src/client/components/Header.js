@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import { Navbar, Button, } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
 
 
@@ -17,15 +17,13 @@ class Header extends React.Component {
   
   render() {
       return(
-        <>
+        <header>
           <Navbar bg="light" expand="lg" >
-            <Navbar.Brand className="logoname ">splash</Navbar.Brand>
+            <Navbar.Brand className="logoname "><NavLink to="/home">splash</NavLink></Navbar.Brand>
             <Button onClick={this.handleViewChange.bind(this)}> back</Button>
             
           </Navbar>
-          
-         
-        </>
+        </header>
       )
   }
 }

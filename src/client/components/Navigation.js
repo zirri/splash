@@ -1,8 +1,8 @@
 import React from 'react';
 
 
-import { Navbar, Nav, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Nav, Tab, Tabs } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
 
 import settings from '../svg/Settings.svg';
 import facts from '../svg/Facts.svg';
@@ -11,47 +11,51 @@ import logout from '../svg/Logout.svg';
 import profile from '../svg/Profile.svg';
 
 
-const stylesBrand= {
-  // position: "absolute", 
-  // right:"50%",
-  width: "100%",
-  textAlign: "center",
-  margin:"0",
-}
-
-const stylesButton= {
-  position: "absolute",
- 
-}
-
-
-
-
 class Navigation extends React.Component {
 
+  componentDidMount(){
+    try{
+
+    } catch(error){
+      console.log(error)
+    }
+  }
     
     render() {
         return(
-          <>
-            <Navbar className="ml-auto "  bg="light" expand="lg" >
-              <Navbar.Brand className="logoname " href="/home">splash</Navbar.Brand>
-              <Navbar.Toggle type="button" aria-controls="responsive-navbar-nav"/>
-              <Navbar.Collapse id="basic-navbar-nav" >
+          <header>
+            <Navbar collapseOnSelect className="ml-auto "  bg="light" expand="lg" >
+              <Navbar.Brand className="logoname ">
+                <NavLink to="/home">splash</NavLink>
+              </Navbar.Brand>
+              <Navbar.Toggle  />
+              <Navbar.Collapse  id="basic-navbar-nav" >
                 
-                <Nav className="mr-auto text-left"  >
-                  <img src={profile} alt="Logo"/> <h2>Full name</h2>
-                  <Link style={{backgroundColor:"#F1F9FF"}} to="/settings"><img src={settings} alt="Logo"/> Settings</Link>
-                  <Link style={{backgroundColor:"#BCE0FD"}} to="/facts"><img src={facts} alt="Logo"/> Facts</Link>
-                  <Link style={{backgroundColor:"#80ACD2", color:"white"}} to="/roomsandmeters"><img src={rooms} alt="Logo"/> Rooms and water </Link>
-                  <Link style={{backgroundColor:"#1F65A1", color:"white"}} to="/logout"><img src={logout} alt="Logo"/> Log out</Link>
+                <Nav  className="mr-auto text-left"  >
+                  <img src={profile} alt="Logo"/> <h2 className="text-center">Full name</h2>
+                  <Nav.Link as={NavLink} to="/home" eventKey="home" >Home</Nav.Link>
+                  <Nav.Link as={Link} eventKey="settings" to="/settings"style={{backgroundColor:"#F1F9FF"}} > 
+                    <img src={settings} alt="Logo"/>
+                    Settings
+                  </Nav.Link>
+                  <Nav.Link  as={Link} eventKey="facts" to="/facts"style={{backgroundColor:"#BCE0FD"}} > 
+                    <img src={facts} alt="Logo"/> 
+                    Facts
+                  </Nav.Link> 
+                  <Nav.Link as={Link} eventKey="roomsandmeters" to="/roomsandmeters" style={{backgroundColor:"#80ACD2", color:"white"}} >
+                    <img src={rooms} alt="Logo"/> 
+                    Rooms and water 
+                  </Nav.Link>
+                  <Nav.Link as={Link} eventKey="logout" to="/logout" style={{backgroundColor:"#1F65A1", color:"white"}} to="/logout">
+                    <img src={logout} alt="Logo"/> 
+                    Log out
+                  </Nav.Link>
                 </Nav>
               </Navbar.Collapse>
+
             </Navbar>
             
-            {/* <nav id="navbar-collapse">
-              
-            </nav> */}
-          </>
+          </header>
         )
     }
 }
