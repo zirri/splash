@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sessionApi = require('./src/server/sessionApi.js');
 const userApi = require('./src/server/userApi.js');
-const waterUsageApi = require('./src/server/waterUsageApi.js');
+const waterUsageApi = require('./src/server/waterusageApi.js');
 const app = express();
 
 //Middleware
@@ -27,7 +27,10 @@ app.use('/api/session', sessionApi);
 app.use('/api/waterusage', waterUsageApi);
 
 //Listening to port
-const port = process.env.PORT;
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
 app.listen(port)
 console.log(`Running on port ${port}`);

@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     const { email, password } = req.body;
     const result = await logInAndGetToken(email, password);
     if(result.error){
-        res.status(result.status).send(result.error)
+        res.status(result.status).json({error: result.error})
     }
     res.json({token: result.token})
 });

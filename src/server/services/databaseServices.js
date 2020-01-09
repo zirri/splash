@@ -30,6 +30,7 @@ async function getUserByEmail(email){
   const sql = `
     SELECT 
       email, 
+      fullName,
       user_id, 
       password
     FROM 
