@@ -7,7 +7,7 @@ const { validateUserInput, validateUserId } = require('./services/inputValidatio
 //middleware
 router.use('/:userid', (req, res, next) => {
     const { userid } = req.params;
-    const result = validateUserId(userid);
+    const result = validateUserId(+userid);
     if(result.error){
         res.status(400).json({error: result.error});
     }else{
