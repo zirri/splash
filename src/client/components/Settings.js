@@ -6,12 +6,12 @@ class Settings extends React.Component {
     render() {
         
         return (
-            <div>
+            <main>
                 Settings
                 <p>Account</p>
                 <p>Notifications</p>
                 <p>Help</p>
-            </div>
+            </main>
         )
     }
 }
