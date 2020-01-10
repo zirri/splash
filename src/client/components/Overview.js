@@ -17,7 +17,7 @@ import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 
 //LOCAL COMPONENTS
 
-import { getWaterUsage } from "../services/water";
+import { getWaterUsageToday } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 
 class Overview extends React.Component {
@@ -29,15 +29,13 @@ class Overview extends React.Component {
 
     this.state = {
       usage: [],
-      session: payload,
-     
+      session: payload
     };
   }
 
   async componentDidMount() {
     try {
-      
-      const water = await getWaterUsage();
+      const water = await getWaterUsageToday();
       console.log(water);
 
       const usage = Object.values(
@@ -67,7 +65,6 @@ class Overview extends React.Component {
       console.log(error);
     }
   }
-
 
   render() {
     const { usage } = this.state;
@@ -103,11 +100,8 @@ class Overview extends React.Component {
       datasets: [
         {
           label: "waterUage",
-          data: [avarageWaterConsumption - totalUsage < 0
-            ? 0:  totalUsage],
-          backgroundColor: `${"#7FC4FD"
-          }`,
-        
+          data: [avarageWaterConsumption - totalUsage < 0 ? 0 : totalUsage],
+          backgroundColor: `${"#7FC4FD"}`
         },
         {
           label: "comparedData",
@@ -116,25 +110,27 @@ class Overview extends React.Component {
               ? 180
               : avarageWaterConsumption - totalUsage
           ],
-          backgroundColor: `${totalUsage > avarageWaterConsumption ? "red" : "#D5DEE5"}  ` 
+          backgroundColor: `${
+            totalUsage > avarageWaterConsumption ? "red" : "#D5DEE5"
+          } `
         }
       ]
     };
 
     return (
       <>
-        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example" >
-          <Tab eventKey="today" title="TODAY" >
-              <br></br>
-           
-           
-              <Carousel wrap="true" interval="10000000" >
-  
-  <Carousel.Item >
-    <h3> Your water usage: </h3>
-    <h3> {totalUsage} / {avarageWaterConsumption}L</h3>
-    
-    <HorizontalBar
+        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
+          <Tab eventKey="today" title="TODAY">
+            <br></br>
+
+            <Carousel wrap="true" interval="10000000">
+              <Carousel.Item>
+                <h3> Your water usage: </h3>
+                <h3>
+                  {totalUsage} / {avarageWaterConsumption}L
+                </h3>
+
+                <HorizontalBar
                   data={dataBar}
                   options={{
                     legend: {
@@ -144,7 +140,7 @@ class Overview extends React.Component {
                       enabled: false
                     },
                     hover: {
-                        mode: null
+                      mode: null
                     },
                     scales: {
                       xAxes: [
@@ -167,21 +163,20 @@ class Overview extends React.Component {
                   }}
                 />
 
-                {totalUsage < avarageWaterConsumption ? (
-                  <span style={{color:"#7FC4FD"}}>
-                    <FaThumbsUp size={48}/>
-                  </span>
-                ) : (
-                  <span style={{color:"#7FC4FD"}}>
-                    <FaThumbsDown size={48}/>
-                  </span>
-                )}
-      
-  </Carousel.Item>
-  <Carousel.Item>
-    <h3 style={{color: "black"}}>Overview</h3>
-    
-    
+                <>
+                  {totalUsage < avarageWaterConsumption ? (
+                    <span style={{ color: "#7FC4FD" }}>
+                      <FaThumbsUp size={48} />
+                    </span>
+                  ) : (
+                    <span style={{ color: "#7FC4FD" }}>
+                      <FaThumbsDown size={48} />
+                    </span>
+                  )}
+                </>
+              </Carousel.Item>
+              <Carousel.Item>
+                <h3 style={{ color: "black" }}>Overview</h3>
                 <Doughnut
                   data={data}
                   options={{
@@ -221,12 +216,8 @@ class Overview extends React.Component {
                     }
                   }}
                 />
-      
-  </Carousel.Item>
-</Carousel>
-
-
-
+              </Carousel.Item>
+            </Carousel>
           </Tab>
           <Tab eventKey="week" title="WEEK">
             <h2>WEEK</h2>
