@@ -11,8 +11,3 @@ export async function createNewUser(fullName, email, password, location, noInHou
     .then((res) => res.json())
 }
 
-export function getHandle(userId) {
-    return fetch(`${API_URL}/user/${userId}`
-    )
-    .then((res) => res.json())
-}
