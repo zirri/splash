@@ -96,7 +96,6 @@ p {
 
 .carousel {
     background-color: lightgray; 
-    height: 70vh;
 }
 
 .carousel-indicators li {
@@ -114,6 +113,3 @@ p {
     visibility: hidden
 }
 
-.carousel-item {
-    height: 60vh;
-}

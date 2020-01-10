@@ -111,10 +111,26 @@ async function updateWaterMetering(waterData){
   return newRecord;
 }
 
+async function getFacts() {
+  const sql = `
+  SELECT 
+    *
+  FROM 
+    facts
+  `
+  let facts = await pool.query(sql);
+  facts = camelcaseKeys(facts.rows)
+  if(!facts){
+    return "There are no facts available";
+  }
+  return facts;
+}
+
 module.exports = {
   getUserInformation,
   getUserByEmail,
   createNewUser,
   getWaterUsage,
-  updateWaterMetering
+  updateWaterMetering,
+  getFacts
 }
