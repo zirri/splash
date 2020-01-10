@@ -5,10 +5,11 @@ const cors = require('cors');
 const sessionApi = require('./src/server/sessionApi.js');
 const userApi = require('./src/server/userApi.js');
 const waterUsageApi = require('./src/server/waterusageApi.js');
+const factApi = require('./src/server/factApi.js');
 const app = express();
 
 //Middleware
-app.use(cors());
+//app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -25,6 +26,7 @@ app.use(express.static('build'));
 app.use('/api/user', userApi);
 app.use('/api/session', sessionApi);
 app.use('/api/waterusage', waterUsageApi);
+app.use('/api/facts', factApi);
 
 //Listening to port
 let port = process.env.PORT;

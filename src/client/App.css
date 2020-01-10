@@ -93,3 +93,23 @@ p {
         animation: water 8s linear infinite;
     }
 }
+
+.carousel {
+    background-color: lightgray; 
+}
+
+.carousel-indicators li {
+    background-color: #7FC4FD;
+    border-radius: 50%;
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+.carousel-control-prev-icon {
+    visibility: hidden
+}
+
+.carousel-control-next-icon {
+    visibility: hidden
+}
+

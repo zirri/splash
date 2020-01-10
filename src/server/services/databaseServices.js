@@ -7,6 +7,7 @@ const pool = new Pool({
   });
 
 async function getUserInformation(userid){
+  if(typeof userid != 'number'){return}
   const sql = `
     SELECT 
       email, 
@@ -17,8 +18,8 @@ async function getUserInformation(userid){
     FROM 
       users 
     WHERE 
-      users.user_id=${userid};`
-  let user = await pool.query(sql);
+      users.user_id=$1;`
+  let user = await pool.query(sql,[userid]);
   if(!user.rows[0]){
     return;
   }
@@ -27,6 +28,7 @@ async function getUserInformation(userid){
 }
 
 async function getUserByEmail(email){
+  if(typeof email != 'string'){return}
   const sql = `
     SELECT 
       email, 
@@ -36,8 +38,8 @@ async function getUserByEmail(email){
     FROM 
       users 
     WHERE 
-      users.email='${email}';`
-  let user = await pool.query(sql);
+      users.email=$1;`
+  let user = await pool.query(sql, [email]);
   if(!user.rows[0]){
     return;
   }
@@ -64,7 +66,12 @@ async function createNewUser(user){
   return newUser;
 }
 
-async function getWaterUsage(userid){
+async function getWaterUsage(userId, periodeStart){
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  if(typeof userId != 'number'){return}
   const sql = `
     SELECT 
       user_id, 
@@ -77,9 +84,10 @@ async function getWaterUsage(userid){
       water_meters, 
       water_usage
     WHERE 
-      water_meters.user_id = ${userid} AND
-      water_meters.meter_id = water_usage.meter_id;`
-  let waterUsage = await pool.query(sql);
+      water_meters.user_id = $1 AND
+      water_meters.meter_id = water_usage.meter_id AND
+      timestamp BETWEEN $2 AND $3;`
+  let waterUsage = await pool.query(sql, [userId, periodeStart ,tomorrow]);
   waterUsage = waterUsage.rows.map(record => camelcaseKeys(record));
   return waterUsage;
 }
@@ -103,10 +111,26 @@ async function updateWaterMetering(waterData){
   return newRecord;
 }
 
+async function getFacts() {
+  const sql = `
+  SELECT 
+    *
+  FROM 
+    facts
+  `
+  let facts = await pool.query(sql);
+  facts = camelcaseKeys(facts.rows)
+  if(!facts){
+    return "There are no facts available";
+  }
+  return facts;
+}
+
 module.exports = {
   getUserInformation,
   getUserByEmail,
   createNewUser,
   getWaterUsage,
-  updateWaterMetering
+  updateWaterMetering,
+  getFacts
 }

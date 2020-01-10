@@ -1,13 +1,33 @@
-const API_URL = '/api';
+const API_URL = '/api/waterusage';
 
-export function getWaterUsage(userId) {
-    return fetch(`${API_URL}/waterusage/user/${userId}`, 
-    {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Auth-Token': localStorage.getItem('json_web_token')
-        }
+export async function getWaterUsageToday() {
+    return await fetch(`${API_URL}/today`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('json_web_token')
+    }
+    })
+    .then((res) => res.json())
+}
+export async function getWaterUsageThisWeek() {
+    return await fetch(`${API_URL}/thisweek`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('json_web_token')
+    }
+    })
+    .then((res) => res.json())
+}
+
+export async function getWaterUsageAll() {
+    return await fetch(`${API_URL}/all`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('json_web_token')
+    }
     })
     .then((res) => res.json())
 }

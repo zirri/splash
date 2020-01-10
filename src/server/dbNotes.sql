@@ -52,3 +52,15 @@ INSERT INTO water_usage (meter_id, amount, timestamp) VALUES (123789, 1, current
 INSERT INTO water_usage (meter_id, amount, timestamp) VALUES (456123, 1, current_timestamp);
 INSERT INTO water_usage (meter_id, amount, timestamp) VALUES (456123, 2, current_timestamp);
 INSERT INTO water_usage (meter_id, amount, timestamp) VALUES (789123, 1, current_timestamp);
+
+
+CREATE TABLE facts (
+    id SERIAL PRIMARY KEY,
+    fact TEXT,
+    source_display_name VARCHAR,
+    source_url VARCHAR
+);
+
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about facts. A fact should not be mistaken for truth.  *MIC DROPPED*', 'Cathy', 'www.url.com');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about truth. A truth is not the same truth for everyone. *MIC DROPPED*', 'Cathy','www.url.com');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about everyone. Everyone compiled is the world. *MIC DROPPED*', 'Cathy', 'www.url.com');
