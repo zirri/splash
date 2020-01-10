@@ -1,7 +1,7 @@
-const API_URL = '/api';
+const API_URL = '/api/session';
 
 export function createSession({ email, password }) {
-    return fetch(`${API_URL}/session`, {
+    return fetch(`${API_URL}`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export function createSession({ email, password }) {
 
 
 export async function checkSession() {
-    const res = await fetch(`${API_URL}/session`, {
+    const res = await fetch(`${API_URL}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
