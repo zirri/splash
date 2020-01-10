@@ -22,20 +22,21 @@ import RoomsAndMeters from './components/RoomsAndMeters';
 import Today from './components/Today';
 import Week from './components/Week';
 import Facts from './components/Facts';
+import withAuthentication from './higher-order-components/withAuthentication.js'
+
 //Stretch:
 //Logout.Component
 //Error.Component
-
 
 class App extends React.Component {
   render(){
     const DefaultContainer = () => (
       <>
         <Navigation />
-        <Route path="/home" component={Overview}></Route>
-        <Route path="/account" component={Account}></Route>
-        <Route path="/settings" component={Settings}></Route>
-        <Route path="/roomsandmeters" component={RoomsAndMeters}></Route>
+        <Route path="/home" component={withAuthentication(Overview)}></Route>
+        <Route path="/account" component={withAuthentication(Account)}></Route>
+        <Route path="/settings" component={withAuthentication(Settings)}></Route>
+        <Route path="/roomsandmeters" component={withAuthentication(RoomsAndMeters)}></Route>
       </>
     )
 
@@ -46,7 +47,7 @@ class App extends React.Component {
             <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={LoginFormik}></Route>
             <Route path="/signup" component={Signup}></Route>
-            <Route component={ DefaultContainer}></Route>
+            <Route component={ DefaultContainer }></Route>
           </Switch>
         </HashRouter>
       </div>
