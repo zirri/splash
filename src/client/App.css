@@ -107,11 +107,11 @@ p {
 }
 
 .carousel-control-prev-icon {
-    display: none;
+    visibility: hidden
 }
 
 .carousel-control-next-icon {
-    display: none;
+    visibility: hidden
 }
 
 .carousel-item {
