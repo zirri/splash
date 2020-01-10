@@ -6,7 +6,7 @@ import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
 
 //REACT-BOOTSTRAP
-import { Tabs, Tab, Card } from "react-bootstrap";
+import { Tabs, Tab, Card, Carousel } from "react-bootstrap";
 
 //REACT-CHARTJS-2
 import { HorizontalBar, Doughnut } from "react-chartjs-2";
@@ -28,15 +28,15 @@ class Overview extends React.Component {
 
     this.state = {
       usage: [],
-      session: payload
+      session: payload,
+     
     };
   }
 
   async componentDidMount() {
     try {
-      const { session } = this.state;
-      console.log(session.userId);
-      const water = await getWaterUsage(session.userId);
+      
+      const water = await getWaterUsage();
       console.log(water);
 
       const usage = Object.values(
@@ -67,16 +67,16 @@ class Overview extends React.Component {
     }
   }
 
+
   render() {
-    const { usage } = this.state;
-    console.log(this.state);
-    const source = usage.map(elem => {
-      return (
-        <div key={elem.meterId}>
-          {elem.room}: {elem.source} {elem.amount}
-        </div>
-      );
-    });
+    const { usage, indexCarousel, directionCarousel } = this.state;
+    // const source = usage.map(elem => {
+    //   return (
+    //     <div key={elem.meterId}>
+    //       {elem.room}: {elem.source} {elem.amount}
+    //     </div>
+    //   );
+    // });
     const avarageWaterConsumption = 180;
     const amount = usage.map(elem => `${elem.amount}`);
     const rooms = usage.map(
@@ -97,37 +97,24 @@ class Overview extends React.Component {
         }
       ]
     };
-    // const data = function transformData (labelsArr, dataArr) {
-    //     const color = ['#2699FB', '#5BB1F8', '#A7D4F8', '#F1F9FF', '#7FC4FD']
-    //     return (
-    //         {
-    //             labels: labelsArr,
-    //             datasets: [{
-    //                 data: dataArr,
-    //                 backgroundColor: color,
-    //                 hoverBackgroundColor: color
-    //             }]
-    //         }
-    //     )
-    // }
 
     const dataBar = {
       datasets: [
         {
           label: "waterUage",
-          data: [totalUsage],
-          backgroundColor: `${
-            totalUsage > avarageWaterConsumption ? "red" : "#7FC4FD"
+          data: [avarageWaterConsumption - totalUsage < 0
+            ? 0:  totalUsage],
+          backgroundColor: `${"#7FC4FD"
           }`
         },
         {
           label: "comparedData",
           data: [
             avarageWaterConsumption - totalUsage < 0
-              ? 0
+              ? 180
               : avarageWaterConsumption - totalUsage
           ],
-          backgroundColor: "lightgrey"
+          backgroundColor: `${totalUsage > avarageWaterConsumption ? "red" : "lightgrey"}  ` 
         }
       ]
     };
@@ -136,9 +123,47 @@ class Overview extends React.Component {
       <>
         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example" >
           <Tab eventKey="today" title="TODAY" >
-            <Card >
-              <Card.Title>Your water usage:</Card.Title>
-              <Card.Body style={{ height: "40vh", width: "80vw" }}>
+              <br></br>
+
+              <Carousel interval="false">
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          alt="First slide"
+        />
+        <Carousel.Caption>
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          alt="Second slide"
+        />
+
+        <Carousel.Caption>
+          <h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          alt="Third slide"
+        />
+
+        <Carousel.Caption>
+          <h3>Third slide label</h3>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+            <Card  style= {{border: "none"}} > 
+              <Card.Text>Your water usage:</Card.Text>
+              <Card.Body>
                 <Card.Text>
                   <h5>
                     {totalUsage} / {avarageWaterConsumption}L
@@ -176,11 +201,11 @@ class Overview extends React.Component {
 
                 {totalUsage < avarageWaterConsumption ? (
                   <span style={{color:"#7FC4FD"}}>
-                    <FaThumbsUp size={32}/>
+                    <FaThumbsUp size={48}/>
                   </span>
                 ) : (
                   <span style={{color:"#7FC4FD"}}>
-                    <FaThumbsDown size={32}/>
+                    <FaThumbsDown size={48}/>
                   </span>
                 )}
 

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import ApexCharts from 'apexcharts';
 
 
 import { Button, ListGroup } from "react-bootstrap";
