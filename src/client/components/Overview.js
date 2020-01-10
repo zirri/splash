@@ -30,7 +30,7 @@ import {
 
 //LOCAL COMPONENTS
 
-import { getWaterUsageToday } from "../services/water";
+import { getWaterUsageToday, getWaterUsageThisWeek } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { getFacts } from "../services/fact";
 
@@ -42,7 +42,8 @@ class Overview extends React.Component {
     const payload = jwtDecode(token);
 
     this.state = {
-      usage: [],
+      usageToday: [],
+      usageThisWeek: [],
       session: payload,
       facts: []
     };
@@ -50,31 +51,38 @@ class Overview extends React.Component {
 
   async componentDidMount() {
     try {
-      const water = await getWaterUsageToday();
-      console.log(water);
+      const waterUsageToday = await getWaterUsageToday();
+      const waterUsageThisWeek = await getWaterUsageThisWeek();
 
-      const usage = Object.values(
-        water.reduce(
-          (r, { meterId, room, source, userId, amount, timestamp }) => {
-            r[meterId] = r[meterId] || {
-              meterId,
-              room,
-              source,
-              userId,
-              amount: 0,
-              timestamp
-            };
-            r[meterId].amount += +amount;
-            return r;
-          },
-          {}
-        )
-      );
+      console.log(waterUsageThisWeek);
 
+      function compileByMeterId(arrayOfWaterData) {
+        return Object.values(
+          arrayOfWaterData.reduce(
+            (r, { meterId, room, source, userId, amount, timestamp }) => {
+              r[meterId] = r[meterId] || {
+                meterId,
+                room,
+                source,
+                userId,
+                amount: 0,
+                timestamp
+              };
+              r[meterId].amount += +amount;
+              return r;
+            },
+            {}
+          )
+        );
+      }
+
+      const compiledDataToday = compileByMeterId(waterUsageToday);
+      const compiledDataByWeek = compileByMeterId(waterUsageThisWeek);
       const facts = await getFacts();
 
       this.setState({
-        usage,
+        usageToday: compiledDataToday,
+        usageThisWeek: compiledDataByWeek,
         facts
       });
 
@@ -85,7 +93,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { usage, facts } = this.state;
+    const { usageToday, usageThisWeek, facts } = this.state;
     // const source = usage.map(elem => {
     //   return (
     //     <div key={elem.meterId}>
@@ -93,51 +101,160 @@ class Overview extends React.Component {
     //     </div>
     //   );
     // });
-    const avarageWaterConsumption = 180;
-    const amount = usage.map(elem => `${elem.amount}`);
-    const rooms = usage.map(
-      elem => `${usage.indexOf(elem) + 1} ${elem.room} ${elem.source}`
-    );
-    const totalUsage = usage.reduce((acc, { amount }) => acc + amount, 0);
-    const color = ["#2699FB", "#5BB1F8", "#A7D4F8", "#F1F9FF", "#7FC4FD"];
 
-    const data = {
-      labels: rooms,
-      datasets: [
-        {
-          data: amount,
-          backgroundColor: color,
-          hoverBackgroundColor: color,
-          hoverBorderColor: "#5898CB",
-          hoverBorderWidth: "1"
+    //CHARTS
+    //DATA FOR CHARTS
+    const avarageWaterConsumption = 180;
+
+    const color = [
+      "#2699FB",
+      "#5BB1F8",
+      "#A7D4F8",
+      "#80ACD2",
+      "#F1F9FF",
+      "#7FC4FD",
+      "#1F65A1"
+    ];
+
+    //TRANSFORM DATA FOR CHARTS.JS COMPONENTS /DATA KEY TRANSFORMER
+    function transformDataForCharts(UsageByPeriod, arrayOfColors) {
+      if (UsageByPeriod.length == 0) {
+        const data = {
+            labels: ["Empty"],
+            datasets: [
+                {data: [180],
+                backgroundColor: ["#D5DEE5"],
+                
+                }
+            ]
         }
-      ]
-    };
+        return data;
+      }
+
+      const amount = UsageByPeriod.map(elem => `${elem.amount}`);
+      const rooms = UsageByPeriod.map(
+        elem => `${UsageByPeriod.indexOf(elem) + 1} ${elem.room} ${elem.source}`
+      );
+
+      const data = {
+        labels: rooms,
+        datasets: [
+          {
+            data: amount,
+            backgroundColor: arrayOfColors,
+            hoverBackgroundColor: arrayOfColors,
+            hoverBorderColor: "#5898CB",
+            hoverBorderWidth: "1"
+          }
+        ]
+      };
+
+      return data;
+    }
+
+    //TODAY DATA
+    const totalUsageToday = usageToday.reduce(
+      (acc, { amount }) => acc + amount,
+      0
+    );
 
     const dataBar = {
       datasets: [
         {
           label: "waterUage",
-          data: [avarageWaterConsumption - totalUsage < 0 ? 0 : totalUsage],
+          data: [
+            avarageWaterConsumption - totalUsageToday < 0 ? 0 : totalUsageToday
+          ],
           backgroundColor: `${"#7FC4FD"}`
         },
         {
           label: "comparedData",
           data: [
-            avarageWaterConsumption - totalUsage < 0
+            avarageWaterConsumption - totalUsageToday < 0
               ? 180
-              : avarageWaterConsumption - totalUsage
+              : avarageWaterConsumption - totalUsageToday
           ],
           backgroundColor: `${
-            totalUsage > avarageWaterConsumption ? "red" : "#D5DEE5"
+            totalUsageToday > avarageWaterConsumption ? "red" : "#D5DEE5"
           } `
         }
       ]
     };
 
-    const fact = facts[Math.floor(Math.random() * facts.length)];
-    console.log(fact);
+    //THISWEEK DATA
+    const totalUsageThisWeek = usageThisWeek.reduce(
+      (acc, { amount }) => acc + amount,
+      0
+    );
 
+    //OPTIONS FOR CHARTS
+    const optionDoughnut = {
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return (
+              data.labels[tooltipItem.index] +
+              ": " +
+              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] +
+              "L"
+            );
+          }
+        }
+      },
+
+      cutoutPercentage: 60,
+      legend: {
+        labels: {
+          fontColor: "black"
+        },
+        position: "bottom"
+      },
+      rotation: 1 * Math.PI,
+      circumference: 1 * Math.PI,
+      plugins: {
+        arc: true,
+        datalabels: {
+          position: "outside",
+          formatter: function(value) {
+            return value + "L";
+          },
+          color: "white"
+        }
+      }
+    };
+
+    const optionBarChart = {
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: false
+      },
+      hover: {
+        mode: null
+      },
+      scales: {
+        xAxes: [
+          {
+            display: false,
+            stacked: true
+          }
+        ],
+        yAxes: [
+          {
+            display: false,
+            stacked: true
+          }
+        ]
+      },
+      //WITHOUT DATALABALS ON BAR-ITEM
+      plugins: {
+        datalabels: false
+      }
+    };
+
+    const fact = facts[Math.floor(Math.random() * facts.length)];
+console.log(transformDataForCharts(usageToday, color))
     return (
       <>
         <Tabs
@@ -150,46 +267,15 @@ class Overview extends React.Component {
 
             <Carousel wrap="true" interval="10000000">
               <Carousel.Item>
+                  <Container>
                 <h3> Your water usage: </h3>
                 <h3>
-                  {totalUsage} / {avarageWaterConsumption}L
+                  {totalUsageToday} / {avarageWaterConsumption}L
                 </h3>
-                <HorizontalBar
-                  data={dataBar}
-                  options={{
-                    legend: {
-                      display: false
-                    },
-                    tooltips: {
-                      enabled: false
-                    },
-                    hover: {
-                      mode: null
-                    },
-                    scales: {
-                      xAxes: [
-                        {
-                          display: false,
-                          stacked: true
-                        }
-                      ],
-                      yAxes: [
-                        {
-                          display: false,
-                          stacked: true
-                        }
-                      ]
-                    },
-                    //WITHOUT DATALABALS ON BAR-ITEM
-                    plugins: {
-                      datalabels: false
-                    }
-                  }}
-                />
+                <HorizontalBar data={dataBar} options={optionBarChart} />
 
-                
                 <>
-                  {totalUsage < avarageWaterConsumption ? (
+                  {totalUsageToday < avarageWaterConsumption ? (
                     <span style={{ color: "#7FC4FD" }}>
                       <FaGrinBeam size={48} />
                     </span>
@@ -202,52 +288,20 @@ class Overview extends React.Component {
                 <CarouselCaption style={{ color: "black" }}>
                   The avarage citizen in Oslo consumes 180L water per day
                 </CarouselCaption>
+                </Container>
               </Carousel.Item>
               <Carousel.Item>
+                  <Container>
                 <h3 style={{ color: "black" }}>Overview</h3>
                 <Doughnut
-                  data={data}
-                  options={{
-                    tooltips: {
-                      callbacks: {
-                        label: function(tooltipItem, data) {
-                          return (
-                            data.labels[tooltipItem.index] +
-                            ": " +
-                            data.datasets[tooltipItem.datasetIndex].data[
-                              tooltipItem.index
-                            ] +
-                            "L"
-                          );
-                        }
-                      }
-                    },
-
-                    cutoutPercentage: 60,
-                    legend: {
-                      labels: {
-                        fontColor: "black"
-                      },
-                      position: "bottom"
-                    },
-                    rotation: 1 * Math.PI,
-                    circumference: 1 * Math.PI,
-                    plugins: {
-                      arc: true,
-                      datalabels: {
-                        position: "outside",
-                        formatter: function(value) {
-                          return value + "L";
-                        },
-                        color: "white"
-                      }
-                    }
-                  }}
+                  data={transformDataForCharts(usageToday, color)}
+                  options={optionDoughnut}
                 />
+              </Container>
               </Carousel.Item>
             </Carousel>
 
-            <Jumbotron fluid style={{margin:0}} >
+            <Jumbotron fluid style={{ margin: 0 }}>
               <Container>
                 <h4>Fact #{fact ? fact.id : ""}</h4>
                 <p>{fact ? fact.fact : ""}</p>
@@ -255,10 +309,20 @@ class Overview extends React.Component {
                 <FaRegCommentDots />
               </Container>
             </Jumbotron>
-
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <h2>WEEK</h2>
+            <Container>
+                <h3> Your water usage: </h3>
+                <h3>
+                  {totalUsageThisWeek} / {avarageWaterConsumption}L
+                </h3>
+                <Doughnut
+                data={transformDataForCharts(usageThisWeek, color)}
+                options={optionDoughnut}
+                />
+
+
+            </Container>
           </Tab>
         </Tabs>
       </>
