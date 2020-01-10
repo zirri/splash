@@ -18,6 +18,7 @@ import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 //LOCAL COMPONENTS
 
 import { getWaterUsage } from "../services/water";
+import CarouselCaption from "react-bootstrap/CarouselCaption";
 
 class Overview extends React.Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class Overview extends React.Component {
 
 
   render() {
-    const { usage, indexCarousel, directionCarousel } = this.state;
+    const { usage } = this.state;
     // const source = usage.map(elem => {
     //   return (
     //     <div key={elem.meterId}>
@@ -105,7 +106,8 @@ class Overview extends React.Component {
           data: [avarageWaterConsumption - totalUsage < 0
             ? 0:  totalUsage],
           backgroundColor: `${"#7FC4FD"
-          }`
+          }`,
+        
         },
         {
           label: "comparedData",
@@ -114,7 +116,7 @@ class Overview extends React.Component {
               ? 180
               : avarageWaterConsumption - totalUsage
           ],
-          backgroundColor: `${totalUsage > avarageWaterConsumption ? "red" : "lightgrey"}  ` 
+          backgroundColor: `${totalUsage > avarageWaterConsumption ? "red" : "#D5DEE5"}  ` 
         }
       ]
     };
@@ -124,52 +126,15 @@ class Overview extends React.Component {
         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example" >
           <Tab eventKey="today" title="TODAY" >
               <br></br>
-
-              <Carousel interval="false">
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          alt="Second slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          alt="Third slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-            <Card  style= {{border: "none"}} > 
-              <Card.Text>Your water usage:</Card.Text>
-              <Card.Body>
-                <Card.Text>
-                  <h5>
-                    {totalUsage} / {avarageWaterConsumption}L
-                  </h5>
-                </Card.Text>
-                <HorizontalBar
+           
+           
+              <Carousel wrap="true" interval="10000000" >
+  
+  <Carousel.Item >
+    <h3> Your water usage: </h3>
+    <h3> {totalUsage} / {avarageWaterConsumption}L</h3>
+    
+    <HorizontalBar
                   data={dataBar}
                   options={{
                     legend: {
@@ -177,6 +142,9 @@ class Overview extends React.Component {
                     },
                     tooltips: {
                       enabled: false
+                    },
+                    hover: {
+                        mode: null
                     },
                     scales: {
                       xAxes: [
@@ -208,7 +176,12 @@ class Overview extends React.Component {
                     <FaThumbsDown size={48}/>
                   </span>
                 )}
-
+      
+  </Carousel.Item>
+  <Carousel.Item>
+    <h3 style={{color: "black"}}>Overview</h3>
+    
+    
                 <Doughnut
                   data={data}
                   options={{
@@ -248,13 +221,12 @@ class Overview extends React.Component {
                     }
                   }}
                 />
+      
+  </Carousel.Item>
+</Carousel>
 
-                <Card.Text>
-                  The avarage citizen in Oslo consumes {avarageWaterConsumption}
-                  L water per day
-                </Card.Text>
-              </Card.Body>
-            </Card>
+
+
           </Tab>
           <Tab eventKey="week" title="WEEK">
             <h2>WEEK</h2>
