@@ -29,10 +29,9 @@ router.get('/', authenticate, async (req, res) => {
     res.json(waterUsage);
 })
 
-router.get('/metering/:waterMeterId', async (req, res) => {
+router.post('/metering/:waterMeterId', async (req, res) => {
     const { waterMeterId } = req.params;
     const { waterData } = req.body;
-    console.log('test')
     waterData.waterMeterId = waterMeterId;
     const newRecord = await updateWaterMetering(waterData);
     res.json(newRecord);
