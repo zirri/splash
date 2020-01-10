@@ -23,7 +23,19 @@ router.use('/metering/:waterMeterId', (req, res, next) => {
 })
 
 //endpoints
-router.get('/', authenticate, async (req, res) => {
+router.get('/all', authenticate, async (req, res) => {
+    const { userId } = req.user;
+    const waterUsage = await getWaterUsage(userId);
+    res.json(waterUsage);
+})
+
+router.get('/thisweek', authenticate, async (req, res) => {
+    const { userId } = req.user;
+    const waterUsage = await getWaterUsage(userId);
+    res.json(waterUsage);
+})
+
+router.get('/today', authenticate, async (req, res) => {
     const { userId } = req.user;
     const waterUsage = await getWaterUsage(userId);
     res.json(waterUsage);
