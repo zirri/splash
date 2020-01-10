@@ -8,7 +8,7 @@ const waterUsageApi = require('./src/server/waterusageApi.js');
 const app = express();
 
 //Middleware
-app.use(cors());
+//app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
