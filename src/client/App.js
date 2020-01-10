@@ -1,11 +1,6 @@
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// In case we use forms later: 
-// import Form from "react-bootstrap/Form";
-// import FormControl from "react-bootstrap/FormControl";
-// import Button from "react-bootstrap/Button";
-
 import React from 'react';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import './App.css';
@@ -23,9 +18,9 @@ import Today from './components/Today';
 import Week from './components/Week';
 import Facts from './components/Facts';
 import withAuthentication from './higher-order-components/withAuthentication.js'
+import Logout from './components/Logout'
 
 //Stretch:
-//Logout.Component
 //Error.Component
 
 class App extends React.Component {
@@ -37,6 +32,7 @@ class App extends React.Component {
         <Route path="/account" component={withAuthentication(Account)}></Route>
         <Route path="/settings" component={withAuthentication(Settings)}></Route>
         <Route path="/roomsandmeters" component={withAuthentication(RoomsAndMeters)}></Route>
+        <Route path="/logout" component={withAuthentication(Logout)}></Route>
       </>
     )
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { createSession } from '../services/session';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Form, InputGroup, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -10,9 +10,14 @@ const schema = yup.object({
   });
 
 class LoginFormik extends React.Component {
+    state = {
+        error: null
+    }
     render() {
         return (
             <main>
+                 <h1 className="animated">splash</h1>
+                 <div></div>
                 <Formik 
                 validationSchema={schema}
                 initialValues={{
@@ -20,13 +25,22 @@ class LoginFormik extends React.Component {
                 password: '',
         }}
         onSubmit={async ({email, password}) => {
+            try {
             const { history } = this.props;
-            const { token, error } = await createSession({email, password})
+            const { token } = await createSession({email, password})
             
             console.log(email, password)
             console.log(history)
             localStorage.setItem('json_web_token', token)
             history.push('/home')
+            } catch(error) {
+                this.setState({
+                    error
+                })
+                console.log(error)
+            }
+
+
         }}
         >
                
