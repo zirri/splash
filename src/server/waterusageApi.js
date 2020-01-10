@@ -25,19 +25,26 @@ router.use('/metering/:waterMeterId', (req, res, next) => {
 //endpoints
 router.get('/all', authenticate, async (req, res) => {
     const { userId } = req.user;
-    const waterUsage = await getWaterUsage(userId);
+    const firstDay = new Date();
+    firstDay.setFullYear(2020,0,0);
+    const waterUsage = await getWaterUsage(userId, firstDay);
     res.json(waterUsage);
 })
 
 router.get('/thisweek', authenticate, async (req, res) => {
     const { userId } = req.user;
-    const waterUsage = await getWaterUsage(userId);
+    const today = new Date();
+    const daysSinceMonday = today.getDate()-1;
+    const lastMonday = new Date(today);
+    lastMonday.setDate(lastMonday.getDate() - daysSinceMonday);
+    const waterUsage = await getWaterUsage(userId, lastMonday);
     res.json(waterUsage);
 })
 
 router.get('/today', authenticate, async (req, res) => {
     const { userId } = req.user;
-    const waterUsage = await getWaterUsage(userId);
+    let todayDate = new Date();
+    const waterUsage = await getWaterUsage(userId, todayDate);
     res.json(waterUsage);
 })
 
