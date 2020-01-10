@@ -3,6 +3,7 @@ import { createSession } from '../services/session';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Form, Button, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -98,6 +99,7 @@ class LoginFormik extends React.Component {
               <Button type="submit">Log in</Button>
             </Form>)}
             </Formik>
+            <Link to='/signup'>Sign up</Link>
             </main>
         
         )

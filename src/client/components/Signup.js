@@ -17,6 +17,8 @@ class Signup extends React.Component {
       render() {
     return (
         <main>
+           <h1 className="animated">splash</h1>
+                 <div></div>
       <Formik
         validationSchema={schema}
         
