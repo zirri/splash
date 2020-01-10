@@ -29,13 +29,13 @@ router.get('/', authenticate, async (req, res) => {
     res.json(user);
 });
 
-router.post('/', authenticate, async (req, res) => {
+router.post('/', async (req, res) => {
     const user = req.body;
     const newUser = await createNewUser(user);
     res.json(newUser);
 });
 
-router.put('/:userid', authenticate, async (req, res) => {
+router.put('/', authenticate, async (req, res) => {
     const { userId } = req.user;
     res.send(`Got put request for user ${userId}`);
 });
