@@ -46,7 +46,7 @@ class Navigation extends React.Component {
                     <img src={rooms} alt="Logo"/> 
                     Rooms and water 
                   </Nav.Link>
-                  <Nav.Link as={Link} eventKey="logout" to="/logout" style={{backgroundColor:"#1F65A1", color:"white"}}>
+                  <Nav.Link as={Link} eventKey="logout" to="/logout" style={{backgroundColor:"#1F65A1", color:"white"}} to="/logout">
                     <img src={logout} alt="Logo"/> 
                     Log out
                   </Nav.Link>

@@ -2,7 +2,7 @@ import React from 'react';
 import { createNewUser } from '../services/users';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, InputGroup, Button, Col } from 'react-bootstrap';
 
 const schema = yup.object({
     name: yup.string().min(2, 'Name must be more than one character').required(),
@@ -17,8 +17,6 @@ class Signup extends React.Component {
       render() {
     return (
         <main>
-           <h1 className="animated">splash</h1>
-                 <div></div>
       <Formik
         validationSchema={schema}
         
@@ -46,7 +44,7 @@ class Signup extends React.Component {
           errors,
         }) => (
        
-          <Form noValidate onSubmit={handleSubmit} className="container">
+          <Form noValidate onSubmit={handleSubmit}>
               <h1>Sign up</h1>
               <br />
             <Form.Row>
@@ -58,32 +56,26 @@ class Signup extends React.Component {
                   value={values.name}
                   onChange={handleChange}
                   isValid={touched.name && !errors.name}
-                  isInvalid={!!errors.name}
                 />
-                 <Form.Control.Feedback type="invalid">
-                    {errors.name}
-                  </Form.Control.Feedback>
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              </Form.Row>
-              <Form.Row>
               <Form.Group as={Col} md="4" controlId="validationFormik02">
                 <Form.Label>Email</Form.Label>
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                  </InputGroup.Prepend>
                 <Form.Control
                   type="text"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
                   isValid={touched.email && !errors.email}
-                  isInvalid={!!errors.email}
                 />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.email}
-                  </Form.Control.Feedback>
+  
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </InputGroup>
               </Form.Group>
-              </Form.Row>
-              <Form.Row>
               <Form.Group as={Col} md="4" controlId="validationFormikUsername">
                 <Form.Label>password</Form.Label>
         
@@ -103,7 +95,7 @@ class Signup extends React.Component {
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <Form.Group as={Col} md="4" controlId="validationFormik03">
+              <Form.Group as={Col} md="6" controlId="validationFormik03">
                 <Form.Label>confirm password</Form.Label>
                 <Form.Control
                   type="password"
@@ -118,9 +110,7 @@ class Signup extends React.Component {
                   {errors.passwordcheck}
                 </Form.Control.Feedback>
               </Form.Group>
-              </Form.Row>
-              <Form.Row>
-              <Form.Group as={Col} md="4" controlId="validationFormik04">
+              <Form.Group as={Col} md="3" controlId="validationFormik04">
                 <Form.Label>location</Form.Label>
                 <Form.Control
                   type="text"
@@ -134,9 +124,7 @@ class Signup extends React.Component {
                   {errors.location}
                 </Form.Control.Feedback>
               </Form.Group>
-              </Form.Row>
-              <Form.Row>
-              <Form.Group as={Col} md="1" controlId="validationFormik05">
+              <Form.Group as={Col} md="3" controlId="validationFormik05">
                 <Form.Label>household</Form.Label>
                 <Form.Control
                   type="number"
