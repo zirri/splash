@@ -6,19 +6,33 @@ import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
 
 //REACT-BOOTSTRAP
-import { Tabs, Tab, Card, Carousel } from "react-bootstrap";
+import {
+  Tabs,
+  Tab,
+  Card,
+  Carousel,
+  Jumbotron,
+  Container
+} from "react-bootstrap";
 
 //REACT-CHARTJS-2
 import { HorizontalBar, Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 //REACT-ICONS
-import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+import {
+  FaThumbsDown,
+  FaThumbsUp,
+  FaGrinBeam,
+  FaFrownOpen,
+  FaRegCommentDots
+} from "react-icons/fa";
 
 //LOCAL COMPONENTS
 
 import { getWaterUsageToday } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
+import { getFacts } from "../services/fact";
 
 class Overview extends React.Component {
   constructor(props) {
@@ -29,7 +43,8 @@ class Overview extends React.Component {
 
     this.state = {
       usage: [],
-      session: payload
+      session: payload,
+      facts: []
     };
   }
 
@@ -56,8 +71,11 @@ class Overview extends React.Component {
         )
       );
 
+      const facts = await getFacts();
+
       this.setState({
-        usage
+        usage,
+        facts
       });
 
       console.log(this.state);
@@ -67,7 +85,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { usage } = this.state;
+    const { usage, facts } = this.state;
     // const source = usage.map(elem => {
     //   return (
     //     <div key={elem.meterId}>
@@ -117,9 +135,16 @@ class Overview extends React.Component {
       ]
     };
 
+    const fact = facts[Math.floor(Math.random() * facts.length)];
+    console.log(fact);
+
     return (
       <>
-        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
+        <Tabs
+          defaultActiveKey="today"
+          id="uncontrolled-tab-example"
+          size="100vh"
+        >
           <Tab eventKey="today" title="TODAY">
             <br></br>
 
@@ -129,7 +154,6 @@ class Overview extends React.Component {
                 <h3>
                   {totalUsage} / {avarageWaterConsumption}L
                 </h3>
-
                 <HorizontalBar
                   data={dataBar}
                   options={{
@@ -163,17 +187,21 @@ class Overview extends React.Component {
                   }}
                 />
 
+                
                 <>
                   {totalUsage < avarageWaterConsumption ? (
                     <span style={{ color: "#7FC4FD" }}>
-                      <FaThumbsUp size={48} />
+                      <FaGrinBeam size={48} />
                     </span>
                   ) : (
                     <span style={{ color: "#7FC4FD" }}>
-                      <FaThumbsDown size={48} />
+                      <FaFrownOpen size={48} />
                     </span>
                   )}
                 </>
+                <CarouselCaption style={{ color: "black" }}>
+                  The avarage citizen in Oslo consumes 180L water per day
+                </CarouselCaption>
               </Carousel.Item>
               <Carousel.Item>
                 <h3 style={{ color: "black" }}>Overview</h3>
@@ -218,6 +246,16 @@ class Overview extends React.Component {
                 />
               </Carousel.Item>
             </Carousel>
+
+            <Jumbotron fluid style={{margin:0}} >
+              <Container>
+                <h4>Fact #{fact ? fact.id : ""}</h4>
+                <p>{fact ? fact.fact : ""}</p>
+                <h6>{fact ? fact.sourceDisplayName : ""} </h6>
+                <FaRegCommentDots />
+              </Container>
+            </Jumbotron>
+
           </Tab>
           <Tab eventKey="week" title="WEEK">
             <h2>WEEK</h2>

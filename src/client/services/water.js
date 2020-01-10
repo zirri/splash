@@ -1,7 +1,7 @@
 const API_URL = '/api/waterusage';
 
 export async function getWaterUsageToday() {
-    return await fetch(`${API_URL}`, {
+    return await fetch(`${API_URL}/today`, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
