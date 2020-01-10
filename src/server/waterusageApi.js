@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const { getWaterUsage, updateWaterMetering } = require('./services/databaseServices.js');
-const { validateUserId, validateMeterId, validateMeteringData } = require('./services/inputValidation.js');
+const { validateMeterId, validateMeteringData } = require('./services/inputValidation.js');
+const { authenticate } = require('./services/authService.js');
 
 //middleware
 
@@ -21,21 +22,10 @@ router.use('/metering/:waterMeterId', (req, res, next) => {
     next();
 })
 
-router.use('/user/:userid', (req, res, next) => {
-    const { userid } = req.params;
-    const result = validateUserId(userid);
-    if(result.error){
-        return res.status(400).json({error: result.error});
-    }else{
-        next();
-    }
-})
-
-
 //endpoints
-router.get('/user/:userid', async (req, res) => {
-    const { userid } = req.params;
-    const waterUsage = await getWaterUsage(userid);
+router.get('/', authenticate, async (req, res) => {
+    const { userId } = req.user;
+    const waterUsage = await getWaterUsage(userId);
     res.json(waterUsage);
 })
 
