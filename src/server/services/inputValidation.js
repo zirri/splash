@@ -1,18 +1,5 @@
 const Joi = require('joi');
 
-const useridSchema = {
-    userid: Joi.number().integer().positive().required()
-};
-
-
-function validateUserId(userid){
-    const result = Joi.validate({userid}, useridSchema);
-    if(result.error){
-        return {error: `Validation of user id failed: ${result.error.details[0].message}`};
-    }
-    return {error: null};
-}
-
 const userSchema = {
     email: Joi.string().email().required(),
     password: Joi.string().required(),
@@ -58,7 +45,6 @@ function validateMeteringData(meteringData){
 
 module.exports = {
     validateUserInput, 
-    validateUserId,
     validateMeterId, 
     validateMeteringData
 }
