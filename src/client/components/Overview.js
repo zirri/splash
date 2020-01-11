@@ -16,8 +16,9 @@ import {
 } from "react-bootstrap";
 
 //REACT-CHARTJS-2
-import { HorizontalBar, Doughnut } from "react-chartjs-2";
+import { HorizontalBar, Doughnut, Bar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import "chartjs-plugin-annotation";
 
 //REACT-ICONS
 import {
@@ -30,9 +31,10 @@ import {
 
 //LOCAL COMPONENTS
 
-import { getWaterUsageToday, getWaterUsageThisWeek } from "../services/water";
+import { getWaterUsageToday, getWaterUsageThisWeek, getWaterUsageAll } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { getFacts } from "../services/fact";
+import { getUserInformation } from "../services/users";
 
 class Overview extends React.Component {
   constructor(props) {
@@ -42,6 +44,7 @@ class Overview extends React.Component {
     const payload = jwtDecode(token);
 
     this.state = {
+    user: [],
       usageToday: [],
       usageThisWeek: [],
       session: payload,
@@ -53,8 +56,7 @@ class Overview extends React.Component {
     try {
       const waterUsageToday = await getWaterUsageToday();
       const waterUsageThisWeek = await getWaterUsageThisWeek();
-
-      console.log(waterUsageThisWeek);
+      const userInformation = await getUserInformation();
 
       function compileByMeterId(arrayOfWaterData) {
         return Object.values(
@@ -81,6 +83,7 @@ class Overview extends React.Component {
       const facts = await getFacts();
 
       this.setState({
+        user: userInformation,
         usageToday: compiledDataToday,
         usageThisWeek: compiledDataByWeek,
         facts
@@ -104,7 +107,7 @@ class Overview extends React.Component {
 
     //CHARTS
     //DATA FOR CHARTS
-    const avarageWaterConsumption = 180;
+    const averageWaterConsumption = 180;
 
     const color = [
       "#2699FB",
@@ -120,14 +123,9 @@ class Overview extends React.Component {
     function transformDataForCharts(UsageByPeriod, arrayOfColors) {
       if (UsageByPeriod.length == 0) {
         const data = {
-            labels: ["Empty"],
-            datasets: [
-                {data: [180],
-                backgroundColor: ["#D5DEE5"],
-                
-                }
-            ]
-        }
+          labels: [],
+          datasets: [{ data: [180], backgroundColor: ["#D5DEE5"] }]
+        };
         return data;
       }
 
@@ -163,19 +161,19 @@ class Overview extends React.Component {
         {
           label: "waterUage",
           data: [
-            avarageWaterConsumption - totalUsageToday < 0 ? 0 : totalUsageToday
+            averageWaterConsumption - totalUsageToday < 0 ? 0 : totalUsageToday
           ],
           backgroundColor: `${"#7FC4FD"}`
         },
         {
           label: "comparedData",
           data: [
-            avarageWaterConsumption - totalUsageToday < 0
+            averageWaterConsumption - totalUsageToday < 0
               ? 180
-              : avarageWaterConsumption - totalUsageToday
+              : averageWaterConsumption - totalUsageToday
           ],
           backgroundColor: `${
-            totalUsageToday > avarageWaterConsumption ? "red" : "#D5DEE5"
+            totalUsageToday > averageWaterConsumption ? "red" : "#D5DEE5"
           } `
         }
       ]
@@ -187,8 +185,56 @@ class Overview extends React.Component {
       0
     );
 
+    //DUMMY & TEST DATA
+    const totalUsageWeeks = [100, 200, 300, 200];
+    const weekNumber = ["12", "13", "14", "15"];
+
+    const dataCompareWeeks = {
+      datasets: [
+        {
+          label: "Water Consumption",
+          data: totalUsageWeeks,
+          backgroundColor: "#2699FB",
+          hoverBackgroundColor: "#2699FB"
+        }
+      ],
+      labels: weekNumber
+    };
+
     //OPTIONS FOR CHARTS
+
     const optionDoughnut = {
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return (
+              data.labels[tooltipItem.index] +
+              ": " +
+              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] +
+              "L"
+            );
+          }
+        }
+      },
+
+      legend: {
+        labels: {
+          fontColor: "black"
+        },
+        position: "bottom"
+      },
+      plugins: {
+        arc: true,
+        datalabels: {
+          formatter: function(value) {
+            return value + "L";
+          },
+          color: "white"
+        }
+      }
+    };
+
+    const optionHalfDoughnut = {
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -214,7 +260,6 @@ class Overview extends React.Component {
       plugins: {
         arc: true,
         datalabels: {
-          position: "outside",
           formatter: function(value) {
             return value + "L";
           },
@@ -253,8 +298,97 @@ class Overview extends React.Component {
       }
     };
 
+    const optionCompareWeeks = {
+      
+    
+      legend: {
+        display: false
+      },
+      scales: {
+        
+        yAxes: [
+          {
+            id: "y-axis",
+            ticks: {
+              beginAtZero: true,
+              callback: function(value) {
+                return value + "L";
+              },
+              suggestedMax: Math.max(...totalUsageWeeks) + 50
+            },
+            scaleLabel: {
+              display: true,
+              labelString: "Water Usage L"
+            },
+           
+          }
+        ],
+        xAxes: [
+          {
+            id: "x-axis",
+            scaleLabel: {
+              display: true,
+              labelString: "Week"
+            },
+            gridLines: {
+                display: false
+            },
+          }
+        ]
+      },
+      plugins: {
+        arc: true,
+        datalabels: {
+          anchor: "center",
+          formatter: function(value) {
+            return value + "L";
+          },
+          color: "white"
+        }
+      },
+      annotation: {
+        // Defines when the annotations are drawn.
+        // This allows positioning of the annotation relative to the other
+        // elements of the graph.
+        //
+        // Should be one of: afterDraw, afterDatasetsDraw, beforeDatasetsDraw
+        // See http://www.chartjs.org/docs/#advanced-usage-creating-plugins
+        drawTime: "afterDatasetsDraw", // (default)
+
+        // Mouse events to enable on each annotation.
+        // Should be an array of one or more browser-supported mouse events
+        // See https://developer.mozilla.org/en-US/docs/Web/Events
+        events: ["click"],
+
+        // Double-click speed in ms used to distinguish single-clicks from
+        // double-clicks whenever you need to capture both. When listening for
+        // both click and dblclick, click events will be delayed by this
+        // amount.
+        dblClickSpeed: 350, // ms (default)
+
+        // Array of annotation configuration objects
+        // See below for detailed descriptions of the annotation options
+        annotations: [
+          {
+            //   drawTime: "afterDraw", //overrides annotation.drawTime if set
+            id: "a-line-1", // optional
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y-axis",
+            value: averageWaterConsumption,
+            borderColor: "red",
+            borderWidth: 1,
+
+            onClick: function(e) {
+             console.log("hei", e)
+            }
+          }
+        ]
+      }
+    };
+
     const fact = facts[Math.floor(Math.random() * facts.length)];
-console.log(transformDataForCharts(usageToday, color))
+    console.log(transformDataForCharts(usageToday, color));
     return (
       <>
         <Tabs
@@ -267,39 +401,43 @@ console.log(transformDataForCharts(usageToday, color))
 
             <Carousel wrap="true" interval="10000000">
               <Carousel.Item>
+                <Container>
                   <Container>
-                <h3> Your water usage: </h3>
-                <h3>
-                  {totalUsageToday} / {avarageWaterConsumption}L
-                </h3>
-                <HorizontalBar data={dataBar} options={optionBarChart} />
-
-                <>
-                  {totalUsageToday < avarageWaterConsumption ? (
-                    <span style={{ color: "#7FC4FD" }}>
-                      <FaGrinBeam size={48} />
-                    </span>
-                  ) : (
-                    <span style={{ color: "#7FC4FD" }}>
-                      <FaFrownOpen size={48} />
-                    </span>
-                  )}
-                </>
-                <CarouselCaption style={{ color: "black" }}>
-                  The avarage citizen in Oslo consumes 180L water per day
-                </CarouselCaption>
+                    <h3> Your water usage: </h3>
+                    <h3>
+                      {totalUsageToday} / {averageWaterConsumption}L
+                    </h3>
+                    <Container >
+                      <HorizontalBar data={dataBar} options={optionBarChart} />
+                      {totalUsageToday < averageWaterConsumption ? (
+                        <span style={{ color: "#7FC4FD" }}>
+                          <FaGrinBeam size={48} />
+                        </span>
+                      ) : (
+                        <span style={{ color: "#7FC4FD" }}>
+                          <FaFrownOpen size={48} />
+                        </span>
+                      )}
+                    </Container>
+                    <text style={{ color: "black" }}>
+                      The avarage citizen in Oslo consumes 180L water per day
+                    </text>
+                  </Container>
                 </Container>
               </Carousel.Item>
               <Carousel.Item>
+                <Container>
+                  <h3 style={{ color: "black" }}>Overview</h3>
                   <Container>
-                <h3 style={{ color: "black" }}>Overview</h3>
-                <Doughnut
-                  data={transformDataForCharts(usageToday, color)}
-                  options={optionDoughnut}
-                />
-              </Container>
+                    <Doughnut
+                      data={transformDataForCharts(usageToday, color)}
+                      options={optionHalfDoughnut}
+                    />
+                  </Container>
+                </Container>
               </Carousel.Item>
             </Carousel>
+        
 
             <Jumbotron fluid style={{ margin: 0 }}>
               <Container>
@@ -311,17 +449,21 @@ console.log(transformDataForCharts(usageToday, color))
             </Jumbotron>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <Container>
-                <h3> Your water usage: </h3>
-                <h3>
-                  {totalUsageThisWeek} / {avarageWaterConsumption}L
-                </h3>
+            <Container fluid style={{ backgroundColor: "#F1F9FF" }}>
+              <h3> Your water usage: </h3>
+              <h3>
+                {totalUsageThisWeek} / {averageWaterConsumption}L
+              </h3>
+              <Container>
                 <Doughnut
-                data={transformDataForCharts(usageThisWeek, color)}
-                options={optionDoughnut}
+                  data={transformDataForCharts(usageThisWeek, color)}
+                  options={optionHalfDoughnut}
                 />
-
-
+              </Container>
+            </Container>
+            <Container fluid style={{backgroundColor:"#CBDFF1"}} >
+              <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
+              <h6>- Average water consumption</h6>
             </Container>
           </Tab>
         </Tabs>
