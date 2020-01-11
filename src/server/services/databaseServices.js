@@ -66,7 +66,7 @@ async function createNewUser(user){
   return newUser;
 }
 
-async function getWaterUsage(userId, periodeStart){
+async function getWaterUsage(userId, periodeStart, periodeEnd){
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
