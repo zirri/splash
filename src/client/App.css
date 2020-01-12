@@ -1,3 +1,13 @@
+:root {
+    --lightest-blue: rgb(213, 232, 248);
+    --light-blue: #BCE0FD;
+    --dark-blue: #80ACD2;
+    --darkest-blue: #1F65A1;
+
+}
+
+
+
 /*GREEN-BLUE*/
 /* .App {
     text-align: center;
@@ -33,7 +43,7 @@ p {
     height: 100vh;
     width: 100vw;
 
-    overflow: auto;
+    overflow: hidden;
 }
 
 /*BLUE*/
@@ -106,12 +116,18 @@ p {
     }
 }
 
+.containerChart {
+    overflow: hidden;
+}
+
 .carousel {
-    background-color: lightgray; 
+    background-color: lightgray;
+    height: 50vh; 
+    overflow: hidden;
 }
 
 .carousel-indicators li {
-    background-color: #7FC4FD;
+    background-color: var(--dark-blue);
     border-radius: 50%;
     width: 0.8rem;
     height: 0.8rem;
@@ -126,11 +142,12 @@ p {
 }
 
 .navbar {
-    background-color: #1F65A1;
+    background-color: var(--darkest-blue);
+    padding: 0;
 }
 
 nav a {
-    color: #B4DCFF
+    color: var(--light-blue);
 }
 
 .navbar-toggler {
@@ -138,13 +155,17 @@ nav a {
     color: white
 }
 
-@media only screen and (min-width: 1000px) {
-
-    
-    .navbar {
-       background-color: teal;
-      
+@media only screen and (min-width: 768px) {
+    .form-row {
+        justify-content: center;
     }
+
+    .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    
 
     .navbar img {
         height: 50px;
@@ -155,4 +176,18 @@ nav a {
     }
 }
 
- 
+@media only screen and (min-width: 1200px) {
+
+   a img{
+    display: none;
+   }
+   
+   a {
+       color: white
+   }
+   
+  
+
+}
+
+
