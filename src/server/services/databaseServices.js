@@ -66,7 +66,7 @@ async function createNewUser(user){
   return newUser;
 }
 
-async function getWaterUsage(userId, periodeStart){
+async function getWaterUsage(userId, periodeStart, periodeEnd){
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -87,7 +87,7 @@ async function getWaterUsage(userId, periodeStart){
       water_meters.user_id = $1 AND
       water_meters.meter_id = water_usage.meter_id AND
       timestamp BETWEEN $2 AND $3;`
-  let waterUsage = await pool.query(sql, [userId, periodeStart ,tomorrow]);
+  let waterUsage = await pool.query(sql, [userId, periodeStart, tomorrow]);
   waterUsage = waterUsage.rows.map(record => camelcaseKeys(record));
   return waterUsage;
 }
@@ -110,10 +110,40 @@ async function updateWaterMetering(waterData){
   return newRecord;
 }
 
+// async function getWaterMeterInfo() {
+//   const sql = `
+//   SELECT 
+//     *
+//   FROM 
+//     water_meters
+//   Where
+
+//   `
+// }
+
+async function getFacts() {
+  const sql = `
+  SELECT 
+    *
+  FROM 
+    facts
+  `
+  let facts = await pool.query(sql);
+  facts = camelcaseKeys(facts.rows)
+  if(!facts){
+    return "There are no facts available";
+  }
+  return facts;
+}
+
+
+
 module.exports = {
   getUserInformation,
   getUserByEmail,
   createNewUser,
   getWaterUsage,
-  updateWaterMetering
+  updateWaterMetering,
+  // getWaterMeterInfo,
+  getFacts
 }

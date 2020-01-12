@@ -28,8 +28,13 @@ p {
     color: rgb(19, 219, 186);
 } */
 
+ 
+.App {
+    height: 100vh;
+    width: 100vw;
 
-
+    overflow: auto;
+}
 
 /*BLUE*/
 .App {
@@ -38,6 +43,13 @@ p {
 
 .logoname {
     font-family: 'Comfortaa';
+    font-size: 2.8rem;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+    
+    padding: 0;
 }
 
 .animated {
@@ -96,7 +108,6 @@ p {
 
 .carousel {
     background-color: lightgray; 
-    height: 70vh;
 }
 
 .carousel-indicators li {
@@ -114,6 +125,34 @@ p {
     visibility: hidden
 }
 
-.carousel-item {
-    height: 60vh;
+.navbar {
+    background-color: #1F65A1;
 }
+
+nav a {
+    color: #B4DCFF
+}
+
+.navbar-toggler {
+    border: none;
+    color: white
+}
+
+@media only screen and (min-width: 1000px) {
+
+    
+    .navbar {
+       background-color: teal;
+      
+    }
+
+    .navbar img {
+        height: 50px;
+    }
+    
+    .navbar a img {
+        display: none;
+    }
+}
+
+ 

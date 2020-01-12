@@ -34,7 +34,7 @@ router.get('/all', authenticate, async (req, res) => {
 router.get('/thisweek', authenticate, async (req, res) => {
     const { userId } = req.user;
     const today = new Date();
-    const daysSinceMonday = today.getDate()-1;
+    const daysSinceMonday = today.getDay()-1;
     const lastMonday = new Date(today);
     lastMonday.setDate(lastMonday.getDate() - daysSinceMonday);
     const waterUsage = await getWaterUsage(userId, lastMonday);

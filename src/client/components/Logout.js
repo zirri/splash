@@ -4,7 +4,7 @@ class Logout extends React.Component {
     componentDidMount() {
         const { history } = this.props;
         localStorage.removeItem('json_web_token');
-        history.replace('/');
+        history.replace('/login');
     }
     render(){
         return(
