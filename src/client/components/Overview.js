@@ -414,8 +414,6 @@ class Overview extends React.Component {
           <Tab  eventKey="today" title="TODAY">
             <Carousel wrap="true" interval="10000000">
               <Carousel.Item>
-                <Container style={{height:"500px"}}>
-                  <Container >
                     <h3> Your water usage: </h3>
                     <h3>
                       {totalUsageToday} / {averageWaterConsumption}L
@@ -430,6 +428,7 @@ class Overview extends React.Component {
                     )}
                     <Container>
                       <HorizontalBar data={dataBar} options={optionBarChart} />
+                      <Container className="containerChart">
                       {totalUsageToday < averageWaterConsumption ? (
                         <span style={{ color: "#7FC4FD"}}>
                           <FaGrinBeam size={48} />
@@ -439,12 +438,11 @@ class Overview extends React.Component {
                           <FaFrownOpen size={48} />
                         </span>
                       )}
+                      </Container >
                     </Container>
                       <text style={{ color: "black"}}>
                         The avarage citizen in Oslo consumes 180L water per day
                       </text>
-                  </Container>
-                </Container>
               </Carousel.Item>
               <Carousel.Item>
                 <Container>

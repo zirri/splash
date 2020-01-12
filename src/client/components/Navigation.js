@@ -40,7 +40,7 @@ class Navigation extends React.Component {
         return(
           
           <header >
-            <Navbar collapseOnSelect className="ml-auto" expand="lg">
+            <Navbar collapseOnSelect className="ml-auto" expand="xl">
 
               <Navbar.Toggle />
               <Navbar.Brand className="logoname text" >
