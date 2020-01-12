@@ -26,12 +26,18 @@ import {
   FaThumbsUp,
   FaGrinBeam,
   FaFrownOpen,
-  FaRegCommentDots
+  FaRegCommentDots,
+  FaUser,
+  FaUsers
 } from "react-icons/fa";
 
 //LOCAL COMPONENTS
 
-import { getWaterUsageToday, getWaterUsageThisWeek, getWaterUsageAll } from "../services/water";
+import {
+  getWaterUsageToday,
+  getWaterUsageThisWeek,
+  getWaterUsageAll
+} from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { getFacts } from "../services/fact";
 import { getUserInformation } from "../services/users";
@@ -44,7 +50,7 @@ class Overview extends React.Component {
     const payload = jwtDecode(token);
 
     this.state = {
-    user: [],
+      user: [],
       usageToday: [],
       usageThisWeek: [],
       session: payload,
@@ -57,7 +63,7 @@ class Overview extends React.Component {
       const waterUsageToday = await getWaterUsageToday();
       const waterUsageThisWeek = await getWaterUsageThisWeek();
       const userInformation = await getUserInformation();
-
+      console.log(getWaterUsageAll)
       function compileByMeterId(arrayOfWaterData) {
         return Object.values(
           arrayOfWaterData.reduce(
@@ -96,7 +102,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { usageToday, usageThisWeek, facts } = this.state;
+    const { usageToday, usageThisWeek, facts, user } = this.state;
     // const source = usage.map(elem => {
     //   return (
     //     <div key={elem.meterId}>
@@ -299,13 +305,23 @@ class Overview extends React.Component {
     };
 
     const optionCompareWeeks = {
-      
-    
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return (
+              data.labels[tooltipItem.index] +
+              ": " +
+              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] +
+              "L"
+            );
+          }
+        }
+      },
+
       legend: {
         display: false
       },
       scales: {
-        
         yAxes: [
           {
             id: "y-axis",
@@ -319,8 +335,7 @@ class Overview extends React.Component {
             scaleLabel: {
               display: true,
               labelString: "Water Usage L"
-            },
-           
+            }
           }
         ],
         xAxes: [
@@ -331,8 +346,8 @@ class Overview extends React.Component {
               labelString: "Week"
             },
             gridLines: {
-                display: false
-            },
+              display: false
+            }
           }
         ]
       },
@@ -380,7 +395,7 @@ class Overview extends React.Component {
             borderWidth: 1,
 
             onClick: function(e) {
-             console.log("hei", e)
+              console.log("hei", e);
             }
           }
         ]
@@ -394,40 +409,47 @@ class Overview extends React.Component {
         <Tabs
           defaultActiveKey="today"
           id="uncontrolled-tab-example"
-          size="100vh"
+          
         >
-          <Tab eventKey="today" title="TODAY">
-            <br></br>
-
+          <Tab  eventKey="today" title="TODAY">
             <Carousel wrap="true" interval="10000000">
               <Carousel.Item>
-                <Container>
-                  <Container>
+                <Container style={{height:"500px"}}>
+                  <Container >
                     <h3> Your water usage: </h3>
                     <h3>
                       {totalUsageToday} / {averageWaterConsumption}L
                     </h3>
-                    <Container >
+                    {user ? (
+                      <Container>
+                        {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
+                        {user.noInHousehold}
+                      </Container>
+                    ) : (
+                      ""
+                    )}
+                    <Container>
                       <HorizontalBar data={dataBar} options={optionBarChart} />
                       {totalUsageToday < averageWaterConsumption ? (
-                        <span style={{ color: "#7FC4FD" }}>
+                        <span style={{ color: "#7FC4FD"}}>
                           <FaGrinBeam size={48} />
                         </span>
                       ) : (
-                        <span style={{ color: "#7FC4FD" }}>
+                        <span style={{ color: "#7FC4FD"}}>
                           <FaFrownOpen size={48} />
                         </span>
                       )}
                     </Container>
-                    <text style={{ color: "black" }}>
-                      The avarage citizen in Oslo consumes 180L water per day
-                    </text>
+                      <text style={{ color: "black"}}>
+                        The avarage citizen in Oslo consumes 180L water per day
+                      </text>
                   </Container>
                 </Container>
               </Carousel.Item>
               <Carousel.Item>
                 <Container>
                   <h3 style={{ color: "black" }}>Overview</h3>
+                 
                   <Container>
                     <Doughnut
                       data={transformDataForCharts(usageToday, color)}
@@ -437,7 +459,6 @@ class Overview extends React.Component {
                 </Container>
               </Carousel.Item>
             </Carousel>
-        
 
             <Jumbotron fluid style={{ margin: 0 }}>
               <Container>
@@ -454,6 +475,14 @@ class Overview extends React.Component {
               <h3>
                 {totalUsageThisWeek} / {averageWaterConsumption}L
               </h3>
+              {user ? (
+                      <Container>
+                        {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
+                        {user.noInHousehold}
+                      </Container>
+                    ) : (
+                      ""
+                    )}
               <Container>
                 <Doughnut
                   data={transformDataForCharts(usageThisWeek, color)}
@@ -461,7 +490,7 @@ class Overview extends React.Component {
                 />
               </Container>
             </Container>
-            <Container fluid style={{backgroundColor:"#CBDFF1"}} >
+            <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
               <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
               <h6>- Average water consumption</h6>
             </Container>

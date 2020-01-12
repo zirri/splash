@@ -64,3 +64,6 @@ CREATE TABLE facts (
 INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about facts. A fact should not be mistaken for truth.  *MIC DROPPED*', 'Cathy', 'www.url.com');
 INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about truth. A truth is not the same truth for everyone. *MIC DROPPED*', 'Cathy','www.url.com');
 INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about everyone. Everyone compiled is the world. *MIC DROPPED*', 'Cathy', 'www.url.com');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about the world. Less than 1% of the water supply on earth can be used as drinking water. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about water. A small drip from a faucet can waste as much as128 liters of water a day. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about the water. A small drip from a faucet can waste as much as128 liters of water a day. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');

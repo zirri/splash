@@ -31,3 +31,14 @@ export async function getWaterUsageAll() {
     })
     .then((res) => res.json())
 }
+
+// export async function getWaterMeters() {
+//     return await fetch(`/api/watermeters`, {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-Auth-Token': localStorage.getItem('json_web_token')
+//         }
+//         })
+//         .then((res) => res.json())
+// }
