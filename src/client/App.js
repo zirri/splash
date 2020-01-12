@@ -33,6 +33,7 @@ class App extends React.Component {
         <Route path="/settings" component={withAuthentication(Settings)}></Route>
         <Route path="/roomsandmeters" component={withAuthentication(RoomsAndMeters)}></Route>
         <Route path="/logout" component={withAuthentication(Logout)}></Route>
+        <Route path="/facts" component={withAuthentication(Facts)}></Route>
       </>
     )
 
