@@ -138,8 +138,15 @@ nav a {
     color: white
 }
 
-@media only screen and (min-width: 1000px) {
+.form-row {
+    justify-content: center;
+}
 
+@media only screen and (min-width: 1000px) {
+    .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
     
     .navbar {
        background-color: teal;
