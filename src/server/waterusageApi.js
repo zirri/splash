@@ -8,10 +8,10 @@ const { authenticate } = require('./services/authService.js');
 
 //middleware
 
-router.use('/metering/:waterMeterId', (req, res, next) => {
-    const { waterMeterId } = req.params;
+router.use('/metering/:meterId', (req, res, next) => {
+    const { meterId } = req.params;
     const waterData = req.body;
-    let result = validateMeterId(waterMeterId);
+    let result = validateMeterId(meterId);
     if(result.error){
         return res.status(400).json({error: result.error});
     };
@@ -48,10 +48,10 @@ router.get('/today', authenticate, async (req, res) => {
     res.json(waterUsage);
 })
 
-router.post('/metering/:waterMeterId', async (req, res) => {
-    const { waterMeterId } = req.params;
-    const { waterData } = req.body;
-    waterData.waterMeterId = waterMeterId;
+router.post('/metering/:meterId', async (req, res) => {
+    const { meterId } = req.params;
+    const waterData = req.body;
+    waterData['meterId'] = meterId;
     const newRecord = await updateWaterMetering(waterData);
     res.json(newRecord);
 })
