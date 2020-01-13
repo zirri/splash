@@ -1,0 +1,11 @@
+<svg id="Profile" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="77" height="77" viewBox="0 0 77 77">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="27" height="27" fill="none"/>
+    </clipPath>
+  </defs>
+  <circle id="Ellipse_96" data-name="Ellipse 96" cx="38.5" cy="38.5" r="38.5" fill="#bce0fd"/>
+  <g id="Symbol_6_1" data-name="Symbol 6 – 1" transform="translate(25 25)" clip-path="url(#clip-path)">
+    <path id="Union_1" data-name="Union 1" d="M0,27V23.625c0-3.713,6.075-6.751,13.5-6.751S27,19.912,27,23.625V27ZM6.749,6.751A6.75,6.75,0,1,1,13.5,13.5,6.751,6.751,0,0,1,6.749,6.751Z" fill="#2699fb"/>
+  </g>
+</svg>
