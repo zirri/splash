@@ -27,6 +27,7 @@ router.get('/all', authenticate, async (req, res) => {
     const { userId } = req.user;
     const firstDay = new Date();
     firstDay.setFullYear(2020,0,0);
+    firstDay.setHours(00,00,00);
     const waterUsage = await getWaterUsage(userId, firstDay);
     res.json(waterUsage);
 })
@@ -37,6 +38,7 @@ router.get('/thisweek', authenticate, async (req, res) => {
     const daysSinceMonday = today.getDay()-1;
     const lastMonday = new Date(today);
     lastMonday.setDate(lastMonday.getDate() - daysSinceMonday);
+    lastMonday.setHours(00,00,00);
     const waterUsage = await getWaterUsage(userId, lastMonday);
     res.json(waterUsage);
 })
@@ -44,6 +46,7 @@ router.get('/thisweek', authenticate, async (req, res) => {
 router.get('/today', authenticate, async (req, res) => {
     const { userId } = req.user;
     let todayDate = new Date();
+    todayDate.setHours(00,00,00);
     const waterUsage = await getWaterUsage(userId, todayDate);
     res.json(waterUsage);
 })
