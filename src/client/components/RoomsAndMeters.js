@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Card, Container, ListGroup, Row, Col } from "react-bootstrap";
+import { Button, Container, ListGroup, Row, Col } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
