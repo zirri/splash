@@ -71,6 +71,14 @@ p {
   background-repeat: repeat-x;
   animation: water 8s linear infinite;
 }
+.meters-align {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.heledritten{
+    display: center;
+}
 
 /*OR MOVING*/
 /* @keyframes water {
@@ -115,6 +123,13 @@ p {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
+    .meters-align {
+        text-align: left;
+        margin: 20px auto;
+    }
+    .list-group-item {
+        height: 50px;
+    }
 }
 
 /* CAROUSEL */
@@ -142,6 +157,8 @@ p {
 .carousel-control-next-icon {
   visibility: hidden;
 }
+
+
 
 
 /* NAVBAR */
@@ -205,6 +222,7 @@ nav a {
     .navbar a img {
       display: none;
     }
+    
   }
   
 
@@ -223,4 +241,7 @@ nav a {
     width: 200px;
     margin: auto;
   }
+  .list-group-item {
+    height: 50px;
+}
 }
