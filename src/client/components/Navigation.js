@@ -40,7 +40,7 @@ class Navigation extends React.Component {
         return(
           
           <header >
-            <Navbar collapseOnSelect className="ml-auto" expand="xl">
+            <Navbar collapseOnSelect className="mr-auto " expand="xl">
 
               <Navbar.Toggle />
               <Navbar.Brand className="logoname text" >
@@ -48,22 +48,23 @@ class Navigation extends React.Component {
               </Navbar.Brand>
               <Container fluid="true">
               <Navbar.Collapse id="basic-navbar-nav" >
-                <Nav style={{margin:0, padding:0}} className="mr-auto text-left"  >
-                  <img src={profile} alt="Logo"/> <h2 className="text-center">{user.fullName}</h2>
+                <Nav style={{margin:0, padding:0}} className="mr-auto "  >
+                  <img src={profile} alt="Logo"/> 
+                  <Nav.Link as={NavLink} to="/" style={{pointerEvents: "none", fontWeight:"bold"}} className="disabled-link" >{user.fullName} </Nav.Link>
                   <Nav.Link as={NavLink} to="/home" eventKey="home" >Home</Nav.Link>
-                  <Nav.Link as={Link} eventKey="settings" to="/settings"style={{backgroundColor:"#F1F9FF"}} > 
+                  <Nav.Link as={Link} eventKey="settings" to="/settings" > 
                     <img src={settings} alt="Logo"/>
                     Settings
                   </Nav.Link> 
-                  <Nav.Link  as={Link} eventKey="facts" to="/facts"style={{backgroundColor:"#BCE0FD"}} > 
+                  <Nav.Link  as={Link} eventKey="facts" to="/facts" > 
                     <img src={facts} alt="Logo"/> 
                     Facts
                   </Nav.Link> 
-                  <Nav.Link as={Link} eventKey="roomsandmeters" to="/roomsandmeters" style={{backgroundColor:"#80ACD2", color:"white"}} >
+                  <Nav.Link as={Link} eventKey="roomsandmeters" to="/roomsandmeters"  >
                     <img src={rooms} alt="Logo"/> 
                     Rooms and water 
                   </Nav.Link>
-                  <Nav.Link as={Link} eventKey="logout" to="/logout" style={{backgroundColor:"#1F65A1", color:"white"}}>
+                  <Nav.Link as={Link} eventKey="logout" to="/logout" >
                     <img src={logout} alt="Logo"/> 
                     Log out
                   </Nav.Link>
