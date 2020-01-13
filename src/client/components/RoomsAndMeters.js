@@ -48,12 +48,12 @@ class RoomsAndMeters extends React.Component {
 
   render() {
     const { waterMeter } = this.state;
-  
+    console.log(waterMeter)
     const meter = waterMeter.map((room) => {
       return (
         <Card>
           <Card.Header>
-            {room.room} 
+            {room.room} : {room.source}
           </Card.Header>
           <Card.Body>
             {room.source}
