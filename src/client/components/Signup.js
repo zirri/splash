@@ -18,7 +18,7 @@ class Signup extends React.Component {
     return (
         <main>
            <h1 className="animated">splash</h1>
-                 <div></div>
+              
       <Formik
         validationSchema={schema}
         
@@ -51,7 +51,7 @@ class Signup extends React.Component {
               <br />
             <Form.Row>
               <Form.Group as={Col} md="4" controlId="validationFormik01">
-                <Form.Label>Full name</Form.Label>
+                <Form.Label>full name</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -59,6 +59,7 @@ class Signup extends React.Component {
                   onChange={handleChange}
                   isValid={touched.name && !errors.name}
                   isInvalid={!!errors.name}
+                  placeholder="Name Nameson"
                 />
                  <Form.Control.Feedback type="invalid">
                     {errors.name}
@@ -68,7 +69,7 @@ class Signup extends React.Component {
               </Form.Row>
               <Form.Row>
               <Form.Group as={Col} md="4" controlId="validationFormik02">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>email</Form.Label>
                 <Form.Control
                   type="text"
                   name="email"
@@ -76,6 +77,7 @@ class Signup extends React.Component {
                   onChange={handleChange}
                   isValid={touched.email && !errors.email}
                   isInvalid={!!errors.email}
+                  placeholder="email@email.com"
                 />
                   <Form.Control.Feedback type="invalid">
                     {errors.email}

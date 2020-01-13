@@ -42,14 +42,11 @@ p {
 .App {
     height: 100vh;
     width: 100vw;
-
-    overflow: hidden;
+    text-align: center;
+    /* overflow: hidden; */
 }
 
 /*BLUE*/
-.App {
-    text-align: center;
-}
 
 .logoname {
     font-family: 'Comfortaa';
@@ -58,12 +55,12 @@ p {
     text-align: center;
     width: 100%;
     z-index: 2;
-    
     padding: 0;
 }
 
+
 .animated {
-    margin: 30px auto 10px auto; 
+    margin: 0px auto 10px auto; 
     font-family: 'Comfortaa';
     font-size: 8rem;
     color: rgba(209, 233, 243, 0.534);
@@ -144,6 +141,10 @@ p {
 .navbar {
     background-color: var(--darkest-blue);
     padding: 0;
+}
+
+.container {
+ margin: auto;
 }
 
 nav a {
