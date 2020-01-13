@@ -1,216 +1,221 @@
 :root {
-    --lightest-blue: rgb(213, 232, 248);
-    --light-blue: #bce0fd;
-    --dark-blue: #80acd2;
-    --darkest-blue: #1f65a1;
-  }
-  
-  /*GREEN-BLUE*/
-  /* .App {
-      text-align: center;
-  }
-  .App h1 {
-      margin: 30px auto 10px auto;
-      font-family: 'Comfortaa';
-      font-size: 8rem;
-      color: rgba(248, 248, 200, 0.534);
-      background-image: url('services/hiclipart.com.png');
-      background-size: 800px;
-      background-clip: text;
-      -webkit-background-clip: text;
-      background-repeat: repeat-x;
-      animation: water 15s linear infinite;
-  }
-  @keyframes water {
-       from {background-position: left 0 top -115px;}
-       to {background-position: left 800px top -115px;}
-  }
-  p {
-      font-family: 'Comfortaa';
-      color: rgb(19, 219, 186);
-  } */
-  
-  .App {
-    height: 100vh;
-    width: 100vw;
-  
-    overflow: hidden;
-  }
-  
-  /*BLUE*/
-  .App {
+  --lightest-blue: rgb(213, 232, 248);
+  --light-blue: #bce0fd;
+  --dark-blue: #80acd2;
+  --darkest-blue: #1f65a1;
+}
+
+/*GREEN-BLUE*/
+/* .App {
     text-align: center;
+}
+
+.App h1 {
+    margin: 30px auto 10px auto;
+    font-family: 'Comfortaa';
+    font-size: 8rem;
+    color: rgba(248, 248, 200, 0.534);
+    background-image: url('services/hiclipart.com.png');
+    background-size: 800px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-repeat: repeat-x;
+    animation: water 15s linear infinite;
+}
+
+
+
+@keyframes water {
+     from {background-position: left 0 top -115px;}
+     to {background-position: left 800px top -115px;}
+}
+
+p {
+    font-family: 'Comfortaa';
+    color: rgb(19, 219, 186);
+} */
+
+.App {
+  height: 100vh;
+  width: 100vw;
+
+  overflow: hidden;
+}
+
+/*BLUE*/
+.App {
+  text-align: center;
+}
+
+.logoname {
+  font-family: "Comfortaa";
+  font-size: 2.8rem;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
+
+  padding: 0;
+}
+
+.animated {
+  margin: 30px auto 10px auto;
+  font-family: "Comfortaa";
+  font-size: 8rem;
+  color: rgba(209, 233, 243, 0.534);
+  background-image: url("../hicliparttwo.com.png");
+  background-size: 200px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-repeat: repeat-x;
+  animation: water 8s linear infinite;
+}
+
+/*OR MOVING*/
+/* @keyframes water {
+     from {background-position: left 0 top 0;}
+     to {background-position: left 800px top -100px;}
+     } */
+
+/*OR COLOR GRADIENT*/
+/*
+@keyframes water {
+    from {background-position: left 0 top 0;}
+    to {background-position: left 800px top -100px;
+       color: rgba(0, 183, 255, 0.527);}
+    }
+*/
+
+/*OR STATIC*/
+
+@keyframes water {
+  from {
+    background-position: left 0 top 0;
   }
-  
-  .logoname {
-    font-family: "Comfortaa";
-    font-size: 2.8rem;
-    margin: 0;
-    text-align: center;
-    width: 100%;
-    z-index: 2;
-  
-    padding: 0;
+  to {
+    background-position: left 800px top 0;
   }
-  
+}
+p {
+  font-family: "Comfortaa";
+  color: rgb(12, 140, 179);
+}
+
+@media only screen and (max-width: 380px) {
   .animated {
     margin: 30px auto 10px auto;
     font-family: "Comfortaa";
-    font-size: 8rem;
+    font-size: 5rem;
     color: rgba(209, 233, 243, 0.534);
     background-image: url("../hicliparttwo.com.png");
-    background-size: 200px;
+    background-size: 120px;
     background-clip: text;
     -webkit-background-clip: text;
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
-  
-  /*OR MOVING*/
-  /* @keyframes water {
-       from {background-position: left 0 top 0;}
-       to {background-position: left 800px top -100px;}
-       } */
-  
-  /*OR COLOR GRADIENT*/
-  /*
-  @keyframes water {
-      from {background-position: left 0 top 0;}
-      to {background-position: left 800px top -100px;
-         color: rgba(0, 183, 255, 0.527);}
-      }
-  */
-  
-  /*OR STATIC*/
-  
-  @keyframes water {
-    from {
-      background-position: left 0 top 0;
+}
+
+/* CAROUSEL */
+.containerChart {
+  overflow: hidden;
+}
+
+.carousel {
+  background-color: lightgray;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.carousel-indicators li {
+  background-color: var(--dark-blue);
+  border-radius: 50%;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.carousel-control-prev-icon {
+  visibility: hidden;
+}
+
+.carousel-control-next-icon {
+  visibility: hidden;
+}
+
+
+/* NAVBAR */
+.navbar {
+  background-color: var(--darkest-blue);
+  padding: 0;
+  height: auto;
+}
+
+nav a {
+  color: var(--light-blue);
+}
+
+.navbar-toggler {
+  border: none;
+  color: white;
+}
+
+.navbar img {
+  height: 1.8rem;
+  margin-inline-end: 10px;
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: white;
+}
+.navbar .profile-img {
+    height: 2.5rem;
+    margin: auto;
+
+}
+.navbar-nav {
+  flex-flow: column;
+  color: white;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .form-row {
+      justify-content: center;
     }
-    to {
-      background-position: left 800px top 0;
+  
+    .col-md-4 {
+      flex: 0 0 50%;
+      max-width: 50%;
     }
-  }
-  p {
-    font-family: "Comfortaa";
-    color: rgb(12, 140, 179);
-  }
-  
-  @media only screen and (max-width: 380px) {
-    .animated {
-      margin: 30px auto 10px auto;
-      font-family: "Comfortaa";
-      font-size: 5rem;
-      color: rgba(209, 233, 243, 0.534);
-      background-image: url("../hicliparttwo.com.png");
-      background-size: 120px;
-      background-clip: text;
-      -webkit-background-clip: text;
-      background-repeat: repeat-x;
-      animation: water 8s linear infinite;
-    }
-  }
-  
-  /* CAROUSEL */
-  .containerChart {
-    overflow: hidden;
-  }
-  
-  .carousel {
-    background-color: lightgray;
-    height: 50vh;
-    overflow: hidden;
-  }
-  
-  .carousel-indicators li {
-    background-color: var(--dark-blue);
-    border-radius: 50%;
-    width: 0.8rem;
-    height: 0.8rem;
-  }
-  
-  .carousel-control-prev-icon {
-    visibility: hidden;
-  }
-  
-  .carousel-control-next-icon {
-    visibility: hidden;
-  }
   
   
-  /* NAVBAR */
-  .navbar {
-    background-color: var(--darkest-blue);
-    padding: 0;
-    height: auto;
-  }
-  
-  nav a {
-    color: var(--light-blue);
-  }
-  
-  .navbar-toggler {
-    border: none;
-    color: white;
-  }
-  
-  .navbar img {
-    height: 1.8rem;
-    margin-inline-end: 10px;
-  }
-  
-  .navbar-light .navbar-nav .nav-link.active,
-  .navbar-light .navbar-nav .nav-link.show,
-  .navbar-light .navbar-nav .show > .nav-link {
-    color: white;
-  }
-  .navbar .profile-img {
-      height: 2.5rem;
-      margin: auto;
-  
-  }
-  .navbar-nav {
-    flex-flow: column;
-    color: white;
-    text-transform: capitalize;
-    font-size: 1.5rem;
-  }
-  
-  .navbar-light .navbar-nav .nav-link {
-    color: white;
-  }
-  
-  
-  @media only screen and (min-width: 768px) {
-      .form-row {
-        justify-content: center;
-      }
-    
-      .col-md-4 {
-        flex: 0 0 50%;
-        max-width: 50%;
-      }
-    
-    
-      .navbar a img {
-        display: none;
-      }
-    }
-    
-  
-  @media only screen and (min-width: 1200px) {
-    a img {
+    .navbar a img {
       display: none;
     }
-  
-    .navbar-expand-xl {
-      flex-flow: column;
-      height: 120px;
-      display: flex;
-    }
-  
-    .navbar-light .navbar-brand {
-      width: 200px;
-      margin: auto;
-    }
   }
+  
+
+@media only screen and (min-width: 1200px) {
+  a img {
+    display: none;
+  }
+
+  .navbar-expand-xl {
+    flex-flow: column;
+    height: 120px;
+    display: flex;
+  }
+
+  .navbar-light .navbar-brand {
+    width: 200px;
+    margin: auto;
+  }
+}
