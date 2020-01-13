@@ -200,7 +200,7 @@ class Overview extends React.Component {
     const dataCompareWeeks = {
       datasets: [
         {
-          label: "Water Consumption",
+          labels: "Water Consumption",
           data: totalUsageWeeks,
           backgroundColor: "#2699FB",
           hoverBackgroundColor: "#2699FB"
@@ -212,6 +212,7 @@ class Overview extends React.Component {
     //OPTIONS FOR CHARTS
 
     const optionDoughnut = {
+      
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -307,6 +308,7 @@ class Overview extends React.Component {
     };
 
     const optionCompareWeeks = {
+      
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -408,29 +410,30 @@ class Overview extends React.Component {
     console.log(transformDataForCharts(usageToday, color));
     return (
       <>
-        <Tabs
+        <Tabs 
           defaultActiveKey="today"
           id="uncontrolled-tab-example"
-          
         >
-          <Tab  eventKey="today" title="TODAY">
+          <Tab  eventKey="today" title="TODAY" >
             <Carousel wrap="true" interval="10000000">
-              <Carousel.Item>
+              <Carousel.Item >
                     <h3> Your water usage: </h3>
                     <h3>
                       {totalUsageToday} / {averageWaterConsumption}L
                     </h3>
                     {user ? (
-                      <Container>
+                      <p>
                         {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
                         {user.noInHousehold}
-                      </Container>
+                      </p>
                     ) : (
                       ""
                     )}
-                    <Container>
+                    <Container className="containerChartBar" >
                       <HorizontalBar data={dataBar} options={optionBarChart} />
-                      <Container className="containerChart">
+                     
+                    </Container>
+                    <Container className="smile-icon">
                       {totalUsageToday < averageWaterConsumption ? (
                         <span style={{ color: "#7FC4FD"}}>
                           <FaGrinBeam size={48} />
@@ -440,59 +443,55 @@ class Overview extends React.Component {
                           <FaFrownOpen size={48} />
                         </span>
                       )}
-                      </Container >
                     </Container>
-                      <p style={{ color: "black"}}>
+                      <p>
                         The avarage citizen in Oslo consumes 180L water per day
                       </p>
               </Carousel.Item>
               <Carousel.Item>
-                <Container>
-                  <h3 style={{ color: "black" }}>Overview</h3>
+                  <h3 >Overview</h3>
                  
-                  <Container>
+                  <Container className="containerChart">
                     <Doughnut
                       data={transformDataForCharts(usageToday, color)}
                       options={optionHalfDoughnut}
                     />
                   </Container>
-                </Container>
               </Carousel.Item>
             </Carousel>
 
-            <Jumbotron fluid style={{ margin: 0 }}>
-              <Container>
+            <Jumbotron fluid >
                 <h4>Fact #{fact ? fact.id : ""}</h4>
                 <p>{fact ? fact.fact : ""}</p>
                 <h6>{fact ? fact.sourceDisplayName : ""} </h6>
                 <FaRegCommentDots />
-              </Container>
             </Jumbotron>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <Container fluid style={{ backgroundColor: "#F1F9FF" }}>
+            <Container fluid >
               <h3> Your water usage: </h3>
               <h3>
                 {totalUsageThisWeek} / {averageWaterConsumption}L
               </h3>
-              {user ? (
-                      <Container>
-                        {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
+              {user ? ( <p>{user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
                         {user.noInHousehold}
-                      </Container>
-                    ) : (
+                    </p>) : (
                       ""
                     )}
-              <Container>
+                <Container className="containerChart">
                 <Doughnut
                   data={transformDataForCharts(usageThisWeek, color)}
                   options={optionHalfDoughnut}
                 />
-              </Container>
+                </Container>
             </Container>
+
             <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
+              <h3> Week comparison</h3>
+                    <Container  className="containerChart">
               <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
               <h6>- Average water consumption</h6>
+              </Container>
             </Container>
           </Tab>
         </Tabs>
