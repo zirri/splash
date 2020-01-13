@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Card, Container } from "react-bootstrap";
+import { Button, Card, Container, ListGroup } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ class RoomsAndMeters extends React.Component {
     try {
       const waterMeters = await getWaterUsageAll();
       function compileByMeterId(arrayOfWaterData) {
-        return Object.values(
+        const reduceToMeterId = Object.values(
           arrayOfWaterData.reduce(
             (r, { meterId, room, source }) => {
               r[meterId] = r[meterId] || {
@@ -33,11 +33,16 @@ class RoomsAndMeters extends React.Component {
             {}
           )
         );
+
+        return Object.entries(reduceToMeterId.reduce((result, value) => {
+          result[value.room] = result[value.room] || [];
+          result[value.room].push({source: value.source, meterId: value.meterId })
+          return result;
+        },
+        {}
+        ))
       }
-
-   
       console.log(compileByMeterId(waterMeters))
-
       this.setState({
         waterMeter: compileByMeterId(waterMeters)
       })
@@ -48,15 +53,15 @@ class RoomsAndMeters extends React.Component {
 
   render() {
     const { waterMeter } = this.state;
-    console.log(waterMeter)
     const meter = waterMeter.map((room) => {
       return (
         <Card>
-          <Card.Header>
-            {room.room} : {room.source}
-          </Card.Header>
+            <strong>{room[0]}</strong> 
+            <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter" } </p> 
           <Card.Body>
-            {room.source}
+            <ListGroup variant="flush">
+              {room[1].map((source) => <ListGroup.Item>{source.source}</ListGroup.Item> )}
+            </ListGroup>
           </Card.Body>
         </Card> 
       )

@@ -63,7 +63,9 @@ class Overview extends React.Component {
       const waterUsageToday = await getWaterUsageToday();
       const waterUsageThisWeek = await getWaterUsageThisWeek();
       const userInformation = await getUserInformation();
-      console.log(getWaterUsageAll)
+      console.log(waterUsageToday)
+      console.log(this.props)
+     
       function compileByMeterId(arrayOfWaterData) {
         return Object.values(
           arrayOfWaterData.reduce(
@@ -440,9 +442,9 @@ class Overview extends React.Component {
                       )}
                       </Container >
                     </Container>
-                      <text style={{ color: "black"}}>
+                      <p style={{ color: "black"}}>
                         The avarage citizen in Oslo consumes 180L water per day
-                      </text>
+                      </p>
               </Carousel.Item>
               <Carousel.Item>
                 <Container>
