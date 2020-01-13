@@ -30,12 +30,11 @@ function validateMeterId(waterMeterId){
 
 
 const waterDataSchema = {
-    timestamp: Joi.date().timestamp('javascript').required(),
+    timestamp: Joi.string(),//Joi.date().timestamp().required(),
     amount: Joi.number().positive().required(),
 };
 
 function validateMeteringData(meteringData){
-    console.log({...meteringData})
     const result = Joi.validate({...meteringData}, waterDataSchema);
     if(result.error){
         return {error: `Validation of metering data (body) failed: ${result.error.details[0].message}`};

@@ -11,3 +11,13 @@ export async function createNewUser(fullName, email, password, location, noInHou
     .then((res) => res.json())
 }
 
+export async function getUserInformation() {
+    return await fetch(`${API_URL}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Auth-Token': localStorage.getItem('json_web_token')
+        }
+    })
+    .then((res) => res.json())
+}
