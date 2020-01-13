@@ -58,6 +58,7 @@ p {
   padding: 0;
 }
 
+
 .animated {
   margin: 30px auto 10px auto;
   font-family: "Comfortaa";
@@ -148,6 +149,10 @@ p {
   background-color: var(--darkest-blue);
   padding: 0;
   height: auto;
+}
+
+.container {
+ margin: auto;
 }
 
 nav a {
