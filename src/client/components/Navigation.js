@@ -28,7 +28,6 @@ class Navigation extends React.Component {
         user
       })
 
-      console.log(user)
     } catch(error){
       console.log(error)
     }
@@ -49,7 +48,7 @@ class Navigation extends React.Component {
               <Container fluid="true">
               <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav style={{margin:0, padding:0}} className="mr-auto "  >
-                  <img src={profile} alt="Logo"/> 
+                  <img src={profile} alt="Logo" className="profile-img"/> 
                   <Nav.Link as={NavLink} to="/" style={{pointerEvents: "none", fontWeight:"bold"}} className="disabled-link" >{user.fullName} </Nav.Link>
                   <Nav.Link as={NavLink} to="/home" eventKey="home" >Home</Nav.Link>
                   <Nav.Link as={Link} eventKey="settings" to="/settings" > 
