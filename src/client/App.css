@@ -82,10 +82,9 @@ header {
     margin-bottom: 40px;
 }
 
-.heledritten{
-    display: center;
+.data-registration {
+    margin: 5px;
 }
-
 /*OR MOVING*/
 /* @keyframes water {
      from {background-position: left 0 top 0;}
