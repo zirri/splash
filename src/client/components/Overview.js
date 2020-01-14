@@ -105,8 +105,8 @@ class Overview extends React.Component {
   }
 
   async handleRegisterClick(amount, meterId) {
-    const record = await postWaterUsage(amount, meterId)
-    console.log(record)
+    await postWaterUsage(amount, meterId)
+    window.location.reload(false);
   }
 
   render() {
