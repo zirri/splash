@@ -64,38 +64,39 @@ class LoginFormik extends React.Component {
               <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationFormikEmail">
                   <Form.Label>email</Form.Label>
-
-                  <Form.Control
-                    type="text"
-                    placeholder="email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    isValid={touched.email && !errors.email}
-                    isInvalid={!!errors.email}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.email}
-                  </Form.Control.Feedback>
-
+          
+                    <Form.Control
+                      type="text"
+                      placeholder="email"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      isValid={touched.email && !errors.email}
+                      isInvalid={touched.email && !!errors.email}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.email}
+                    </Form.Control.Feedback>
+               
                 </Form.Group>
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationFormikUsername">
                   <Form.Label>password</Form.Label>
-                  
-                  <Form.Control
-                    type="password"
-                    placeholder="password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    isValid={touched.password && !errors.password}
-                    isInvalid={!!errors.password}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.password}
-                  </Form.Control.Feedback>
+          
+                    <Form.Control
+                      type="password"
+                      placeholder="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      isValid={touched.password && !errors.password}
+                      isInvalid={touched.password && !!errors.password}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.password}
+                    </Form.Control.Feedback>
+               
                 </Form.Group>
               </Form.Row>
               <Button type="submit">Log in</Button>

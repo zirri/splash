@@ -23,7 +23,6 @@ class Signup extends React.Component {
     return (
       <main>
         <h1 className="animated">splash</h1>
-
         <Formik
           validationSchema={schema}
 
@@ -52,7 +51,7 @@ class Signup extends React.Component {
           }) => (
 
               <Form noValidate onSubmit={handleSubmit} className="container">
-                <h1>Sign up</h1>
+                <h2>Sign up</h2>
                 <br />
                 <Form.Row>
                   <Form.Group as={Col} md="4" controlId="validationFormik01">
@@ -63,7 +62,7 @@ class Signup extends React.Component {
                       value={values.name}
                       onChange={handleChange}
                       isValid={touched.name && !errors.name}
-                      isInvalid={!!errors.name}
+                      isInvalid={touched.name && !!errors.name}
                       placeholder="Name Nameson"
                     />
                     <Form.Control.Feedback type="invalid">
@@ -81,7 +80,7 @@ class Signup extends React.Component {
                       value={values.email}
                       onChange={handleChange}
                       isValid={touched.email && !errors.email}
-                      isInvalid={!!errors.email}
+                      isInvalid={touched.email && !!errors.email}
                       placeholder="email@email.com"
                     />
                     <Form.Control.Feedback type="invalid">
@@ -101,7 +100,7 @@ class Signup extends React.Component {
                       name="password"
                       value={values.password}
                       onChange={handleChange}
-                      isInvalid={!!errors.password}
+                      isInvalid={touched.password && !!errors.password}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.password}
@@ -118,7 +117,7 @@ class Signup extends React.Component {
                       name="passwordcheck"
                       value={values.passwordcheck}
                       onChange={handleChange}
-                      isInvalid={!!errors.passwordcheck}
+                      isInvalid={touched.passwordcheck && !!errors.passwordcheck}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -135,7 +134,7 @@ class Signup extends React.Component {
                       name="location"
                       value={values.location}
                       onChange={handleChange}
-                      isInvalid={!!errors.location}
+                      isInvalid={touched.location && !!errors.location}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.location}
@@ -151,7 +150,7 @@ class Signup extends React.Component {
                       name="household"
                       value={values.household}
                       onChange={handleChange}
-                      isInvalid={!!errors.household}
+                      isInvalid={touched.household && !!errors.household}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -165,6 +164,7 @@ class Signup extends React.Component {
             )}
         </Formik>
       </main>
+
     );
   }
 }

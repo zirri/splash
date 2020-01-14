@@ -6,11 +6,12 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
 //Locale icons and files
-import settings from '../svg/Settings.svg';
-import facts from '../svg/Facts.svg';
-import rooms from '../svg/Rooms.svg';
-import logout from '../svg/Logout.svg';
-import profile from '../svg/Profile.svg';
+import settings from '../icons/Settings.svg';
+import facts from '../icons/Facts.svg';
+import rooms from '../icons/Rooms.svg';
+import logout from '../icons/Logout.svg';
+import profile from '../icons/Profile.svg';
+
 import { getUserInformation } from '../services/users';
 
 
