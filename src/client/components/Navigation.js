@@ -1,5 +1,6 @@
 //Plugins
 import React from 'react';
+import jwtDecode from "jwt-decode";
 
 //Bootstrap
 import { Navbar, Nav, Container } from "react-bootstrap";
@@ -12,27 +13,15 @@ import rooms from '../icons/Rooms.svg';
 import logout from '../icons/Logout.svg';
 import profile from '../icons/Profile.svg';
 
-import { getUserInformation } from '../services/users';
-
-
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
+    const token = localStorage.getItem("json_web_token");
+    const payload = jwtDecode(token);
+
     this.state = {
-      user: []
-    }
-  }
-  async componentDidMount() {
-    try {
-      const user = await getUserInformation()
-
-      this.setState({
-        user
-      })
-
-    } catch (error) {
-      console.log(error)
+      user: payload,
     }
   }
 
