@@ -68,7 +68,7 @@ class LoginFormik extends React.Component {
                       value={values.email}
                       onChange={handleChange}
                       isValid={touched.email && !errors.email}
-                      isInvalid={!!errors.email}
+                      isInvalid={touched.email && !!errors.email}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.email}
@@ -87,7 +87,7 @@ class LoginFormik extends React.Component {
                       value={values.password}
                       onChange={handleChange}
                       isValid={touched.password && !errors.password}
-                      isInvalid={!!errors.password}
+                      isInvalid={touched.password && !!errors.password}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.password}
