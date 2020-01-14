@@ -60,7 +60,7 @@ class RoomsAndMeters extends React.Component {
         <div className="meters-align" key={room}>
           <Row className="justify-content-md-center">
             <Col xs lg="2">
-              <strong>{room[0]}</strong>
+              <h3>{room[0]}</h3>
               <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter"} </p>
             </Col>
           </Row>
