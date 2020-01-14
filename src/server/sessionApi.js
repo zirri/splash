@@ -14,8 +14,10 @@ router.post('/', async (req, res) => {
     const result = await logInAndGetToken(email, password);
     if(result.error){
         res.status(result.status).json({error: result.error})
+    }else{
+        res.json({token: result.token})
     }
-    res.json({token: result.token})
+    
 });
 
 module.exports = router;
