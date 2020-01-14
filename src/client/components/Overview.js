@@ -13,7 +13,7 @@ import {
   Carousel,
   Jumbotron,
   Container,
-  Button, 
+  Button,
   Col,
   Row
 } from "react-bootstrap";
@@ -35,15 +35,12 @@ import {
 } from "react-icons/fa";
 
 //LOCAL COMPONENTS
-import {
-  getWaterUsageToday,
-  getWaterUsageThisWeek,
-} from "../services/water";
+import { getWaterUsageToday, getWaterUsageThisWeek } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { getFacts } from "../services/fact";
 import { getUserInformation } from "../services/users";
 
-import TabRegister from './TabRegister';
+import TabRegister from "./TabRegister";
 
 class Overview extends React.Component {
   constructor(props) {
@@ -66,9 +63,9 @@ class Overview extends React.Component {
       const waterUsageToday = await getWaterUsageToday();
       const waterUsageThisWeek = await getWaterUsageThisWeek();
       const userInformation = await getUserInformation();
-      console.log(waterUsageToday)
-      console.log(this.props)
-     
+      console.log(waterUsageToday);
+      console.log(this.props);
+
       function compileByMeterId(arrayOfWaterData) {
         return Object.values(
           arrayOfWaterData.reduce(
@@ -105,8 +102,6 @@ class Overview extends React.Component {
       console.log(error);
     }
   }
-
- 
 
   render() {
     const { usageToday, usageThisWeek, facts, user } = this.state;
@@ -217,7 +212,6 @@ class Overview extends React.Component {
     //OPTIONS FOR CHARTS
 
     const optionDoughnut = {
-      
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -313,7 +307,6 @@ class Overview extends React.Component {
     };
 
     const optionCompareWeeks = {
-      
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -415,91 +408,90 @@ class Overview extends React.Component {
     console.log(transformDataForCharts(usageToday, color));
     return (
       <>
-        <Tabs 
-          defaultActiveKey="today"
-          id="uncontrolled-tab-example"
-        >
-          <Tab  eventKey="today" title="TODAY" >
+        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
+          <Tab eventKey="today" title="TODAY">
             <Carousel wrap="true" interval="10000000">
-              <Carousel.Item >
-                    <h3> Your water usage: </h3>
-                    <h3>
-                      {totalUsageToday} / {averageWaterConsumption}L
-                    </h3>
-                    {user ? (
-                      <p>
-                        {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
-                        {user.noInHousehold}
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                    <Container className="containerChartBar" >
-                      <HorizontalBar data={dataBar} options={optionBarChart} />
-                     
-                    </Container>
-                    <Container className="smile-icon">
-                      {totalUsageToday < averageWaterConsumption ? (
-                        <span style={{ color: "#7FC4FD"}}>
-                          <FaGrinBeam size={48} />
-                        </span>
-                      ) : (
-                        <span style={{ color: "#7FC4FD"}}>
-                          <FaFrownOpen size={48} />
-                        </span>
-                      )}
-                    </Container>
-                      <p>
-                        The avarage citizen in Oslo consumes 180L water per day
-                      </p>
+              <Carousel.Item>
+                <h3> Your water usage: </h3>
+                <h3>
+                  {totalUsageToday} / {averageWaterConsumption}L
+                </h3>
+                {user ? (
+                  <p>
+                    {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
+                    {user.noInHousehold}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <Container className="containerChartBar">
+                  <HorizontalBar data={dataBar} options={optionBarChart} />
+                </Container>
+                <Container className="smile-icon">
+                  {totalUsageToday < averageWaterConsumption ? (
+                    <span style={{ color: "#7FC4FD" }}>
+                      <FaGrinBeam size={48} />
+                    </span>
+                  ) : (
+                    <span style={{ color: "#7FC4FD" }}>
+                      <FaFrownOpen size={48} />
+                    </span>
+                  )}
+                </Container>
+                <p>The avarage citizen in Oslo consumes 180L water per day</p>
               </Carousel.Item>
               <Carousel.Item>
-                  <h3 >Overview</h3>
-                 
-                  <Container className="containerChart">
-                    <Doughnut
-                      data={transformDataForCharts(usageToday, color)}
-                      options={optionHalfDoughnut}
-                    />
-                  </Container>
+                <h3>Overview</h3>
+
+                <Container className="containerChart">
+                  <Doughnut
+                    data={transformDataForCharts(usageToday, color)}
+                    options={optionHalfDoughnut}
+                  />
+                </Container>
               </Carousel.Item>
             </Carousel>
 
-            <Jumbotron fluid >
-                <h4>Fact #{fact ? fact.id : ""}</h4>
-                <p>{fact ? fact.fact : ""}</p>
-                <h6>{fact ? fact.sourceDisplayName : ""} </h6>
-                <FaRegCommentDots />
+            <Jumbotron fluid>
+              <h4>Fact #{fact ? fact.id : ""}</h4>
+              <p>{fact ? fact.fact : ""}</p>
+              <h6>{fact ? fact.sourceDisplayName : ""} </h6>
+              <FaRegCommentDots />
             </Jumbotron>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <Container fluid >
+            <Container fluid>
               <h3> Your water usage: </h3>
               <h3>
                 {totalUsageThisWeek} / {averageWaterConsumption}L
               </h3>
-              {user ? ( <p>{user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
-                        {user.noInHousehold}
-                    </p>) : (
-                      ""
-                    )}
-                <Container className="containerChart">
+              {user ? (
+                <p>
+                  {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
+                  {user.noInHousehold}
+                </p>
+              ) : (
+                ""
+              )}
+              <Container className="containerChart">
                 <Doughnut
                   data={transformDataForCharts(usageThisWeek, color)}
                   options={optionHalfDoughnut}
                 />
-                </Container>
+              </Container>
             </Container>
 
             <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
               <h3> Week comparison</h3>
-                    <Container  className="containerChart">
-              <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
-              <h6>- Average water consumption</h6>
+              <Container className="containerChart">
+                <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
+                <h6>- Average water consumption</h6>
               </Container>
             </Container>
           </Tab>
-          <TabRegister />
+          <Tab eventKey="register" title="REGISTER">
+            <TabRegister />
+          </Tab>
         </Tabs>
       </>
     );
