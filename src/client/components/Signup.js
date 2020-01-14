@@ -8,6 +8,7 @@ import { Form, Button, Col } from 'react-bootstrap';
 
 //Locale files
 import { createNewUser } from '../services/users';
+import Errorview from './Errorview';
 
 const schema = yup.object({
   name: yup.string().min(2, 'Name must be more than one character').required(),
@@ -19,7 +20,20 @@ const schema = yup.object({
 });
 
 class Signup extends React.Component {
+  constructor(props){
+    super(props)
+
+    this.state= {
+      error: null
+    }
+  }
   render() {
+    const { error } = this.state;
+
+    if(error){
+      return <Errorview error={error}/>
+    }
+
     return (
       <main>
         <h1 className="animated">splash</h1>
@@ -35,9 +49,13 @@ class Signup extends React.Component {
             household: 0,
           }}
           onSubmit={async (values) => {
-            await createNewUser(values.name, values.email, values.password, values.location, values.household);
-            const { history } = this.props;
-            history.push('/login');
+            try{
+              await createNewUser(values.name, values.email, values.password, values.location, values.household);
+              const { history } = this.props;
+              history.push('/login');
+            }catch(error){
+              this.setState({error})
+            }
           }}
         >
           {({

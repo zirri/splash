@@ -6,6 +6,7 @@ import { Container, Card } from "react-bootstrap";
 
 //LOCAL
 import { getFacts } from "../services/fact";
+import Errorview from './Errorview.js'
 
 //REACT-ICONS
 import { FaRegCommentDots } from "react-icons/fa";
@@ -15,26 +16,37 @@ class Facts extends React.Component {
     super(props);
 
     this.state = {
-      facts: []
+      facts: [],
+      error: null
     };
   }
 
   async componentDidMount() {
     try {
       const facts = await getFacts();
+      if(facts.error){throw new Error(facts.error)}
       this.setState({
         facts
       });
     } catch (error) {
+      this.setState({
+        error
+      })
     }
   }
 
   render() {
-    const { facts } = this.state;
+    const { facts, error } = this.state;
+
+    if(error){
+      return(
+        <Errorview error={error}/>
+      )
+    }
 
     const fact = facts.map(elem => {
       return (
-        <Container>
+        <Container key={elem.id}>
           <Card>
             <Card.Body>
               <blockquote className="blockquote mb-0">
@@ -50,6 +62,7 @@ class Facts extends React.Component {
     });
 
     return (
+
       <Container>
         <h2>Facts</h2>
         {fact}

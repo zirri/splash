@@ -10,6 +10,7 @@ import { Form, Button, Col } from 'react-bootstrap';
 
 //LOCALE IMPORTS
 import { createSession } from '../services/session';
+import Errorview from './Errorview';
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -27,6 +28,12 @@ class LoginFormik extends React.Component {
   
 
   render() {
+    const { error } = this.state;
+    
+    if(error){
+      return <Errorview error={error}/>
+    }
+
     return (
       <main>
         <h1 className="animated">splash</h1>
@@ -39,7 +46,8 @@ class LoginFormik extends React.Component {
           onSubmit={async ({ email, password }) => {
             try {
               const { history } = this.props;
-              const { token } = await createSession({ email, password })
+              const { token, error } = await createSession({ email, password });
+              if(error){throw new Error(error)}
               localStorage.setItem('json_web_token', token)
               history.push('/home')
             } catch (error) {

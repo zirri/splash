@@ -6,13 +6,15 @@ import { Container, ListGroup, Row, Col } from "react-bootstrap";
 
 //LOCAL
 import { getWaterUsageAll } from "../services/water";
+import Errorview from './Errorview.js'
 
 class RoomsAndMeters extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      waterMeters: []
+      waterMeters: [],
+      error: null
     };
   }
 
@@ -43,17 +45,23 @@ class RoomsAndMeters extends React.Component {
   async componentDidMount() {
     try {
       const waterMeters = await getWaterUsageAll();
+      if(waterMeters.error){throw new Error(waterMeters.error)}
       const arrayRoomsWithMeters = this.compileByMeterId(waterMeters);
       this.setState({
         waterMeters: arrayRoomsWithMeters
       })
     } catch (error) {
-      console.log(error);
+      this.setState({error})
     }
   }
 
   render() {
-    const { waterMeters } = this.state;
+    const { waterMeters, error } = this.state;
+
+    if(error){
+      return <Errorview error={error}/>
+    }
+
     const meter = waterMeters.map((room) => {
       return (
         <div className="meters-align" key={room}>
