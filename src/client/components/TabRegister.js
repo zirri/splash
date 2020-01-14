@@ -1,8 +1,8 @@
 import React from "react";
-import Header from './Header';
+import { FaShower, FaToilet, FaBath } from "react-icons/fa";
 
 //REACT-BOOTSTRAP
-import { Button, Tab, Row, Col, ListGroup } from "react-bootstrap";
+import { Button, Tab, Row, Col, ListGroup, Accordion, Card } from "react-bootstrap";
 
 //LOCAL
 import { postWaterUsage } from "../services/water";
@@ -40,12 +40,45 @@ class TabRegister extends React.Component {
         <>
         <div>This is the bath</div>
         <Col xs lg="3">
-        <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 75, 123456)} > Take a 5 min shower (75L){" "}</Button>
-        <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 150, 123456)} > Take a 10 min shower (150L) </Button> 
-        <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 123456)} > Take a 5 min shower using 'sparedusj' (37,5L) </Button> 
-        <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 200, 123456)} > Take a bath (200L) </Button> 
-        <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 6, 123111)} > Flush the WC (6L) </Button>
+        <Accordion >
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="0" >
+              <FaShower />
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0">
+              <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 75, 123456)} > Take a 5 min shower (75L){" "}</Button>
+            </Accordion.Collapse>
+            <Accordion.Collapse eventKey="0">
+              <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 150, 123456)} > Take a 10 min shower (150L) </Button>
+            </Accordion.Collapse>
+            <Accordion.Collapse eventKey="0">
+             <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 123456)} > Take a 5 min shower using 'sparedusj' (37,5L) </Button>
+             </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="1">
+              <FaBath />
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="1">
+              <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 200, 123456)} > Take a bath (200L) </Button>
+            </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="2" >
+              <FaToilet />
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="2">
+              <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 4, 123111)} > Flush the WC (big button) (4L) </Button>
+            </Accordion.Collapse>
+            <Accordion.Collapse eventKey="2">
+              <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 2.5, 123111)} > Flush the WC (small button) (2.5L) </Button>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
         </Col>
+
         <Button onClick={this.backButton.bind(this)}>
           back
         </Button>
