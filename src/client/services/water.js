@@ -32,13 +32,20 @@ export async function getWaterUsageAll() {
     .then((res) => res.json())
 }
 
-// export async function getWaterMeters() {
-//     return await fetch(`/api/watermeters`, {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-Auth-Token': localStorage.getItem('json_web_token')
-//         }
-//         })
-//         .then((res) => res.json())
-// }
+
+
+export async function postWaterUsage(amount, meterId) {
+    const waterUsage = {
+        amount,
+        timestamp: new Date()
+    };
+    const resultJson = await fetch(`${API_URL}/metering/${meterId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(waterUsage)
+    })
+    const result = await resultJson.json();
+    return result;
+}

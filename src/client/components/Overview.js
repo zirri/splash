@@ -12,7 +12,8 @@ import {
   Card,
   Carousel,
   Jumbotron,
-  Container
+  Container,
+  Button, 
 } from "react-bootstrap";
 
 //REACT-CHARTJS-2
@@ -36,7 +37,7 @@ import {
 import {
   getWaterUsageToday,
   getWaterUsageThisWeek,
-  getWaterUsageAll
+  postWaterUsage
 } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { getFacts } from "../services/fact";
@@ -101,6 +102,11 @@ class Overview extends React.Component {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async handleRegisterClick(amount, meterId) {
+    const record = await postWaterUsage(amount, meterId)
+    console.log(record)
   }
 
   render() {
@@ -200,7 +206,7 @@ class Overview extends React.Component {
     const dataCompareWeeks = {
       datasets: [
         {
-          label: "Water Consumption",
+          labels: "Water Consumption",
           data: totalUsageWeeks,
           backgroundColor: "#2699FB",
           hoverBackgroundColor: "#2699FB"
@@ -212,6 +218,7 @@ class Overview extends React.Component {
     //OPTIONS FOR CHARTS
 
     const optionDoughnut = {
+      
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -307,6 +314,7 @@ class Overview extends React.Component {
     };
 
     const optionCompareWeeks = {
+      
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -408,29 +416,30 @@ class Overview extends React.Component {
     console.log(transformDataForCharts(usageToday, color));
     return (
       <>
-        <Tabs
+        <Tabs 
           defaultActiveKey="today"
           id="uncontrolled-tab-example"
-          
         >
-          <Tab  eventKey="today" title="TODAY">
+          <Tab  eventKey="today" title="TODAY" >
             <Carousel wrap="true" interval="10000000">
-              <Carousel.Item>
+              <Carousel.Item >
                     <h3> Your water usage: </h3>
                     <h3>
                       {totalUsageToday} / {averageWaterConsumption}L
                     </h3>
                     {user ? (
-                      <Container>
+                      <p>
                         {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
                         {user.noInHousehold}
-                      </Container>
+                      </p>
                     ) : (
                       ""
                     )}
-                    <Container>
+                    <Container className="containerChartBar" >
                       <HorizontalBar data={dataBar} options={optionBarChart} />
-                      <Container className="containerChart">
+                     
+                    </Container>
+                    <Container className="smile-icon">
                       {totalUsageToday < averageWaterConsumption ? (
                         <span style={{ color: "#7FC4FD"}}>
                           <FaGrinBeam size={48} />
@@ -440,60 +449,67 @@ class Overview extends React.Component {
                           <FaFrownOpen size={48} />
                         </span>
                       )}
-                      </Container >
                     </Container>
-                      <p style={{ color: "black"}}>
+                      <p>
                         The avarage citizen in Oslo consumes 180L water per day
                       </p>
               </Carousel.Item>
               <Carousel.Item>
-                <Container>
-                  <h3 style={{ color: "black" }}>Overview</h3>
+                  <h3 >Overview</h3>
                  
-                  <Container>
+                  <Container className="containerChart">
                     <Doughnut
                       data={transformDataForCharts(usageToday, color)}
                       options={optionHalfDoughnut}
                     />
                   </Container>
-                </Container>
               </Carousel.Item>
             </Carousel>
 
-            <Jumbotron fluid style={{ margin: 0 }}>
-              <Container>
+            <Jumbotron fluid >
                 <h4>Fact #{fact ? fact.id : ""}</h4>
                 <p>{fact ? fact.fact : ""}</p>
                 <h6>{fact ? fact.sourceDisplayName : ""} </h6>
                 <FaRegCommentDots />
-              </Container>
             </Jumbotron>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <Container fluid style={{ backgroundColor: "#F1F9FF" }}>
+            <Container fluid >
               <h3> Your water usage: </h3>
               <h3>
                 {totalUsageThisWeek} / {averageWaterConsumption}L
               </h3>
-              {user ? (
-                      <Container>
-                        {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
+              {user ? ( <p>{user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
                         {user.noInHousehold}
-                      </Container>
-                    ) : (
+                    </p>) : (
                       ""
                     )}
-              <Container>
+                <Container className="containerChart">
                 <Doughnut
                   data={transformDataForCharts(usageThisWeek, color)}
                   options={optionHalfDoughnut}
                 />
-              </Container>
+                </Container>
             </Container>
+
             <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
+              <h3> Week comparison</h3>
+                    <Container  className="containerChart">
               <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
               <h6>- Average water consumption</h6>
+              </Container>
             </Container>
+          </Tab>
+          <Tab eventKey="register" title="REGISTER">
+          <h2>Simulate water usage</h2>
+                <Button onClick={this.handleRegisterClick.bind(this, 75, 123456)}>Take a 5 min shower (75L) </Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 150, 123456)}>Take a 10 min shower (150L)</Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 37.5, 123456)}>Take a 5 min shower using 'sparedusj' (37,5L)</Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 20, 123321)}>Run the washing machine (20L)</Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 20, 123987)}>Use the dishwasher (20L)</Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 200, 123456)}>Take a bath (200L)</Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 6, 123789)}>Let water run for 30s to get cold water (6L)</Button>
+                <Button onClick={this.handleRegisterClick.bind(this, 6, 123111)}>Flush the WC (6L)</Button>      
           </Tab>
         </Tabs>
       </>

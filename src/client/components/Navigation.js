@@ -45,7 +45,7 @@ class Navigation extends React.Component {
               <Navbar.Brand className="logoname text" >
                 <NavLink to="/home">splash</NavLink>
               </Navbar.Brand>
-              <Container fluid="true">
+              <Container fluid>
               <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav style={{margin:0, padding:0}} className="mr-auto "  >
                   <img src={profile} alt="Logo" className="profile-img"/> 
