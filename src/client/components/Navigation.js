@@ -45,7 +45,7 @@ class Navigation extends React.Component {
               <Navbar.Brand className="logoname text" >
                 <NavLink to="/home">splash</NavLink>
               </Navbar.Brand>
-              <Container fluid="true">
+              <Container fluid>
               <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav style={{margin:0, padding:0}} className="mr-auto "  >
                   <img src={profile} alt="Logo" className="profile-img"/> 
@@ -61,7 +61,7 @@ class Navigation extends React.Component {
                   </Nav.Link> 
                   <Nav.Link as={Link} eventKey="roomsandmeters" to="/roomsandmeters"  >
                     <img src={rooms} alt="Logo"/> 
-                    Rooms and water 
+                    Rooms and meters 
                   </Nav.Link>
                   <Nav.Link as={Link} eventKey="logout" to="/logout" >
                     <img src={logout} alt="Logo"/> 

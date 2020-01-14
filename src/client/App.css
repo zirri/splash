@@ -38,14 +38,20 @@ p {
 .App {
   height: 100vh;
   width: 100vw;
-
+  text-align: center;
+   
   overflow: hidden;
 }
 
-/*BLUE*/
-.App {
-  text-align: center;
+/* HEADER */
+header {
+    min-height: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
 }
+
 
 .logoname {
   font-family: "Comfortaa";
@@ -56,7 +62,7 @@ p {
   z-index: 2;
 
   padding: 0;
-}
+} 
 
 
 .animated {
@@ -70,6 +76,14 @@ p {
   -webkit-background-clip: text;
   background-repeat: repeat-x;
   animation: water 8s linear infinite;
+}
+.meters-align {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.heledritten{
+    display: center;
 }
 
 /*OR MOVING*/
@@ -102,6 +116,11 @@ p {
   color: rgb(12, 140, 179);
 }
 
+.containerChartBar {
+    position: relative;
+    overflow: hidden;
+}
+
 @media only screen and (max-width: 380px) {
   .animated {
     margin: 30px auto 10px auto;
@@ -115,17 +134,35 @@ p {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
+    .meters-align {
+        text-align: left;
+        margin: 20px auto;
+    }
+    .list-group-item {
+        height: 50px;
+    }
 }
 
+  .containerChartBar {
+      position: relative;
+      height: 60px;
+      overflow: hidden;
+  }
+  .jumbotron {
+      height: 100%;
+  }
+
+
+/* TABS */
+div .tab-content {
+    height: 60vh;
+}
+ 
 /* CAROUSEL */
-.containerChart {
-  overflow: hidden;
-}
-
 .carousel {
   background-color: lightgray;
-  height: 50vh;
-  overflow: hidden;
+  height: 55vh;
+  padding: 0;
 }
 
 .carousel-indicators li {
@@ -143,12 +180,41 @@ p {
   visibility: hidden;
 }
 
+/* COPMONENTS INSIDE CAROUSEL */
+div .containerChart {
+    margin: auto;
+    overflow: hidden;
+    height: 10vh;
+}
+
+
+div .tab-content {
+    height: 100%;
+}
+
+div .tab-content div .jumbotron .jumbotron-fluid {
+    height: 100%;
+    margin: 0;
+}
+
+.tab-content div .jumbotron {
+    padding: 1rem;
+}
+
+.smile-icon {
+    padding: 1rem;
+} 
+
+
+
+
+
 
 /* NAVBAR */
 .navbar {
+width: 100vw;
   background-color: var(--darkest-blue);
   padding: 0;
-  height: auto;
 }
 
 .container {
@@ -191,7 +257,76 @@ nav a {
 }
 
 
+
+
+@media only screen and (max-width: 300px) {
+    div .containerChart  {
+        margin-left: 1rem;
+        width: 100%;
+    }
+
+    div .tab-content {
+        height: 100vh;
+    }
+    
+    nav .nav .nav-tabs {
+        display: block;
+        height: 30vh;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    h4 {
+        font-size: 1.1rem;
+    }
+
+    h6 {
+        font-size: 0.8rem;
+        margin :0;
+    }
+
+    .tab-content {
+        height: 100vh;
+    }
+
+    .smile-icon span svg{
+        padding: 3px;
+    }
+
+    p {
+        font-size: 0.8rem;
+        margin-block-end: 0.2rem;
+    }
+
+    .carousel-indicators {
+        margin-block-end: 0.2rem;
+    }
+
+    .tab-content div .jumbotron {
+        padding: 0;
+    }
+
+    div .containerChart {
+        height: 8vh;
+    }
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+div .containerChart {
+    overflow: visible;
+    height: 300px;
+}
+
 @media only screen and (min-width: 768px) {
+    .containerChartBar {
+        height: 150px;
+    }
+
     .form-row {
       justify-content: center;
     }
@@ -205,22 +340,73 @@ nav a {
     .navbar a img {
       display: none;
     }
-  }
-  
 
-@media only screen and (min-width: 1200px) {
+
+}
+ 
+
+
+header {
+    min-height: 10vh;
+    display: block;
+    background-color: var(--darkest-blue);
+}
+
+nav .nav .nav-tabs {
+    height: 5vh;
+}
+
+div .tab-content  {
+    min-height: 85vh;
+}
+
+@media only screen and (min-width: 1200px){
+
   a img {
     display: none;
   }
 
   .navbar-expand-xl {
     flex-flow: column;
-    height: 120px;
     display: flex;
   }
 
   .navbar-light .navbar-brand {
-    width: 200px;
     margin: auto;
   }
+
+  div .containerChart {
+    overflow: hidden;
+    width: 85vw;
+    min-height: 10vh;
+    max-height: 10vh;
+}
+div .containerChart  {
+    position: relative;
+    height: 100%;
+}
+
+
+    div.jumbotron .jumbotron-fluid {
+        background-color: white;
+    }
+} 
+
+#uncontrolled-tab-example-tabpane-week {
+    height: 100%;
+}
+
+#uncontrolled-tab-example-tabpane-week div{
+    height: 45%;
+    margin-block-end: 1rem;
+    
+}
+
+#uncontrolled-tab-example-tabpane-today{
+    height: 100%;
+  
+}
+  
+.list-group-item {
+    height: 50px;
 }
