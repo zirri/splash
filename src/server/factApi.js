@@ -6,8 +6,8 @@ const { getFacts } = require('./services/databaseServices.js');
 const { authenticate } = require('./services/authService.js');
 
 router.get('/', authenticate, async (req, res) => {
-    const fact = await getFacts();
-    res.json(fact);
+    const facts = await getFacts();
+    res.json(facts);
 });
 
 module.exports = router;
