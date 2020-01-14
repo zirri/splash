@@ -11,7 +11,7 @@ class Header extends React.Component {
 
   handleViewChange() {
     const { match, location, history } = this.props;
-    console.log(history)
+    console.log(this.props)
     history.goBack()
   }
   
