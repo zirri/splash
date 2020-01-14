@@ -14,6 +14,8 @@ import {
   Jumbotron,
   Container,
   Button, 
+  Col,
+  Row
 } from "react-bootstrap";
 
 //REACT-CHARTJS-2
@@ -104,7 +106,7 @@ class Overview extends React.Component {
     }
   }
 
-  
+ 
 
   render() {
     const { usageToday, usageThisWeek, facts, user } = this.state;
