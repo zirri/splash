@@ -1,5 +1,7 @@
 import React from "react";
 import { FaShower, FaToilet, FaBath } from "react-icons/fa";
+import { GiTap } from "react-icons/gi";
+
 
 //REACT-BOOTSTRAP
 import { Button, Tab, Row, Col, ListGroup, Accordion, Card } from "react-bootstrap";
@@ -91,6 +93,26 @@ class TabRegister extends React.Component {
         <>
         <div>This is the kitchen</div>
         <Col xs lg="3">
+        <Accordion >
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="0" >
+              <GiTap />
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0">
+            <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 6, 123789)} > Let water run for 30s to get cold water (6L) </Button>
+            </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="1">
+              <FaBath />
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="1">
+              <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 200, 123456)} > Take a bath (200L) </Button>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
+
         <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 20, 123321)}> Run the washing machine (20L) </Button> 
         <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 20, 123987)} > Use the dishwasher (20L) </Button> 
         <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 6, 123789)} > Let water run for 30s to get cold water (6L) </Button>
