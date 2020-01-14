@@ -505,7 +505,7 @@ class Overview extends React.Component {
           <Tab eventKey="register" title="REGISTER">
             <main className="meters-align">
             <Row className="justify-content-md-center meters-align">
-              <h2>Simulate water usage</h2>
+              <h2 className="justify-content-md-center meters-align">Simulate water usage</h2>
               </Row>
               <Row className="justify-content-md-center meters-align">
             <Col xs lg="3">
