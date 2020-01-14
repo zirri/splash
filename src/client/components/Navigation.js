@@ -61,7 +61,7 @@ class Navigation extends React.Component {
                   </Nav.Link> 
                   <Nav.Link as={Link} eventKey="roomsandmeters" to="/roomsandmeters"  >
                     <img src={rooms} alt="Logo"/> 
-                    Rooms and water 
+                    Rooms and meters 
                   </Nav.Link>
                   <Nav.Link as={Link} eventKey="logout" to="/logout" >
                     <img src={logout} alt="Logo"/> 

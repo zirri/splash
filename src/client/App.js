@@ -14,8 +14,6 @@ import Signup from './components/Signup';
 import Settings from './components/Settings';
 import Authenticate from './components/Authenticate';
 import RoomsAndMeters from './components/RoomsAndMeters';
-import Today from './components/Today';
-import Week from './components/Week';
 import Facts from './components/Facts';
 import withAuthentication from './higher-order-components/withAuthentication.js'
 import Logout from './components/Logout'

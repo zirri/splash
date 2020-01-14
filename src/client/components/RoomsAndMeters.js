@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Card, Container, ListGroup } from "react-bootstrap";
+import { Button, Container, ListGroup, Row, Col } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -55,22 +55,30 @@ class RoomsAndMeters extends React.Component {
     const { waterMeter } = this.state;
     const meter = waterMeter.map((room) => {
       return (
-        <Card>
+        <main className="meters-align">
+        <Row className="justify-content-md-center">
+        <Col xs lg="2">
             <strong>{room[0]}</strong> 
+            
             <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter" } </p> 
-          <Card.Body>
-            <ListGroup variant="flush">
+         </Col> 
+         </Row>
+         <Row className="justify-content-md-center">
+         <Col xs lg="2" >
+            <ListGroup variant="horizontal-left">
               {room[1].map((source) => <ListGroup.Item>{source.source}</ListGroup.Item> )}
             </ListGroup>
-          </Card.Body>
-        </Card> 
+            </Col>
+            </Row>
+        </main>
       )
     })
 
     return (
       <div>
-        <h4>Rooms and Water meters</h4>
-
+        
+        <h4>Rooms and Water Meters</h4>
+        
         <Container>
 
         {meter}
@@ -81,6 +89,7 @@ class RoomsAndMeters extends React.Component {
             </Link>
           </Button>
         </Container>
+     
       </div>
     );
   }

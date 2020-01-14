@@ -64,6 +64,7 @@ header {
   padding: 0;
 } 
 
+
 .animated {
   margin: 30px auto 10px auto;
   font-family: "Comfortaa";
@@ -75,6 +76,14 @@ header {
   -webkit-background-clip: text;
   background-repeat: repeat-x;
   animation: water 8s linear infinite;
+}
+.meters-align {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.heledritten{
+    display: center;
 }
 
 /*OR MOVING*/
@@ -125,6 +134,14 @@ p {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
+    .meters-align {
+        text-align: left;
+        margin: 20px auto;
+    }
+    .list-group-item {
+        height: 50px;
+    }
+}
 
   .containerChartBar {
       position: relative;
@@ -134,7 +151,7 @@ p {
   .jumbotron {
       height: 100%;
   }
-}
+
 
 /* TABS */
 div .tab-content {
@@ -191,11 +208,17 @@ div .tab-content div .jumbotron .jumbotron-fluid {
 
 
 
+
+
 /* NAVBAR */
 .navbar {
 width: 100vw;
   background-color: var(--darkest-blue);
   padding: 0;
+}
+
+.container {
+ margin: auto;
 }
 
 nav a {
@@ -381,5 +404,9 @@ div .containerChart  {
 
 #uncontrolled-tab-example-tabpane-today{
     height: 100%;
+  
 }
-    
+  
+.list-group-item {
+    height: 50px;
+}
