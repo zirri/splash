@@ -23,7 +23,7 @@ class Account extends React.Component {
 		return (
 			<>
 				<Header />
-				<div>Account</div>
+				<h2>Your account</h2>
 			</>
 		)
 	}
