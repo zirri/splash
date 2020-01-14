@@ -1,6 +1,8 @@
+//plugins
 import React from "react";
 
-import { Jumbotron, Container, Card } from "react-bootstrap";
+//Bootstrap components
+import { Container, Card } from "react-bootstrap";
 
 //LOCAL
 import { getFacts } from "../services/fact";
@@ -20,12 +22,10 @@ class Facts extends React.Component {
   async componentDidMount() {
     try {
       const facts = await getFacts();
-      console.log(facts);
       this.setState({
         facts
       });
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -42,28 +42,16 @@ class Facts extends React.Component {
               </blockquote>
             </Card.Body>
             <Card.Footer as="cite">
-              #{elem.id}
               <FaRegCommentDots /> {elem.sourceDisplayName}
             </Card.Footer>
           </Card>
         </Container>
-
-        /* <Container>
-            <Jumbotron>
-                <blockquote className="blockquote mb-0">
-                <p> {elem.fact} </p>
-                </blockquote>
-                #{elem.id}
-                <FaRegCommentDots /> 
-                {elem.sourceDisplayName}
-            </Jumbotron>
-        </Container> */
       );
     });
 
     return (
       <Container>
-        <h3>Facts</h3>
+        <h2>Facts</h2>
         {fact}
       </Container>
     );
