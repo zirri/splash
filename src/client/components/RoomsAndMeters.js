@@ -1,9 +1,8 @@
 //Plugins
 import React from "react";
-import { Link } from "react-router-dom";
 
 //Bootstrap
-import { Button, Container, ListGroup, Row, Col } from "react-bootstrap";
+import { Container, ListGroup, Row, Col } from "react-bootstrap";
 
 //LOCAL
 import { getWaterUsageAll } from "../services/water";
@@ -80,11 +79,6 @@ class RoomsAndMeters extends React.Component {
         <h2>Rooms and Water Meters</h2>
         <Container>
           {meter}
-          <Button variant="primary" size="sm">
-            <Link to="/addMeter" style={{ color: "white" }}>
-              ADD WATER METER
-            </Link>
-          </Button>
         </Container>
       </main>
     );
