@@ -68,9 +68,9 @@ INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fa
 
 
 --New queries 13.1
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about the world. Less than 1% of the water supply on earth can be used as drinking water. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about water. A small drip from a faucet can waste as much as128 liters of water a day. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about the water. A small drip from a faucet can waste as much as128 liters of water a day. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'Less than 1% of the water supply on earth can be used as drinking water.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'A small drip from a faucet can waste as much as 128 liters of water a day.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'A small drip from a faucet can waste as much as 128 liters of water a day.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
 
 
 INSERT INTO water_meters (meter_id, user_id, room, source) VALUES (123111, 1, 'bathroom', 'toilet');

@@ -33,15 +33,15 @@ import {
 } from "react-icons/fa";
 
 //LOCAL COMPONENTS
-
 import {
   getWaterUsageToday,
   getWaterUsageThisWeek,
-  postWaterUsage
 } from "../services/water";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { getFacts } from "../services/fact";
 import { getUserInformation } from "../services/users";
+
+import TabRegister from './TabRegister';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -104,10 +104,7 @@ class Overview extends React.Component {
     }
   }
 
-  async handleRegisterClick(amount, meterId) {
-    const record = await postWaterUsage(amount, meterId)
-    console.log(record)
-  }
+  
 
   render() {
     const { usageToday, usageThisWeek, facts, user } = this.state;
@@ -500,17 +497,7 @@ class Overview extends React.Component {
               </Container>
             </Container>
           </Tab>
-          <Tab eventKey="register" title="REGISTER">
-          <h2>Simulate water usage</h2>
-                <Button onClick={this.handleRegisterClick.bind(this, 75, 123456)}>Take a 5 min shower (75L) </Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 150, 123456)}>Take a 10 min shower (150L)</Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 37.5, 123456)}>Take a 5 min shower using 'sparedusj' (37,5L)</Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 20, 123321)}>Run the washing machine (20L)</Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 20, 123987)}>Use the dishwasher (20L)</Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 200, 123456)}>Take a bath (200L)</Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 6, 123789)}>Let water run for 30s to get cold water (6L)</Button>
-                <Button onClick={this.handleRegisterClick.bind(this, 6, 123111)}>Flush the WC (6L)</Button>      
-          </Tab>
+          <TabRegister />
         </Tabs>
       </>
     );
