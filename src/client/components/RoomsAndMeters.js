@@ -5,7 +5,7 @@ import React from "react";
 import { Container, ListGroup, Row, Col } from "react-bootstrap";
 
 //LOCAL
-import { getWaterUsageAll } from "../services/water";
+import { getWaterUsageAll } from "../services/waterusage";
 import Errorview from './Errorview.js'
 
 class RoomsAndMeters extends React.Component {
@@ -47,6 +47,7 @@ class RoomsAndMeters extends React.Component {
       const waterMeters = await getWaterUsageAll();
       if(waterMeters.error){throw new Error(waterMeters.error)}
       const arrayRoomsWithMeters = this.compileByMeterId(waterMeters);
+      console.log(arrayRoomsWithMeters)
       this.setState({
         waterMeters: arrayRoomsWithMeters
       })
