@@ -31,7 +31,6 @@ class TabToday extends React.Component {
   render() {
 
 		const { fact, averageWaterConsumption, usageToday, color, user} = this.props
-
     //TODAY DATA    
     const totalUsageToday = usageToday.reduce(
       (acc, { amount }) => acc + amount,
