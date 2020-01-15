@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const sessionApi = require('./src/server/sessionApi.js');
 const userApi = require('./src/server/userApi.js');
 const waterUsageApi = require('./src/server/waterusageApi.js');
+const waterMetersApi = require('./src/server/watermetersApi.js');
 const factApi = require('./src/server/factApi.js');
 
 //Initialize server
@@ -32,6 +33,7 @@ app.use((req, res, next)=>{
 app.use('/api/user', userApi);
 app.use('/api/session', sessionApi);
 app.use('/api/waterusage', waterUsageApi);
+app.use('/api/watermeters', waterMetersApi);
 app.use('/api/facts', factApi);
 
 //Listening to port

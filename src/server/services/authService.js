@@ -9,7 +9,6 @@ function authenticate(req, res, next){
         req.user = { userId, fullName };
         next();
     }catch(error){
-        console.log(error)
         res.status(401).send({message: 'Unable to authenticate'})
     }
 }
