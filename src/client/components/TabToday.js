@@ -22,16 +22,19 @@ import {
 } from "react-bootstrap";
 
 
-//LOCAL 
-import { transformDataForCharts } from '../utils/chartFunctions'
+import { transformDataForCharts, getWaterRecordsToday, compileByMeterId } from "../utils/chartFunctions";
 
 
 
 class TabToday extends React.Component {
   render() {
 
-		const { fact, averageWaterConsumption, usageToday, color, user} = this.props
+		const { fact, averageWaterConsumption, usageAll, color, user} = this.props
+
     //TODAY DATA    
+    const waterRecordsToday = getWaterRecordsToday(usageAll);
+    const usageToday =compileByMeterId(waterRecordsToday);
+
     const totalUsageToday = usageToday.reduce(
       (acc, { amount }) => acc + amount,
       0
