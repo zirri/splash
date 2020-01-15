@@ -39,15 +39,15 @@ class Navigation extends React.Component {
         return(
           
           <header >
-            <Navbar collapseOnSelect className="mr-auto " expand="xl">
-
+            <Navbar collapseOnSelect className="navbar-in-header mr-auto" expand="xl">
+            <span class="w-100"></span>
               <Navbar.Toggle />
               <Navbar.Brand className="logoname text" >
                 <NavLink to="/home">splash</NavLink>
               </Navbar.Brand>
               <Container fluid>
               <Navbar.Collapse id="basic-navbar-nav" >
-                <Nav style={{margin:0, padding:0}} className="mr-auto "  >
+                <Nav style={{margin:0, padding:0}} className="navbar-inside mr-auto "  >
                   <img src={profile} alt="Logo" className="profile-img"/> 
                   <Nav.Link as={NavLink} to="/" style={{pointerEvents: "none", fontWeight:"bold"}} className="disabled-link" >{user.fullName} </Nav.Link>
                   <Nav.Link as={NavLink} to="/home" eventKey="home" >Home</Nav.Link>

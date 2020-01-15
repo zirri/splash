@@ -117,16 +117,15 @@ class Overview extends React.Component {
     
 
 
-   
 
     return (
       <>
         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
           <Tab eventKey="today" title="TODAY">
-            <TabToday fact={facts} usageToday={usageToday} color={color} averageWaterConsumption={averageWaterConsumption} user={user}/>
+            <TabToday fact={facts} usageToday={usageToday} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} user={user}/>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <TabWeek usageThisWeek={usageThisWeek} user={user} color={color} verageWaterConsumption={averageWaterConsumption} />
+            <TabWeek usageThisWeek={usageThisWeek} user={user} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} />
           </Tab>
           <Tab eventKey="register" title="REGISTER">
             <TabRegister />

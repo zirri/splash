@@ -1,0 +1,124 @@
+/* CUSTOM ROOT */ 
+:root {
+  --lightest-blue: rgb(213, 232, 248);
+  --light-blue: #bce0fd;
+  --dark-blue: #80acd2;
+  --darkest-blue: #1f65a1;
+}
+
+/*
+containerChartDToday
+containerChartBToday
+containerChartDWeek
+containerChartBWeek
+*/
+
+/* MAIN CONTAINER*/
+.App {
+  height: 100vh;
+  max-width: 100vw !important;
+}
+
+/* MAIN SUB-CONTAINER */
+header {
+  min-height: 10vh;
+  padding: 0;
+  max-width: 100vw !important;
+  background-color: var(--darkest-blue);
+}
+
+.nav-tabs {
+  height: 5vh;
+  max-width: 100vw !important;
+
+}
+
+.tab-content {
+  height: 85vh;
+  text-align: center;
+  max-width: 100vw !important;
+
+}
+
+.tab-content *{
+  text-align: center;
+}
+
+/* CONTENT */
+/* header*/
+.navbar-in-header {
+ height: 100%;
+ text-align: left;
+
+}
+
+.logoname {
+   font-family: "Comfortaa";
+  font-size: 2.8rem;
+  padding: 0;
+  text-align: center;
+}
+
+.logoname a {
+  color: white
+}
+
+.navbar-in-header * {
+  text-align: left;
+
+}
+
+.navbar-in-header button {
+  border: none;
+  position: relative;
+  z-index: 99;
+
+}
+
+
+.navbar-in-header a img{
+   
+  height: 3rem;
+  margin-block-end: 1rem;
+  margin-inline-end: 1rem;
+}
+
+.navbar-in-header .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")
+}
+
+/* tab-content */
+#uncontrolled-tab-example-tabpane-today {
+  height: 100%;
+}
+
+/* carousel component insise tab-content */
+.carousel-slide {
+
+}
+
+.carousel-slide ol {
+  margin-block-start: 2rem;
+}
+
+.carousel-inner {
+  
+}
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 576px) {
+
+}
+
+@media only screen and (max-width: 576px) {
+
+}
+@media only screen and (max-width: 768px) {
+
+}
+@media only screen and (max-width: 992px) {
+
+}
+@media only screen and (max-width: 1200px) {
+
+}

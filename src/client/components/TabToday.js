@@ -129,18 +129,15 @@ class TabToday extends React.Component {
       ]
     };
 
-
-    
-
-
     return (
       <>
-        <Carousel wrap="true" interval="10000000">
+        <Carousel interval="10000000" className="carousel-slide">
           <Carousel.Item>
             <h2> Your water usage: </h2>
-            <h3>
-              {totalUsageToday} / {averageWaterConsumption}L
-            </h3>
+            <p>
+              {totalUsageToday} / {averageWaterConsumption}L <br></br>
+              ({averageWaterConsumption/user.noInHousehold}L/person)
+            </p>
             {user ? (
               <p>
                 {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
@@ -149,7 +146,7 @@ class TabToday extends React.Component {
             ) : (
               ""
             )}
-            <Container className="containerChartBar">
+            <Container className="containerChartBToday">
               <HorizontalBar data={dataBar} options={optionBarChart} />
             </Container>
             <Container className="smile-icon">
@@ -168,7 +165,7 @@ class TabToday extends React.Component {
           <Carousel.Item>
             <h3>Overview</h3>
 
-            <Container className="containerChart">
+            <Container className="containerChartDToday">
               <Doughnut
                 data={transformDataForCharts(usageToday, color)}
                 options={optionHalfDoughnut}
