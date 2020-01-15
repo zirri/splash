@@ -174,9 +174,10 @@ class TabWeek extends React.Component {
       <>
         <Container fluid>
           <h3> Your water usage: </h3>
-          <h3>
-            {totalUsageThisWeek} / {averageWaterConsumption}L
-          </h3>
+          <p>
+              {totalUsageThisWeek} / {averageWaterConsumption}L <br></br>
+              ({averageWaterConsumption/user.noInHousehold}L/person)
+            </p>
           {user ? (
             <p>
               {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
@@ -185,7 +186,7 @@ class TabWeek extends React.Component {
           ) : (
             ""
           )}
-          <Container className="containerChart">
+          <Container className="containerChartDWeek">
             <Doughnut
               data={transformDataForCharts(usageThisWeek, color)}
               options={optionHalfDoughnut}
@@ -195,7 +196,7 @@ class TabWeek extends React.Component {
 
         <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
           <h3> Week comparison</h3>
-          <Container className="containerChart">
+          <Container className="containerChartBWeek">
             <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
             <h6>- Average water consumption</h6>
           </Container>
