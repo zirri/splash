@@ -135,7 +135,9 @@ async function getWaterMetersByUser(userId){
     FROM 
       water_meters
     WHERE 
-      water_meters.user_id = $1;`
+      water_meters.user_id = $1
+    ORDER BY
+      room;`
   let waterMeters = await pool.query(sql, [userId]);
   waterMeters = waterMeters.rows.map(record => camelcaseKeys(record));
   return waterMeters;
