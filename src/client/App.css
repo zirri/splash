@@ -83,8 +83,14 @@ header {
 }
 
 .data-registration {
-    margin: 5px;
+    margin: 4px 1px;
+    max-width: 170px;
+    text-align: left;
+    padding: 4px;
+    background-color: rgba(0, 140, 255, 0.705);
+    border-style: none;
 }
+
 /*OR MOVING*/
 /* @keyframes water {
      from {background-position: left 0 top 0;}
@@ -133,9 +139,19 @@ p {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
+
+  .split {
+      width: 150px;
+      align-items: left;
+      padding: 5px;
+  }
+  .pad {
+      margin-right: 10px;
+  }
     .meters-align {
         text-align: left;
-        margin: 20px auto;
+        align-items: left;
+        margin: 2px auto;
     }
     .list-group-item {
         height: 50px;
@@ -335,11 +351,9 @@ div .containerChart {
       max-width: 50%;
     }
   
-  
     .navbar a img {
       display: none;
     }
-
 
 }
  

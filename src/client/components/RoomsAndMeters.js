@@ -5,7 +5,7 @@ import React from "react";
 import { Container, ListGroup, Row, Col } from "react-bootstrap";
 
 //LOCAL
-import { getWaterUsageAll } from "../services/water";
+import { getWaterMeters } from "../services/watermeters";
 import Errorview from './Errorview.js'
 
 class RoomsAndMeters extends React.Component {
@@ -19,21 +19,7 @@ class RoomsAndMeters extends React.Component {
   }
 
   compileByMeterId(arrayOfWaterData) {
-    const reduceToMeterId = Object.values(
-      arrayOfWaterData.reduce(
-        (r, { meterId, room, source }) => {
-          r[meterId] = r[meterId] || {
-            meterId,
-            room,
-            source
-          };
-          return r;
-        },
-        {}
-      )
-    );
-
-    return Object.entries(reduceToMeterId.reduce((result, value) => {
+    return Object.entries(arrayOfWaterData.reduce((result, value) => {
       result[value.room] = result[value.room] || [];
       result[value.room].push({ source: value.source, meterId: value.meterId })
       return result;
@@ -44,11 +30,11 @@ class RoomsAndMeters extends React.Component {
 
   async componentDidMount() {
     try {
-      const waterMeters = await getWaterUsageAll();
+      const arrayOfWaterData = await getWaterMeters();
+      const waterMeters = this.compileByMeterId(arrayOfWaterData) 
       if(waterMeters.error){throw new Error(waterMeters.error)}
-      const arrayRoomsWithMeters = this.compileByMeterId(waterMeters);
       this.setState({
-        waterMeters: arrayRoomsWithMeters
+        waterMeters
       })
     } catch (error) {
       this.setState({error})
@@ -68,13 +54,13 @@ class RoomsAndMeters extends React.Component {
           <Row className="justify-content-md-center">
             <Col xs lg="2">
               <h3>{room[0]}</h3>
-              <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter"} </p>
+              {/* <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter"} </p> */}
             </Col>
           </Row>
           <Row className="justify-content-md-center">
             <Col xs lg="2" >
               <ListGroup variant="horizontal-left">
-                {room[1].map((source) => <ListGroup.Item key={source.source}>{source.source}</ListGroup.Item>)}
+                {room[1].map((source) => <ListGroup.Item key={source.meterId}>{source.source}</ListGroup.Item>)}
               </ListGroup>
             </Col>
           </Row>

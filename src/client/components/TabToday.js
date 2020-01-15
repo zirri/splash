@@ -13,26 +13,32 @@ import {
 
 //REACT-CHARTJS-2
 import { HorizontalBar, Doughnut, Bar, Chart } from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 //REACT-BOOTSTRAP
-import { Carousel, Jumbotron, Container, CarouselItem } from "react-bootstrap";
+import {
+  Carousel,
+  Jumbotron,
+  Container,
+} from "react-bootstrap";
+
 
 //LOCAL
-import { transformDataForCharts } from "../utils/chartFunctions";
+import { transformDataForCharts, getWaterRecordsToday, compileByMeterId } from "../utils/chartFunctions";
+
 
 Chart.defaults.global.maintainAspectRatio = true;
-
+Chart.defaults.global.plugins.datalabels = true;
 class TabToday extends React.Component {
   render() {
-    const {
-      fact,
-      averageWaterConsumption,
-      usageToday,
-      color,
-      user
-    } = this.props;
 
-    //TODAY DATA
+    const { fact, averageWaterConsumption, usageAll, color, user} = this.props;
+    const averageWaterConsumptionHousehold = averageWaterConsumption*user.noInHousehold
+    
+    //TODAY DATA    
+    const waterRecordsToday = getWaterRecordsToday(usageAll);
+    const usageToday =compileByMeterId(waterRecordsToday);
+
     const totalUsageToday = usageToday.reduce(
       (acc, { amount }) => acc + amount,
       0
@@ -101,7 +107,8 @@ class TabToday extends React.Component {
           formatter: function(value) {
             return value + "L";
           },
-          color: "white"
+          color: "white",
+          display:true,
         }
       }
     };
