@@ -1,5 +1,6 @@
 //Router file for endpoint /user. Handeling new user, edit use
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const { getUserByEmail, getUserInformation, createNewUser } = require('./services/databaseServices.js');
 const { validateUserInput } = require('./services/inputValidation.js');
@@ -33,7 +34,8 @@ router.get('/', authenticate, async (req, res) => {
 
 router.post('/', async (req, res) => {
     const {email, fullName, password, location, noInHousehold} = req.body;
-    const user =  {email, fullName, password, location, noInHousehold};
+    const hash = bcrypt.hashSync(password, 10);
+    const user =  {email, fullName, password:hash, location, noInHousehold};
     const userExist = await getUserByEmail(user.email);
     if(userExist){
         return res.status(401).json({error: 'user already registred, please log in instead'})
