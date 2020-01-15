@@ -69,9 +69,6 @@ class TabRegister extends React.Component {
                   <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 150, 123456)} > Take a 10 min shower (150L) </Button>
                 </Accordion.Collapse>
                 <Accordion.Collapse eventKey="0">
-                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 123456)} > Take a 5 min shower, 'sparedusj' (37,5L) </Button>
-                  </Accordion.Collapse>
-                  <Accordion.Collapse eventKey="0">
                   <InputGroup type="number" name="minutesShower"className="data-registration mb-3">
                     <FormControl 
                       placeholder="minutes"
@@ -84,6 +81,9 @@ class TabRegister extends React.Component {
                         <Button onClick={this.showerLiters.bind(this)} variant="primary" >Add</Button>
                       </InputGroup.Append>
                   </InputGroup>
+                  </Accordion.Collapse>
+                <Accordion.Collapse eventKey="0">
+                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 123456)} > Take a 5 min shower, 'sparedusj' (37,5L) </Button>
                   </Accordion.Collapse>
               </Card>
               </Accordion>
@@ -135,6 +135,9 @@ class TabRegister extends React.Component {
                 <Accordion.Collapse eventKey="0">
                 <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 6, 123789)} > Let water run for 30s <br/>to get cold water (6L) </Button>
                 </Accordion.Collapse>
+                <Accordion.Collapse eventKey="0">
+                <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 30, 123789)} > Do dishes by hand <br/>(fill sink) (30L) </Button>
+                </Accordion.Collapse>
               </Card>
             </Accordion>
             <Accordion>
@@ -143,7 +146,7 @@ class TabRegister extends React.Component {
                   <img src={dishwasher} alt="dishwasher-logo" className="pad"/> Dishwasher
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
-                <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 20, 123987)} > Run dishwasher (20L) </Button>
+                <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 12, 123987)} > Run dishwasher (12L) </Button>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
