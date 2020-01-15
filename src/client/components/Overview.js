@@ -18,9 +18,10 @@ import "chartjs-plugin-annotation";
 
 
 //LOCAL COMPONENTS
-import { getWaterUsageToday, getWaterUsageThisWeek } from "../services/waterusage";
+import { getWaterUsageToday, getWaterUsageThisWeek, getWaterUsageAll } from "../services/waterusage";
 import { getFacts } from "../services/fact";
 import { getUserInformation } from "../services/users";
+import { waterHistoryPerWeek, compileByMeterId } from '../utils/chartFunctions'
 
 import TabRegister from "./TabRegister";
 import TabToday from "./TabToday";
@@ -37,6 +38,10 @@ class Overview extends React.Component {
       user: [],
       usageToday: [],
       usageThisWeek: [],
+      usageHistory: {
+        weekNumber: [],
+        totalAmount: []
+      },
       session: payload,
       facts: []
     };
@@ -46,38 +51,22 @@ class Overview extends React.Component {
     try {
       const waterUsageToday = await getWaterUsageToday();
       const waterUsageThisWeek = await getWaterUsageThisWeek();
+      const usageAll = await getWaterUsageAll();
       const userInformation = await getUserInformation();
+      const facts = await getFacts();
+
       console.log(waterUsageToday);
       console.log(this.props);
 
-      function compileByMeterId(arrayOfWaterData) {
-        return Object.values(
-          arrayOfWaterData.reduce(
-            (r, { meterId, room, source, userId, amount, timestamp }) => {
-              r[meterId] = r[meterId] || {
-                meterId,
-                room,
-                source,
-                userId,
-                amount: 0,
-                timestamp
-              };
-              r[meterId].amount += +amount;
-              return r;
-            },
-            {}
-          )
-        );
-      }
-
+      const compiledSixWeekHistory = waterHistoryPerWeek(usageAll)
       const compiledDataToday = compileByMeterId(waterUsageToday);
       const compiledDataByWeek = compileByMeterId(waterUsageThisWeek);
-      const facts = await getFacts();
-
+      
       this.setState({
         user: userInformation,
         usageToday: compiledDataToday,
         usageThisWeek: compiledDataByWeek,
+        usageHistory: compiledSixWeekHistory,
         facts
       });
 
@@ -88,7 +77,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { usageToday, usageThisWeek, facts, user } = this.state;
+    const { usageToday, usageHistory, usageThisWeek, facts, user } = this.state;
     // const source = usage.map(elem => {
     //   return (
     //     <div key={elem.meterId}>
@@ -125,7 +114,7 @@ class Overview extends React.Component {
             <TabToday fact={facts} usageToday={usageToday} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} user={user}/>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <TabWeek usageThisWeek={usageThisWeek} user={user} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} />
+            <TabWeek usageThisWeek={usageThisWeek} user={user} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} usageHistory={usageHistory}/>
           </Tab>
           <Tab eventKey="register" title="REGISTER">
             <TabRegister />

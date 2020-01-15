@@ -14,7 +14,7 @@ import { transformDataForCharts } from "../utils/chartFunctions";
 
 class TabWeek extends React.Component {
   render() {
-    const { usageThisWeek, color, averageWaterConsumption, user } = this.props;
+    const { usageThisWeek, usageHistory, color, averageWaterConsumption, user } = this.props;
 
     //THISWEEK DATA
     const totalUsageThisWeek = usageThisWeek.reduce(
@@ -56,9 +56,8 @@ class TabWeek extends React.Component {
       }
     };
 
-    //DUMMY & TEST DATA
-    const totalUsageWeeks = [100, 200, 300, 200];
-    const weekNumber = ["12", "13", "14", "15"];
+    let totalUsageWeeks = usageHistory.totalAmount;
+    let weekNumber = usageHistory.weekNumber;
 
     const dataCompareWeeks = {
       datasets: [
