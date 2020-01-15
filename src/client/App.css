@@ -83,7 +83,12 @@ header {
 }
 
 .data-registration {
-    margin: 4px 0px;
+    margin: 4px 1px;
+    max-width: 170px;
+    text-align: left;
+    padding: 4px;
+    background-color: rgba(0, 140, 255, 0.705);
+    border-style: none;
 }
 
 /*OR MOVING*/
@@ -135,11 +140,17 @@ p {
     animation: water 8s linear infinite;
   }
 
+  .split {
+      width: 150px;
+      align-items: left;
+      padding: 5px;
+  }
   .pad {
-      margin-right: 20px;
+      margin-right: 10px;
   }
     .meters-align {
         text-align: left;
+        align-items: left;
         margin: 2px auto;
     }
     .list-group-item {
@@ -340,11 +351,9 @@ div .containerChart {
       max-width: 50%;
     }
   
-  
     .navbar a img {
       display: none;
     }
-
 
 }
  
