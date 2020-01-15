@@ -62,10 +62,6 @@ CREATE TABLE facts (
     source_url VARCHAR
 );
 
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about facts. A fact should not be mistaken for truth.  *MIC DROPPED*', 'Cathy', 'www.url.com');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about truth. A truth is not the same truth for everyone. *MIC DROPPED*', 'Cathy','www.url.com');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about everyone. Everyone compiled is the world. *MIC DROPPED*', 'Cathy', 'www.url.com');
-
 
 --New queries 13.1
 INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'Less than 1% of the water supply on earth can be used as drinking water.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
