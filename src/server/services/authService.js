@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const { getUserByEmail } = require('./databaseServices.js');
 const secret = process.env.SECRET;
 const jwt = require('jsonwebtoken');
@@ -24,7 +25,8 @@ async function logInAndGetToken(email, password){
         return ({status: 401,
                 error: 'Unknown user'});
     }
-    if(user.password !== password){
+
+    if(!bcrypt.compareSync(password, user.password)){
         return ({status: 401, 
                 error: 'Wrong password'});
     }
