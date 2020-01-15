@@ -18,10 +18,9 @@ import "chartjs-plugin-annotation";
 
 
 //LOCAL COMPONENTS
-import { getWaterUsageToday, getWaterUsageThisWeek, getWaterUsageAll } from "../services/waterusage";
+import {  getWaterUsageAll } from "../services/waterusage";
 import { getFacts } from "../services/fact";
 import { getUserInformation } from "../services/users";
-import { waterHistoryPerWeek, compileByMeterId } from '../utils/chartFunctions'
 
 import TabRegister from "./TabRegister";
 import TabToday from "./TabToday";
@@ -36,12 +35,7 @@ class Overview extends React.Component {
 
     this.state = {
       user: [],
-      usageToday: [],
-      usageThisWeek: [],
-      usageHistory: {
-        weekNumber: [],
-        totalAmount: []
-      },
+      usageAll: [],
       session: payload,
       facts: []
     };
@@ -49,42 +43,23 @@ class Overview extends React.Component {
 
   async componentDidMount() {
     try {
-      const waterUsageToday = await getWaterUsageToday();
-      const waterUsageThisWeek = await getWaterUsageThisWeek();
       const usageAll = await getWaterUsageAll();
       const userInformation = await getUserInformation();
-      const facts = await getFacts();
+      const facts = await getFacts();     
 
-      console.log(waterUsageToday);
-      console.log(this.props);
-
-      const compiledSixWeekHistory = waterHistoryPerWeek(usageAll)
-      const compiledDataToday = compileByMeterId(waterUsageToday);
-      const compiledDataByWeek = compileByMeterId(waterUsageThisWeek);
-      
       this.setState({
         user: userInformation,
-        usageToday: compiledDataToday,
-        usageThisWeek: compiledDataByWeek,
-        usageHistory: compiledSixWeekHistory,
+        usageAll,
         facts
       });
 
-      console.log(this.state);
     } catch (error) {
       console.log(error);
     }
   }
 
   render() {
-    const { usageToday, usageHistory, usageThisWeek, facts, user } = this.state;
-    // const source = usage.map(elem => {
-    //   return (
-    //     <div key={elem.meterId}>
-    //       {elem.room}: {elem.source} {elem.amount}
-    //     </div>
-    //   );
-    // });
+    const { usageAll, facts, user } = this.state;
 
     //CHARTS
     //DATA FOR CHARTS
@@ -111,10 +86,10 @@ class Overview extends React.Component {
       <>
         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
           <Tab eventKey="today" title="TODAY">
-            <TabToday fact={facts} usageToday={usageToday} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} user={user}/>
+            <TabToday fact={facts} usageAll={usageAll} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} user={user}/>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <TabWeek usageThisWeek={usageThisWeek} user={user} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} usageHistory={usageHistory}/>
+            <TabWeek usageAll={usageAll} user={user} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} />
           </Tab>
           <Tab eventKey="register" title="REGISTER">
             <TabRegister />

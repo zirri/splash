@@ -66,10 +66,7 @@ async function createNewUser(user){
   return newUser;
 }
 
-async function getWaterUsage(userId, periodeStart){
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
+async function getWaterUsage(userId){
   if(typeof userId != 'number'){return}
   const sql = `
     SELECT 
@@ -84,9 +81,8 @@ async function getWaterUsage(userId, periodeStart){
       water_usage
     WHERE 
       water_meters.user_id = $1 AND
-      water_meters.meter_id = water_usage.meter_id AND
-      timestamp BETWEEN $2 AND $3;`
-  let waterUsage = await pool.query(sql, [userId, periodeStart, tomorrow]);
+      water_meters.meter_id = water_usage.meter_id;`
+  let waterUsage = await pool.query(sql, [userId]);
   waterUsage = waterUsage.rows.map(record => camelcaseKeys(record));
   return waterUsage;
 }

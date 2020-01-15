@@ -10,13 +10,17 @@ import { Container } from "react-bootstrap";
 import { FaUser, FaUsers } from "react-icons/fa";
 
 //LOCAL
-import { transformDataForCharts } from "../utils/chartFunctions";
+import { transformDataForCharts, getWaterHistorySixWeeks, getWaterRecordsThisWeek, compileByMeterId } from "../utils/chartFunctions";
 
 class TabWeek extends React.Component {
   render() {
-    const { usageThisWeek, usageHistory, color, averageWaterConsumption, user } = this.props;
+    const { usageAll, color, averageWaterConsumption, user } = this.props;
 
     //THISWEEK DATA
+    const recordsThisWeek = getWaterRecordsThisWeek(usageAll);
+    const usageThisWeek = compileByMeterId(recordsThisWeek);
+
+
     const totalUsageThisWeek = usageThisWeek.reduce(
       (acc, { amount }) => acc + amount,
       0
@@ -56,8 +60,8 @@ class TabWeek extends React.Component {
       }
     };
 
-    let totalUsageWeeks = usageHistory.totalAmount;
-    let weekNumber = usageHistory.weekNumber;
+    let totalUsageWeeks = getWaterHistorySixWeeks(usageAll).totalAmount;
+    let weekNumber = getWaterHistorySixWeeks(usageAll).weekNumber;
 
     const dataCompareWeeks = {
       datasets: [
