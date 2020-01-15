@@ -188,7 +188,7 @@ class TabWeek extends React.Component {
           <h3> Your water usage: </h3>
           <p>
               {totalUsageThisWeek} / {averageWaterConsumptionHousehold}L <br></br>
-              ({averageWaterConsumption/user.noInHousehold}L/person)
+              {user.noInHousehold === 1 ? "" : `(${averageWaterConsumptionHousehold} / ${user.noInHousehold}L/person)`}
             </p>
           {user ? (
             <p>

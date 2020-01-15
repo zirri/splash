@@ -141,8 +141,9 @@ class TabToday extends React.Component {
           <Carousel.Item className="slide-page-1">
             <h2> Your water usage: </h2>
             <p>
-              {totalUsageToday} / {averageWaterConsumption}L <br></br>(
-              {averageWaterConsumption / user.noInHousehold}L/person)
+              
+              {totalUsageToday} / {averageWaterConsumption}L <br></br>
+              {user.noInHousehold === 1 ? "" : `(${averageWaterConsumption} / ${user.noInHousehold}L/person)`}
             </p>
             {user ? (
               <p>
