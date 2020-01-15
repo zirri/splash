@@ -110,17 +110,6 @@ async function updateWaterMetering(waterData){
   return newRecord;
 }
 
-// async function getWaterMeterInfo() {
-//   const sql = `
-//   SELECT 
-//     *
-//   FROM 
-//     water_meters
-//   Where
-
-//   `
-// }
-
 async function getFacts() {
   const sql = `
   SELECT 
@@ -144,6 +133,5 @@ module.exports = {
   createNewUser,
   getWaterUsage,
   updateWaterMetering,
-  // getWaterMeterInfo,
   getFacts
 }

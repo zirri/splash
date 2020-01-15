@@ -1,9 +1,12 @@
+//plugins
 import React from "react";
 
-import { Jumbotron, Container, Card } from "react-bootstrap";
+//Bootstrap components
+import { Container, Card } from "react-bootstrap";
 
 //LOCAL
 import { getFacts } from "../services/fact";
+import Errorview from './Errorview.js'
 
 //REACT-ICONS
 import { FaRegCommentDots } from "react-icons/fa";
@@ -13,28 +16,37 @@ class Facts extends React.Component {
     super(props);
 
     this.state = {
-      facts: []
+      facts: [],
+      error: null
     };
   }
 
   async componentDidMount() {
     try {
       const facts = await getFacts();
-      console.log(facts);
+      if(facts.error){throw new Error(facts.error)}
       this.setState({
         facts
       });
     } catch (error) {
-      console.log(error);
+      this.setState({
+        error
+      })
     }
   }
 
   render() {
-    const { facts } = this.state;
+    const { facts, error } = this.state;
+
+    if(error){
+      return(
+        <Errorview error={error}/>
+      )
+    }
 
     const fact = facts.map(elem => {
       return (
-        <Container>
+        <Container key={elem.id}>
           <Card>
             <Card.Body>
               <blockquote className="blockquote mb-0">
@@ -42,28 +54,17 @@ class Facts extends React.Component {
               </blockquote>
             </Card.Body>
             <Card.Footer as="cite">
-              #{elem.id}
               <FaRegCommentDots /> {elem.sourceDisplayName}
             </Card.Footer>
           </Card>
         </Container>
-
-        /* <Container>
-            <Jumbotron>
-                <blockquote className="blockquote mb-0">
-                <p> {elem.fact} </p>
-                </blockquote>
-                #{elem.id}
-                <FaRegCommentDots /> 
-                {elem.sourceDisplayName}
-            </Jumbotron>
-        </Container> */
       );
     });
 
     return (
+
       <Container>
-        <h3>Facts</h3>
+        <h2>Facts</h2>
         {fact}
       </Container>
     );

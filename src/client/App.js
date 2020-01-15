@@ -18,9 +18,6 @@ import Facts from './components/Facts';
 import withAuthentication from './higher-order-components/withAuthentication.js'
 import Logout from './components/Logout'
 
-//Stretch:
-//Error.Component
-
 class App extends React.Component {
   render(){
     const DefaultContainer = () => (
