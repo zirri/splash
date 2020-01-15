@@ -128,7 +128,8 @@ async function getWaterMetersByUser(userId){
       user_id, 
       room,
       source,
-      meter_id
+      meter_id,
+      simulated_data
     FROM 
       water_meters
     WHERE 
@@ -149,19 +150,28 @@ async function getHighestMeterId(){
 
 async function insertNewWaterMeter(newWaterMeter){
   newWaterMeter = snakeCaseKeys(newWaterMeter);
-  const newMeterId = await getHighestMeterId()+1;
+  let newMeterId;
+  let simulated_data = false;
+  if(newWaterMeter.meter_id === 0){
+    newMeterId = await getHighestMeterId()+1;
+    simulated_data = true;
+  }else{
+    newMeterId = newWaterMeter.meter_id;
+  }
+  
   const sql = `
   INSERT INTO water_meters (
     meter_id, 
     user_id,
     room,
-    source
+    source,
+    simulated_data
     )  
   VALUES
-    ($1, $2, $3, $4)
+    ($1, $2, $3, $4, $5)
   RETURNING *;`
   const { user_id, room, source } = newWaterMeter;
-  let newRecord = await pool.query(sql, [newMeterId, user_id, room, source]);
+  let newRecord = await pool.query(sql, [newMeterId, user_id, room, source, simulated_data]);
   newRecord = camelcaseKeys(newRecord.rows[0]);
   return newRecord;
 }
@@ -179,6 +189,13 @@ async function fixHashing(){
   }
 }
 
+async function fixColWaterMeters(){
+  const sql = 'ALTER TABLE water_meters ADD simulated_data boolean;';
+  await pool.query(sql);
+}
+
+
+
 module.exports = {
   getUserInformation,
   getUserByEmail,
@@ -188,5 +205,6 @@ module.exports = {
   getFacts,
   getWaterMetersByUser,
   insertNewWaterMeter,
-  fixHashing
+  fixHashing,
+  fixColWaterMeters
 }
