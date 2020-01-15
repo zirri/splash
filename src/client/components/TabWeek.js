@@ -2,9 +2,8 @@ import React from "react";
 
 //REACT-CHARTJS-2
 
-import { Doughnut, Bar } from "react-chartjs-2";
+import { Doughnut, Bar, Chart } from "react-chartjs-2";
 import "chartjs-plugin-annotation";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 //REACT-BOOTSTRAP
@@ -15,6 +14,9 @@ import { FaUser, FaUsers } from "react-icons/fa";
 
 //LOCAL
 import { transformDataForCharts, getWaterHistorySixWeeks, getWaterRecordsThisWeek, compileByMeterId } from "../utils/chartFunctions";
+
+Chart.defaults.global.maintainAspectRatio = true;
+Chart.defaults.global.plugins.datalabels = true;
 
 class TabWeek extends React.Component {
   render() {

@@ -13,7 +13,6 @@ import {
 
 //REACT-CHARTJS-2
 import { HorizontalBar, Doughnut, Bar, Chart } from "react-chartjs-2";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 //REACT-BOOTSTRAP
 import {
@@ -29,6 +28,7 @@ import { transformDataForCharts, getWaterRecordsToday, compileByMeterId } from "
 
 Chart.defaults.global.maintainAspectRatio = true;
 Chart.defaults.global.plugins.datalabels = true;
+
 class TabToday extends React.Component {
   render() {
 
@@ -107,8 +107,7 @@ class TabToday extends React.Component {
           formatter: function(value) {
             return value + "L";
           },
-          color: "white",
-          display:true,
+          color: "black",
         }
       }
     };
