@@ -40,30 +40,30 @@ class TabRegister extends React.Component {
             </h2>
           </Row>
 
-          <Row className="justify-content-md-center meters-align">
-            <Col xs lg="3">
+          <Row className="justify-content-md-center meters-align ">
+            <Col xs lg="3" className="split">
             <ListGroup variant='flush' defaultActiveKey="#link1">
             <ListGroup.Item >
               Bathroom
             </ListGroup.Item>
             <Accordion>
-              <Card>
+              <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0" >
                   <FaShower className="pad"/> Shower
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
-                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 75, 123456)} > Take a 5 min shower (75L){" "}</Button>
+                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 75, 123456)} > Take a 5 min shower <br/>(75L){" "}</Button>
                 </Accordion.Collapse>
                 <Accordion.Collapse eventKey="0">
                   <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 150, 123456)} > Take a 10 min shower (150L) </Button>
                 </Accordion.Collapse>
                 <Accordion.Collapse eventKey="0">
-                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 123456)} > Take a 5 min shower with 'sparedusj' (37,5L) </Button>
+                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 123456)} > Take a 5 min shower, 'sparedusj' (37,5L) </Button>
                   </Accordion.Collapse>
               </Card>
               </Accordion>
               <Accordion>
-              <Card>
+              <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0">
                   <FaBath className="pad"/> Bath
                 </Accordion.Toggle>
@@ -73,20 +73,20 @@ class TabRegister extends React.Component {
               </Card>
               </Accordion>
               <Accordion>
-              <Card>
+              <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0" >
                   <FaToilet className="pad"/> Toilet
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
-                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 4, 123111)} > Flush the WC (big button) (4L) </Button>
+                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 4, 123111)} > Flush the WC <br/> (big button) (4L) </Button>
                 </Accordion.Collapse>
                 <Accordion.Collapse eventKey="0">
-                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 2.5, 123111)} > Flush the WC (small button) (2.5L) </Button>
+                  <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 2.5, 123111)} > Flush the WC <br/> (small button) (2.5L) </Button>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
             <Accordion>
-              <Card>
+              <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0" >
                   <GiTap className="pad"/> Tap
                 </Accordion.Toggle>
@@ -100,17 +100,17 @@ class TabRegister extends React.Component {
               Kitchen
             </ListGroup.Item>
             <Accordion>
-              <Card>
+              <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0" >
                   <GiTap className="pad"/> Tap
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
-                <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 6, 123789)} > Let water run for 30s to get cold water (6L) </Button>
+                <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 6, 123789)} > Let water run for 30s <br/>to get cold water (6L) </Button>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
             <Accordion>
-              <Card>
+              <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0" >
                   <img src={dishwasher} alt="dishwasher-logo" className="pad"/> Dishwasher
                 </Accordion.Toggle>
@@ -119,14 +119,17 @@ class TabRegister extends React.Component {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-
+            </ListGroup>
+            </Col>
+            <Col xs lg="3" className="split">
+              <ListGroup variant="flush">
             <ListGroup.Item>
               Laundry
             </ListGroup.Item>
             <Accordion>
-             <Card>
+             <Card border="light">
                 <Accordion.Toggle as={Card.Header} eventKey="0" >
-                <img src={washingMachine} alt="Logo" className="pad"/> Washing machine
+                <img src={washingMachine} alt="Logo" className="pad"/> Laundry
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                 <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 20, 123321)} > Run washing machine (20L) </Button>
@@ -137,8 +140,8 @@ class TabRegister extends React.Component {
             <ListGroup.Item>
               Outdoors
             </ListGroup.Item>
-            <Accordion>
-            <Card>
+            <Accordion >
+            <Card border="light">
             <Accordion.Toggle as={Card.Header} eventKey="0" >
                   <GiTap className="pad"/> Outdoor tap
                 </Accordion.Toggle>
@@ -149,6 +152,7 @@ class TabRegister extends React.Component {
             </Accordion>
             </ListGroup>
             </Col>
+            
           </Row>
         </main>
     );
