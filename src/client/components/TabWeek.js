@@ -1,7 +1,10 @@
 import React from "react";
 
 //REACT-CHARTJS-2
-import { Doughnut, Bar } from "react-chartjs-2";
+
+import { Doughnut, Bar, Chart } from "react-chartjs-2";
+import "chartjs-plugin-annotation";
+
 
 //REACT-BOOTSTRAP
 import { Container } from "react-bootstrap";
@@ -12,9 +15,13 @@ import { FaUser, FaUsers } from "react-icons/fa";
 //LOCAL
 import { transformDataForCharts, getWaterHistorySixWeeks, getWaterRecordsThisWeek, compileByMeterId } from "../utils/chartFunctions";
 
+Chart.defaults.global.maintainAspectRatio = true;
+Chart.defaults.global.plugins.datalabels = true;
+
 class TabWeek extends React.Component {
   render() {
     const { usageAll, color, averageWaterConsumption, user } = this.props;
+    const averageWaterConsumptionHousehold = averageWaterConsumption*user.noInHousehold*7
 
     //THISWEEK DATA
     const recordsThisWeek = getWaterRecordsThisWeek(usageAll);
@@ -88,7 +95,7 @@ class TabWeek extends React.Component {
           }
         }
       },
-
+      maintainAspectRatio: true,
       legend: {
         display: false
       },
@@ -101,7 +108,7 @@ class TabWeek extends React.Component {
               callback: function(value) {
                 return value + "L";
               },
-              suggestedMax: Math.max(...totalUsageWeeks) + 50
+              suggestedMax: Math.max(...totalUsageWeeks, averageWaterConsumptionHousehold) + 50
             },
             scaleLabel: {
               display: true,
@@ -123,6 +130,7 @@ class TabWeek extends React.Component {
         ]
       },
       plugins: {
+        datalabels: true,
         arc: true,
         datalabels: {
           anchor: "center",
@@ -139,7 +147,7 @@ class TabWeek extends React.Component {
         //
         // Should be one of: afterDraw, afterDatasetsDraw, beforeDatasetsDraw
         // See http://www.chartjs.org/docs/#advanced-usage-creating-plugins
-        drawTime: "afterDatasetsDraw", // (default)
+        drawTime: "afterDraw", // (default)
 
         // Mouse events to enable on each annotation.
         // Should be an array of one or more browser-supported mouse events
@@ -156,12 +164,12 @@ class TabWeek extends React.Component {
         // See below for detailed descriptions of the annotation options
         annotations: [
           {
-            //   drawTime: "afterDraw", //overrides annotation.drawTime if set
+            // drawTime: "afterDraw", //overrides annotation.drawTime if set
             id: "a-line-1", // optional
             type: "line",
             mode: "horizontal",
             scaleID: "y-axis",
-            value: averageWaterConsumption,
+            value: averageWaterConsumptionHousehold ,
             borderColor: "red",
             borderWidth: 1,
 
@@ -173,12 +181,13 @@ class TabWeek extends React.Component {
       }
     };
 
+    console.log(user.noInHousehold)
     return (
       <>
         <Container fluid>
           <h3> Your water usage: </h3>
           <p>
-              {totalUsageThisWeek} / {averageWaterConsumption}L <br></br>
+              {totalUsageThisWeek} / {averageWaterConsumptionHousehold}L <br></br>
               ({averageWaterConsumption/user.noInHousehold}L/person)
             </p>
           {user ? (
