@@ -29,12 +29,8 @@ import { transformDataForCharts, getWaterRecordsToday, compileByMeterId } from "
 class TabToday extends React.Component {
   render() {
 
-<<<<<<< HEAD
 		const { fact, averageWaterConsumption, usageAll, color, user} = this.props
 
-=======
-		const { fact, averageWaterConsumption, usageToday, color, user} = this.props
->>>>>>> eedc9cc15a0076c2f06847d2c1b176c3041ba0d7
     //TODAY DATA    
     const waterRecordsToday = getWaterRecordsToday(usageAll);
     const usageToday =compileByMeterId(waterRecordsToday);
