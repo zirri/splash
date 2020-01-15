@@ -18,7 +18,7 @@ import "chartjs-plugin-annotation";
 
 
 //LOCAL COMPONENTS
-import { getWaterUsageToday, getWaterUsageThisWeek } from "../services/water";
+import { getWaterUsageToday, getWaterUsageThisWeek } from "../services/waterusage";
 import { getFacts } from "../services/fact";
 import { getUserInformation } from "../services/users";
 

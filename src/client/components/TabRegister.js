@@ -9,7 +9,7 @@ import dishwasher from '../icons/Dishwasher.svg'
 import { Button, Row, Col, ListGroup, Accordion, Card } from "react-bootstrap";
 
 //LOCAL
-import { postWaterUsage } from "../services/water";
+import { postWaterUsage } from "../services/waterusage";
 
 
 

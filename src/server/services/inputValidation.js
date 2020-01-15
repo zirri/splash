@@ -28,11 +28,9 @@ function validateMeterId(waterMeterId){
     return {error: null};
 } 
 
-
 const waterDataSchema = {
     timestamp: Joi.string(),//Joi.date().timestamp().required(),
-    amount: Joi.number().positive().required(),
-    meterId: Joi.number().integer().positive().required(),
+    amount: Joi.number().positive().required()
 };
 
 function validateMeteringData(meteringData){
