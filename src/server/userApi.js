@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
     const user =  {email, fullName, password, location, noInHousehold};
     const userExist = await getUserByEmail(user.email);
     if(userExist){
-        return res.status(400).json({error: 'user already registred, please log in instead'})
+        return res.status(401).json({error: 'user already registred, please log in instead'})
     }
     const newUser = await createNewUser(user);
     res.json(newUser);
