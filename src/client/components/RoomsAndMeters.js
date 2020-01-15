@@ -47,20 +47,18 @@ class RoomsAndMeters extends React.Component {
     if(error){
       return <Errorview error={error}/>
     }
-
     const meter = waterMeters.map((room) => {
       return (
         <div className="meters-align" key={room}>
           <Row className="justify-content-md-center">
             <Col xs lg="2">
               <h3>{room[0]}</h3>
-              {/* <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter"} </p> */}
             </Col>
           </Row>
           <Row className="justify-content-md-center">
             <Col xs lg="2" >
               <ListGroup variant="horizontal-left">
-                {room[1].map((source) => <ListGroup.Item key={source.meterId}>{source.source}</ListGroup.Item>)}
+                {room[1].map((source) => <ListGroup.Item key={source.meterId}>{source.source}{source.simulatedData? `(simulated)`:``}</ListGroup.Item>)}
               </ListGroup>
             </Col>
           </Row>
