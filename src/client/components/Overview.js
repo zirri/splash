@@ -2,8 +2,6 @@
 import React from "react";
 import jwtDecode from "jwt-decode";
 
-//REACT-ROUTER-DOM
-import { Link } from "react-router-dom";
 
 //REACT-BOOTSTRAP
 import {
@@ -12,9 +10,7 @@ import {
 } from "react-bootstrap";
 
 //REACT-CHARTJS-2
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import "chartjs-plugin-annotation";
-
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 //LOCAL COMPONENTS
@@ -34,7 +30,9 @@ class Overview extends React.Component {
     const payload = jwtDecode(token);
 
     this.state = {
-      user: [],
+      user: {
+        noInHousehold: 1,
+      },
       usageAll: [],
       session: payload,
       facts: []
@@ -61,7 +59,6 @@ class Overview extends React.Component {
   render() {
     const { usageAll, facts, user } = this.state;
 
-    //CHARTS
     //DATA FOR CHARTS
     const averageWaterConsumption = 180;
 
@@ -74,22 +71,16 @@ class Overview extends React.Component {
       "#7FC4FD",
       "#1F65A1"
     ];
-
-    //TRANSFORM DATA FOR CHARTS.JS COMPONENTS /DATA KEY TRANSFORMER
-   
-    //TODAY DATA
     
-
-
 
     return (
       <>
         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
           <Tab eventKey="today" title="TODAY">
-            <TabToday fact={facts} usageAll={usageAll} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} user={user}/>
+            <TabToday fact={facts} usageAll={usageAll} color={color} averageWaterConsumption={averageWaterConsumption} user={user}/>
           </Tab>
           <Tab eventKey="week" title="WEEK">
-            <TabWeek usageAll={usageAll} user={user} color={color} averageWaterConsumption={averageWaterConsumption*user.noInHousehold} />
+            <TabWeek usageAll={usageAll} user={user} color={color} averageWaterConsumption={averageWaterConsumption} />
           </Tab>
           <Tab eventKey="register" title="REGISTER">
             <TabRegister />

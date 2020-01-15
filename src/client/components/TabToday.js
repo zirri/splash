@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 //REACT-CHARTJS-2
-import { HorizontalBar, Doughnut, Bar } from "react-chartjs-2";
+import { HorizontalBar, Doughnut, Bar, Chart } from "react-chartjs-2";
 
 //REACT-BOOTSTRAP
 import {
@@ -22,15 +22,19 @@ import {
 } from "react-bootstrap";
 
 
+//LOCAL
 import { transformDataForCharts, getWaterRecordsToday, compileByMeterId } from "../utils/chartFunctions";
 
 
+Chart.defaults.global.maintainAspectRatio = true;
+Chart.defaults.global.plugins.datalabels = true;
 
 class TabToday extends React.Component {
   render() {
 
-		const { fact, averageWaterConsumption, usageAll, color, user} = this.props
-
+    const { fact, averageWaterConsumption, usageAll, color, user} = this.props;
+    const averageWaterConsumptionHousehold = averageWaterConsumption*user.noInHousehold
+    
     //TODAY DATA    
     const waterRecordsToday = getWaterRecordsToday(usageAll);
     const usageToday =compileByMeterId(waterRecordsToday);
@@ -40,11 +44,11 @@ class TabToday extends React.Component {
       0
     );
 
-		const randomFact = fact[
-      Math.floor(Math.random() * fact.length)
-    ];
+    const randomFact = fact[Math.floor(Math.random() * fact.length)];
 
     const optionBarChart = {
+      maintainAspectRatio: false,
+
       legend: {
         display: false
       },
@@ -87,12 +91,12 @@ class TabToday extends React.Component {
           }
         }
       },
-
       cutoutPercentage: 60,
       legend: {
         labels: {
           fontColor: "black"
         },
+        display: true,
         position: "bottom"
       },
       rotation: 1 * Math.PI,
@@ -103,12 +107,12 @@ class TabToday extends React.Component {
           formatter: function(value) {
             return value + "L";
           },
-          color: "white"
+          color: "black",
         }
       }
     };
 
-		const dataBar = {
+    const dataBar = {
       datasets: [
         {
           label: "waterUage",
@@ -134,11 +138,11 @@ class TabToday extends React.Component {
     return (
       <>
         <Carousel interval="10000000" className="carousel-slide">
-          <Carousel.Item>
+          <Carousel.Item className="slide-page-1">
             <h2> Your water usage: </h2>
             <p>
-              {totalUsageToday} / {averageWaterConsumption}L <br></br>
-              ({averageWaterConsumption/user.noInHousehold}L/person)
+              {totalUsageToday} / {averageWaterConsumption}L <br></br>(
+              {averageWaterConsumption / user.noInHousehold}L/person)
             </p>
             {user ? (
               <p>
@@ -151,37 +155,42 @@ class TabToday extends React.Component {
             <Container className="containerChartBToday">
               <HorizontalBar data={dataBar} options={optionBarChart} />
             </Container>
-            <Container className="smile-icon">
+            <Container className="response-box">
               {totalUsageToday < averageWaterConsumption ? (
-                <span style={{ color: "#7FC4FD" }}>
+                <span>
                   <FaGrinBeam size={48} />
                 </span>
               ) : (
-                <span style={{ color: "#7FC4FD" }}>
+                <span>
                   <FaFrownOpen size={48} />
                 </span>
               )}
+              <p>The avarage citizen in Oslo consumes 180L water per day</p>
             </Container>
-            <p>The avarage citizen in Oslo consumes 180L water per day</p>
           </Carousel.Item>
-          <Carousel.Item>
-            <h3>Overview</h3>
+          <Carousel.Item className="slide-page-2">
+            <h3>Overview per source</h3>
 
-            <Container className="containerChartDToday">
+            <Container
+              className="containerChartDToday"
+              style={{ position: "relative", heigth: "100vh" }}
+            >
               <Doughnut
                 data={transformDataForCharts(usageToday, color)}
                 options={optionHalfDoughnut}
               />
             </Container>
           </Carousel.Item>
-        </Carousel>
 
-        <Jumbotron fluid>
-          <h4>Fact #{randomFact ? randomFact.id : ""}</h4>
-          <p>{randomFact ? randomFact.fact : ""}</p>
-          <h6>{randomFact ? randomFact.sourceDisplayName : ""} </h6>
-          <FaRegCommentDots />
-        </Jumbotron>
+          <Carousel.Item className="slide-page-3">
+            <Jumbotron className="fact-box">
+              <h4>Fact #{randomFact ? randomFact.id : ""}</h4>
+              <p>{randomFact ? randomFact.fact : ""}</p>
+              <cite>{randomFact ? randomFact.sourceDisplayName : ""} </cite>
+              <FaRegCommentDots />
+            </Jumbotron>
+          </Carousel.Item>
+        </Carousel>
       </>
     );
   }
