@@ -12,8 +12,6 @@ import {
 } from "react-bootstrap";
 
 //REACT-CHARTJS-2
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import "chartjs-plugin-annotation";
 
 
 
@@ -97,7 +95,6 @@ class Overview extends React.Component {
     //   );
     // });
 
-    //CHARTS
     //DATA FOR CHARTS
     const averageWaterConsumption = 180;
 
@@ -110,13 +107,7 @@ class Overview extends React.Component {
       "#7FC4FD",
       "#1F65A1"
     ];
-
-    //TRANSFORM DATA FOR CHARTS.JS COMPONENTS /DATA KEY TRANSFORMER
-   
-    //TODAY DATA
     
-
-
 
     return (
       <>

@@ -1,7 +1,11 @@
 import React from "react";
 
 //REACT-CHARTJS-2
+import "chartjs-plugin-annotation";
+
 import { Doughnut, Bar } from "react-chartjs-2";
+
+
 
 //REACT-BOOTSTRAP
 import { Container } from "react-bootstrap";
@@ -57,8 +61,8 @@ class TabWeek extends React.Component {
     };
 
     //DUMMY & TEST DATA
-    const totalUsageWeeks = [100, 200, 300, 200];
-    const weekNumber = ["12", "13", "14", "15"];
+    const totalUsageWeeks = [100, 200, 300, 200, 50, 300];
+    const weekNumber = ["12", "13", "14", "15", "16", "14"];
 
     const dataCompareWeeks = {
       datasets: [
@@ -85,7 +89,7 @@ class TabWeek extends React.Component {
           }
         }
       },
-
+      maintainAspectRatio: true,
       legend: {
         display: false
       },
@@ -136,7 +140,7 @@ class TabWeek extends React.Component {
         //
         // Should be one of: afterDraw, afterDatasetsDraw, beforeDatasetsDraw
         // See http://www.chartjs.org/docs/#advanced-usage-creating-plugins
-        drawTime: "afterDatasetsDraw", // (default)
+        drawTime: "beforeDatasetsDraw", // (default)
 
         // Mouse events to enable on each annotation.
         // Should be an array of one or more browser-supported mouse events
@@ -153,12 +157,12 @@ class TabWeek extends React.Component {
         // See below for detailed descriptions of the annotation options
         annotations: [
           {
-            //   drawTime: "afterDraw", //overrides annotation.drawTime if set
+            // drawTime: "afterDraw", //overrides annotation.drawTime if set
             id: "a-line-1", // optional
             type: "line",
             mode: "horizontal",
             scaleID: "y-axis",
-            value: averageWaterConsumption,
+            value: 200,
             borderColor: "red",
             borderWidth: 1,
 

@@ -1,4 +1,3 @@
-import { FaMarsDouble } from "react-icons/fa";
 
 export function transformDataForCharts(UsageByPeriod, arrayOfColors) {
     if (UsageByPeriod.length == 0) {
