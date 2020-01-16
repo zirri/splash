@@ -53,8 +53,7 @@ class TabRegister extends React.Component {
         return source === metersInRoom.source;
       })
       if (waterMeterRoomAndSource.length === 0) {
-        const newWaterMeter = await postWaterMeter(0, room, source)
-        console.log(newWaterMeter);
+        const newWaterMeter = await postWaterMeter(0, room, source);
         meterId = newWaterMeter.meterId;
       } else if (waterMeterRoomAndSource.length > 1) {
         throw new Error('more than one water meter on this room and source')
@@ -72,7 +71,7 @@ class TabRegister extends React.Component {
 
   handleInputChange(event) {
     this.setState({
-      minutesShower: +event.target.value * 15
+      minutesShower: +event.target.value * 6
     })
   }
 
@@ -90,11 +89,9 @@ class TabRegister extends React.Component {
     }
 
     return (
-      <main id="box" className="meters-align">
-        <Row className="meters-align">
-          <h2 className="meters-align ">
-            Simulate water usage
-            </h2>
+      <main id="box" >
+        <Row >
+          <h2 className="meters-align">Simulate water usage</h2>
         </Row>
 
         <Row className="justify-content-md-center meters-align ">
@@ -109,29 +106,29 @@ class TabRegister extends React.Component {
                     <FaShower className="pad" /> Shower
                 </Accordion.Toggle>
                   <Accordion.Collapse eventKey="0">
-                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 75, 'bathroom', 'shower')} > Take a 5 min shower <br />(75L){" "}</Button>
+                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 30, 'bathroom', 'shower')} > Take a 5 min shower <br />(30L){" "}</Button>
                   </Accordion.Collapse>
                   <Accordion.Collapse eventKey="0">
-                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 150, 'bathroom', 'shower')} > Take a 10 min shower (150L) </Button>
+                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 60, 'bathroom', 'shower')} > Take a 10 min shower <br/>(60L) </Button>
                   </Accordion.Collapse>
                   <Accordion.Collapse eventKey="0">
-                    <InputGroup type="number" name="minutesShower" className="data-registration mb-3">
+                    <InputGroup type="number" name="minutesShower" className=" mb-3">
+                      <div className="data-registration custom-reg">Custom shower time: </div>
                       <FormControl
+                  
                         placeholder="minutes"
                         aria-label="minutes"
                         aria-describedby="basic-addon1"
                         value={this.state.value}
                         onChange={this.handleInputChange.bind(this)}
                       />
+                      
                       <InputGroup.Append>
                         <Button onClick={this.showerLiters.bind(this)} variant="primary" >Add</Button>
                       </InputGroup.Append>
                     </InputGroup>
                   </Accordion.Collapse>
-                  <Accordion.Collapse eventKey="0">
-                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 37.5, 'bathroom', 'shower')} > Take a 5 min shower, 'sparedusj' (37,5L) </Button>
-                  </Accordion.Collapse>
-                </Card>
+                  </Card>
               </Accordion>
               <Accordion>
                 <Card border="light">
@@ -206,7 +203,10 @@ class TabRegister extends React.Component {
                     <img src={washingMachine} alt="Logo" className="pad" /> Laundry
                 </Accordion.Toggle>
                   <Accordion.Collapse eventKey="0">
-                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 20, 'laundry', 'washingmachine')} > Run washing machine (20L) </Button>
+                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 50, 'laundry', 'washingmachine')} > Run washing machine, regular (50L) </Button>
+                  </Accordion.Collapse>
+                  <Accordion.Collapse eventKey="0">
+                    <Button className="data-registration" onClick={this.handleRegisterClick.bind(this, 30, 'laundry', 'washingmachine')} > Run washing machine, ECO mode (30L) </Button>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>

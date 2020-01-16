@@ -32,7 +32,8 @@ async function logInAndGetToken(email, password){
     }
     const token = jwt.sign({
         userId: user.userId,
-        fullName: user.fullName
+        fullName: user.fullName,
+        noInHousehold: user.noInHousehold
     }, new Buffer.from(secret, 'base64'));
     return({
         status:200,

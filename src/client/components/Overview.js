@@ -28,14 +28,11 @@ class Overview extends React.Component {
 
     const token = localStorage.getItem("json_web_token");
     const payload = jwtDecode(token);
-
     this.state = {
-      user: {
-        noInHousehold: 1,
-      },
+      user: payload,
       usageAll: [],
-      session: payload,
-      facts: []
+      facts: [],
+      isLoading: true
     };
   }
 
@@ -48,7 +45,8 @@ class Overview extends React.Component {
       this.setState({
         user: userInformation,
         usageAll,
-        facts
+        facts,
+        isLoading: false,
       });
 
     } catch (error) {
@@ -57,7 +55,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { usageAll, facts, user } = this.state;
+    const { usageAll, facts, user, isLoading } = this.state;
 
     //DATA FOR CHARTS
     const averageWaterConsumption = 180;
@@ -72,7 +70,11 @@ class Overview extends React.Component {
       "#1F65A1"
     ];
     
-
+    if(isLoading) {
+      return(
+        <div>Is loading...</div>
+      )
+    } 
     return (
       <>
         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">

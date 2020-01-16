@@ -8,6 +8,7 @@ import { Form, Button, Col } from 'react-bootstrap';
 
 //Locale files
 import { createNewUser } from '../services/users';
+import { createSession } from '../services/session';
 import Errorview from './Errorview';
 
 const schema = yup.object({
@@ -29,6 +30,7 @@ class Signup extends React.Component {
   }
   render() {
     const { error } = this.state;
+    const { history } = this.props;
 
     if(error){
       return <Errorview error={error}/>
@@ -46,13 +48,15 @@ class Signup extends React.Component {
             password: '',
             passwordcheck: '',
             location: '',
-            household: 0,
+            household: 1,
           }}
           onSubmit={async (values) => {
             try{
-              await createNewUser(values.name, values.email, values.password, values.location, values.household);
-              const { history } = this.props;
-              history.push('/login');
+              const newUser = await createNewUser(values.name, values.email, values.password, values.location, values.household);
+              const { token, error } = await createSession({email:values.email, password:values.password} );
+              if(error||newUser.error){throw new Error(error)}
+              localStorage.setItem('json_web_token', token);
+              history.push('/');
             }catch(error){
               this.setState({error})
             }
@@ -61,8 +65,6 @@ class Signup extends React.Component {
           {({
             handleSubmit,
             handleChange,
-            isValid,
-            handleBlur,
             values,
             touched,
             errors,
