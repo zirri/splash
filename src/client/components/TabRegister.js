@@ -53,8 +53,7 @@ class TabRegister extends React.Component {
         return source === metersInRoom.source;
       })
       if (waterMeterRoomAndSource.length === 0) {
-        const newWaterMeter = await postWaterMeter(0, room, source)
-        console.log(newWaterMeter);
+        const newWaterMeter = await postWaterMeter(0, room, source);
         meterId = newWaterMeter.meterId;
       } else if (waterMeterRoomAndSource.length > 1) {
         throw new Error('more than one water meter on this room and source')
