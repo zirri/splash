@@ -64,7 +64,7 @@ header {
   padding: 0;
 } 
 
-
+/*ZARA STYLE*/
 .animated {
   margin: 30px auto 10px auto;
   font-family: "Comfortaa";
@@ -77,36 +77,36 @@ header {
   background-repeat: repeat-x;
   animation: water 8s linear infinite;
 }
+
+/* ZARA STYLING */
 .meters-align {
-    text-align: left;
-    margin-bottom: 40px;
+  text-align: left;
+  margin-bottom: 40px;
 }
 
 .data-registration {
-    margin: 4px 1px;
-    max-width: 170px;
-    text-align: left;
-    padding: 4px;
-    background-color: rgba(0, 140, 255, 0.705);
-    border-style: none;
+  display: block;
+  width: 100%;
+  margin: 3px 1px;
+  text-align: left;
+  padding: 4px;
+  background-color: rgba(0, 140, 255, 0.705);
+  border-style: none;
 }
 
-/*OR MOVING*/
-/* @keyframes water {
-     from {background-position: left 0 top 0;}
-     to {background-position: left 800px top -100px;}
-     } */
+.custom-reg {
+  background-color: rgba(0, 140, 255, 0.705);
+  padding: 4px;
+  margin-bottom: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-family: inherit;
+  color: white;
+}
+/*END ZARA STYLING */
 
-/*OR COLOR GRADIENT*/
-/*
-@keyframes water {
-    from {background-position: left 0 top 0;}
-    to {background-position: left 800px top -100px;
-       color: rgba(0, 183, 255, 0.527);}
-    }
-*/
 
-/*OR STATIC*/
+/*ZARA STYLING SPLASH LOGO*/
 
 @keyframes water {
   from {
@@ -127,6 +127,7 @@ p {
 }
 
 @media only screen and (max-width: 380px) {
+  /*ZARA STYLE */
   .animated {
     margin: 30px auto 10px auto;
     font-family: "Comfortaa";
@@ -139,7 +140,6 @@ p {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
-
   .split {
       width: 150px;
       align-items: left;
@@ -153,6 +153,8 @@ p {
         align-items: left;
         margin: 2px auto;
     }
+
+    /*END ZARA STYLE */
     .list-group-item {
         height: 50px;
     }

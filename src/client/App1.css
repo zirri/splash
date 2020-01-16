@@ -231,6 +231,65 @@ cite {
   background-color: var(--lightest-blue);
 }
 
+
+/*animation*/
+.animated {
+  margin: 30px auto 10px auto;
+  font-family: "Comfortaa";
+  font-size: 8rem;
+  color: rgba(209, 233, 243, 0.534);
+  background-image: url("../hicliparttwo.com.png");
+  background-size: 200px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-repeat: repeat-x;
+  animation: water 8s linear infinite;
+}
+
+/*tab-register*/
+.meters-align {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+h2.meters-align {
+  padding-top: 64px;
+  padding-bottom: 10px;
+}
+
+.data-registration {
+  display: block;
+  width: 100%;
+  margin: 3px 1px;
+  text-align: left;
+  padding: 4px;
+  background-color: rgba(0, 140, 255, 0.705);
+  border-style: none;
+}
+
+.custom-reg {
+  background-color: rgba(0, 140, 255, 0.705);
+  padding: 4px;
+  margin-bottom: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-family: inherit;
+  color: white;
+}
+/*END ZARA STYLING */
+
+
+/*ZARA STYLING SPLASH LOGO*/
+
+@keyframes water {
+  from {
+    background-position: left 0 top 0;
+  }
+  to {
+    background-position: left 800px top 0;
+  }
+}
+
 /* MEDIA QUERIES */
 @media only screen and (max-width: 375px) {
   .containerChartBToday {
@@ -240,6 +299,34 @@ cite {
   p {
     font-size: 1.2rem;
   }
+   /*ZARA STYLE small screen*/
+   .animated {
+    margin: 30px auto 10px auto;
+    font-family: "Comfortaa";
+    font-size: 5rem;
+    color: rgba(209, 233, 243, 0.534);
+    background-image: url("../hicliparttwo.com.png");
+    background-size: 120px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-repeat: repeat-x;
+    animation: water 8s linear infinite;
+  }
+  .split {
+      width: 150px;
+      align-items: left;
+      padding: 5px;
+  }
+  .pad {
+      margin-right: 10px;
+  }
+    .meters-align {
+        text-align: left;
+        align-items: left;
+        margin: 2px auto;
+    }
+
+    /*END ZARA STYLE */
 }
 
 @media only screen and (min-width: 376px) {
