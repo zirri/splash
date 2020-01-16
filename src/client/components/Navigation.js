@@ -6,6 +6,9 @@ import jwtDecode from "jwt-decode";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
+//React-icons 
+import { IoMdHome } from 'react-icons/io'
+
 //Locale icons and files
 import settings from '../icons/Settings.svg';
 import facts from '../icons/Facts.svg';
@@ -43,7 +46,7 @@ class Navigation extends React.Component {
                 <Nav style={{margin:0, padding:0}} className="navbar-inside mr-auto "  >
                   <img src={profile} alt="Logo" className="profile-img"/> 
                   <Nav.Link as={Link} to="/" style={{pointerEvents: "none", fontWeight:"bold", fontSize:"1.2rem"}} className="disabled-link" >{user.fullName} </Nav.Link>
-                  <Nav.Link as={Link} to="/home" eventKey="home" style={{fontWeight: "bold", fontSize:"1.2rem", textDecoration:"underline"}}>Home</Nav.Link>
+                  <Nav.Link as={Link} to="/home" eventKey="home" className="home-icon" ><IoMdHome /></Nav.Link>
                   <Nav.Link as={Link} eventKey="settings" to="/settings" > 
                     <img src={settings} alt="Logo"/>
                     Settings

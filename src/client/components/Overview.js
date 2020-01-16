@@ -30,11 +30,8 @@ class Overview extends React.Component {
     const payload = jwtDecode(token);
 
     this.state = {
-      user: {
-        noInHousehold: 1,
-      },
+      user: payload,
       usageAll: [],
-      session: payload,
       facts: []
     };
   }

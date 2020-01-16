@@ -97,8 +97,25 @@ header {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
+.nav-link.active {
+  font-weight: bold;
+}
+
 .navbar-toggler {
   z-index: 9;
+}
+
+.home-icon svg{
+  color: var(--light-blue);
+
+}
+
+a.home-icon.nav-link {
+  font-size: 60px; 
+}
+a.home-icon.nav-link.active svg{
+  font-size: 60px; 
+  border: none;
 }
 
 /* tab */
@@ -119,12 +136,23 @@ nav a {
 }
 
 /* tab-content */
+
+.info-p {
+  top: 35rem;
+  position: absolute;
+  text-align: center;
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+
 .carousel-item.active {
   display: flex;
   flex-direction: column;
   margin: 0;
 }
 
+/* TODAY-TAB */
 /* carousel component insise tab-content */
 .carousel-slide {
   width: 100%;
@@ -162,12 +190,7 @@ nav a {
   color: var(--light-blue);
 }
 
-.response-box p {
-  font-size: 1rem;
-  padding: 1rem;
-  width: 100%;
-  padding-block-start: 8rem;
-}
+
 
 div.space {
   padding: 1rem;
@@ -190,9 +213,6 @@ div.space {
 }
 
 /* Doughnut chart*/
-.containerChartDToday {
-  align-content: center;
-}
 
 ol {
   margin-block-end: 0;
@@ -226,9 +246,24 @@ cite {
   flex-direction: column;
   justify-content: space-evenly;
   padding: 2rem;
+  margin-top: -1rem;
   border-radius: 2rem;
   box-sizing: border-box;
   background-color: var(--lightest-blue);
+}
+
+/* WEEK-TAB */
+h2 {
+  padding-block-start: 4rem;
+}
+
+h3 {
+  padding-block-end: 2rem;
+}
+
+.week-comparison {
+  margin-block-start: 2.5rem;
+  height: 100%;
 }
 
 
@@ -292,6 +327,19 @@ h2.meters-align {
 
 /* MEDIA QUERIES */
 @media only screen and (max-width: 375px) {
+  .containerChartDToday {
+    align-content: center;
+    width: 60vh;
+    right: 3.5rem;
+  }
+ 
+  .containerChartDWeek {
+    align-content: center;
+    width: 50vh;
+    padding: 0;
+    margin: 0;
+  }
+  
   .containerChartBToday {
     margin-left: 2rem;
   }
@@ -347,13 +395,15 @@ h2.meters-align {
 @media only screen and (max-width: 992px) {
 }
 @media only screen and (min-width: 1200px) {
+
+  /* Header content*/
   .navbar-in-header a img {
     display: none;
     visibility: hidden;
   }
 
   header {
-    min-height: 64px;
+    height: 64px;
     padding: 0;
     background-color: var(--darkest-blue);
     width: 100vw !important;
@@ -361,8 +411,6 @@ h2.meters-align {
 
   .navbar-in-header {
     display: inline-block;
-    flex-direction: column-reverse;
-    justify-content: left;
   }
 
   #basic-navbar-nav {
@@ -390,4 +438,32 @@ h2.meters-align {
     z-index: 999;
   }
  
+
+  .home-icon * {
+    width: 64px;
+    height: 30px;
+    margin: auto;
+  }
+
+  .home-icon.navbar-light.navbar-nav.nav-link.active{
+    font-size: 30px; 
+    border: none;
+  }
+  a.home-icon.nav-link {
+    font-size: 20px;
+  }
+
+  .navbar-inside.mr-auto.navbar-nav {
+    align-items: center;
+  }
+
+  /* slide-3 facts*/
+  h4, cite {
+    font-size: 2.2rem;
+  }
+
+
+  p {
+    font-size: 2rem;
+  }
 }
