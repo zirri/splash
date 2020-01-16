@@ -34,6 +34,7 @@ class TabWeek extends React.Component {
     );
 
     const optionHalfDoughnut = {
+      maintainAspectRatio: true,
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -200,10 +201,10 @@ class TabWeek extends React.Component {
               options={optionHalfDoughnut}
             />
           </Container>
-          <p className="info-p2">* Your water consumption compared to avarage Oslo citizen; 180L water per day</p>
+          
         </Container>
       
-        <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
+        <Container className="week-comparison" fluid style={{ backgroundColor: "#CBDFF1" }}>
           <h3> Week comparison</h3>
           <Container className="containerChartBWeek">
             <Bar data={dataCompareWeeks} options={optionCompareWeeks} />

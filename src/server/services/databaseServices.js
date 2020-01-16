@@ -179,21 +179,19 @@ async function insertNewWaterMeter(newWaterMeter){
 async function fixHashing(){
   const sqlGetPassword = `SELECT user_id, password FROM users;`;
   let users = await pool.query(sqlGetPassword);
-  users = users.rows
+  users = users.rows;
   for(let i=0; i<users.length;i++){
     let user = users[i];
     let password = user.password;
     let hash = await bcrypt.hashSync(password, 10);
-    const sql = `UPDATE users SET password='${hash}' WHERE user_id = ${user.user_id};` 
-    await pool.query(sql);
+    if(bcrypt.compareSync(password, hash)){
+      //console.log('passwords already hashed');
+    }else{
+      const sql = `UPDATE users SET password='${hash}' WHERE user_id = ${user.user_id};` 
+      await pool.query(sql);
+    }
   }
 }
-
-async function fixColWaterMeters(){
-  const sql = 'ALTER TABLE water_meters ADD simulated_data boolean;';
-  await pool.query(sql);
-}
-
 
 
 module.exports = {
@@ -206,5 +204,4 @@ module.exports = {
   getWaterMetersByUser,
   insertNewWaterMeter,
   fixHashing,
-  fixColWaterMeters
 }

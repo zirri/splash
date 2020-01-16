@@ -79,6 +79,7 @@ class TabToday extends React.Component {
     };
 
     const optionHalfDoughnut = {
+      maintainAspectRatio: true,
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -97,7 +98,7 @@ class TabToday extends React.Component {
           fontColor: "black"
         },
         display: true,
-        position: "bottom"
+        position: "bottom",
       },
       rotation: 1 * Math.PI,
       circumference: 1 * Math.PI,
