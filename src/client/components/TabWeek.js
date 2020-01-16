@@ -21,6 +21,7 @@ Chart.defaults.global.plugins.datalabels = true;
 class TabWeek extends React.Component {
   render() {
     const { usageAll, color, averageWaterConsumption, user } = this.props;
+
     const averageWaterConsumptionHousehold = averageWaterConsumption*user.noInHousehold*7
     console.log(averageWaterConsumptionHousehold)
     //THISWEEK DATA
@@ -203,7 +204,7 @@ class TabWeek extends React.Component {
           </Container>
           
         </Container>
-      
+        
         <Container className="week-comparison" fluid style={{ backgroundColor: "#CBDFF1" }}>
           <h3> Week comparison</h3>
           <Container className="containerChartBWeek">
