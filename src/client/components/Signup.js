@@ -30,6 +30,7 @@ class Signup extends React.Component {
   }
   render() {
     const { error } = this.state;
+    const { history } = this.props;
 
     if(error){
       return <Errorview error={error}/>
@@ -51,13 +52,11 @@ class Signup extends React.Component {
           }}
           onSubmit={async (values) => {
             try{
-              const { history } = this.props;
               const newUser = await createNewUser(values.name, values.email, values.password, values.location, values.household);
-              console.log(values.email, values.password);
-              const { token, error } = await createSession(values.email, values.password );
+              const { token, error } = await createSession({email:values.email, password:values.password} );
               if(error||newUser.error){throw new Error(error)}
-              localStorage.setItem('json_web_token', token)
-              history.push('/')
+              localStorage.setItem('json_web_token', token);
+              history.push('/');
             }catch(error){
               this.setState({error})
             }
@@ -66,8 +65,6 @@ class Signup extends React.Component {
           {({
             handleSubmit,
             handleChange,
-            isValid,
-            handleBlur,
             values,
             touched,
             errors,
