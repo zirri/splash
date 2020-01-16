@@ -295,7 +295,10 @@ h2.meters-align {
   .containerChartBToday {
     margin-left: 2rem;
   }
-
+  h1.animated, main, .container {
+    text-align: center;
+  }
+  
   p {
     font-size: 1.2rem;
   }
