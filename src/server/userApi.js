@@ -1,7 +1,8 @@
 //Router file for endpoint /user. Handeling new user, edit use
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
-const { getUserInformation, createNewUser } = require('./services/databaseServices.js');
+const { getUserByEmail, getUserInformation, createNewUser } = require('./services/databaseServices.js');
 const { validateUserInput } = require('./services/inputValidation.js');
 const { authenticate } = require('./services/authService.js');
 
@@ -9,8 +10,10 @@ const { authenticate } = require('./services/authService.js');
 router.use('/', (req, res, next) => {
     if(req.method === 'GET'){
         return next();
+    
     }
-    const user = req.body;
+    const {email, fullName, password, location, noInHousehold} = req.body;
+    const user =  {email, fullName, password, location, noInHousehold};
     const result = validateUserInput(user);
     if(result.error){
         res.status(400).json({error: result.error});
@@ -30,7 +33,13 @@ router.get('/', authenticate, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const user = req.body;
+    const {email, fullName, password, location, noInHousehold} = req.body;
+    const hash = bcrypt.hashSync(password, 10);
+    const user =  {email, fullName, password:hash, location, noInHousehold};
+    const userExist = await getUserByEmail(user.email);
+    if(userExist){
+        return res.status(401).json({error: 'user already registred, please log in instead'})
+    }
     const newUser = await createNewUser(user);
     res.json(newUser);
 });

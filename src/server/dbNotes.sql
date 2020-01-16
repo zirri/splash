@@ -14,12 +14,14 @@ CREATE TABLE users (
     no_in_household INTEGER
 );
 
+
+--NB! Passwords must be hashed
 INSERT INTO users (email, password, location, full_name, no_in_household)
-VALUES ('123@test.com', 'password123', 'Oslo', 'Frank Doe', 1);
+VALUES ('123@test.com', insert bcrypt hash, 'Oslo', 'Frank Doe', 1);
 INSERT INTO users (email, password, location, full_name, no_in_household)
-VALUES ('kongen@test.com', 'password321', 'Oslo', 'Kong Harald', 1);
+VALUES ('kongen@test.com', insert bcrypt hash, 'Oslo', 'Kong Harald', 1);
 INSERT INTO users (email, password, location, full_name, no_in_household)
-VALUES ('minister@test.com', '123password', 'Oslo', 'Sylvi', 4);
+VALUES ('minister@test.com', insert bcrypt hash, 'Oslo', 'Sylvi', 4);
 
 
 CREATE TABLE water_meters (
@@ -27,7 +29,8 @@ CREATE TABLE water_meters (
     meter_id INTEGER,
     user_id INTEGER,
     room VARCHAR,
-    source VARCHAR
+    source VARCHAR,
+    simulated_data BOOLEAN
 );
 
 INSERT INTO water_meters (meter_id, user_id, room, source) VALUES (123123, 1, 'bathroom', 'sink');
@@ -62,15 +65,11 @@ CREATE TABLE facts (
     source_url VARCHAR
 );
 
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about facts. A fact should not be mistaken for truth.  *MIC DROPPED*', 'Cathy', 'www.url.com');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about truth. A truth is not the same truth for everyone. *MIC DROPPED*', 'Cathy','www.url.com');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about everyone. Everyone compiled is the world. *MIC DROPPED*', 'Cathy', 'www.url.com');
-
 
 --New queries 13.1
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about the world. Less than 1% of the water supply on earth can be used as drinking water. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about water. A small drip from a faucet can waste as much as128 liters of water a day. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
-INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'This is a fact about the water. A small drip from a faucet can waste as much as128 liters of water a day. *MIC DROPPED*', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'Less than 1% of the water supply on earth can be used as drinking water.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'A small drip from a faucet can waste as much as 128 liters of water a day.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
+INSERT INTO facts (fact, source_display_name, source_url) VALUES ( 'A small drip from a faucet can waste as much as 128 liters of water a day.', 'Cathy', 'https://www.espwaterproducts.com/water-facts/');
 
 
 INSERT INTO water_meters (meter_id, user_id, room, source) VALUES (123111, 1, 'bathroom', 'toilet');

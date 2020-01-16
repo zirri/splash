@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const bcrypt = require('bcryptjs');
 const camelcaseKeys = require('camelcase-keys');
 const snakeCaseKeys = require('snakecase-keys');
 
@@ -66,11 +67,7 @@ async function createNewUser(user){
   return newUser;
 }
 
-async function getWaterUsage(userId, periodeStart, periodeEnd){
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
+async function getWaterUsage(userId){
   if(typeof userId != 'number'){return}
   const sql = `
     SELECT 
@@ -85,9 +82,8 @@ async function getWaterUsage(userId, periodeStart, periodeEnd){
       water_usage
     WHERE 
       water_meters.user_id = $1 AND
-      water_meters.meter_id = water_usage.meter_id AND
-      timestamp BETWEEN $2 AND $3;`
-  let waterUsage = await pool.query(sql, [userId, periodeStart, tomorrow]);
+      water_meters.meter_id = water_usage.meter_id;`
+  let waterUsage = await pool.query(sql, [userId]);
   waterUsage = waterUsage.rows.map(record => camelcaseKeys(record));
   return waterUsage;
 }
@@ -110,17 +106,6 @@ async function updateWaterMetering(waterData){
   return newRecord;
 }
 
-// async function getWaterMeterInfo() {
-//   const sql = `
-//   SELECT 
-//     *
-//   FROM 
-//     water_meters
-//   Where
-
-//   `
-// }
-
 async function getFacts() {
   const sql = `
   SELECT 
@@ -136,6 +121,83 @@ async function getFacts() {
   return facts;
 }
 
+async function getWaterMetersByUser(userId){
+  if(typeof userId != 'number'){return}
+  const sql = `
+    SELECT 
+      user_id, 
+      room,
+      source,
+      meter_id,
+      simulated_data
+    FROM 
+      water_meters
+    WHERE 
+      water_meters.user_id = $1
+    ORDER BY
+      room;`
+  let waterMeters = await pool.query(sql, [userId]);
+  waterMeters = waterMeters.rows.map(record => camelcaseKeys(record));
+  return waterMeters;
+};
+
+async function getHighestMeterId(){
+  const sql = `
+  SELECT meter_id FROM water_meters ORDER BY meter_id DESC LIMIT 1;`
+  const result = await pool.query(sql)
+  return result.rows[0].meter_id;
+}
+
+async function insertNewWaterMeter(newWaterMeter){
+  newWaterMeter = snakeCaseKeys(newWaterMeter);
+  let newMeterId;
+  let simulated_data = false;
+  if(newWaterMeter.meter_id === 0){
+    newMeterId = await getHighestMeterId()+1;
+    simulated_data = true;
+  }else{
+    newMeterId = newWaterMeter.meter_id;
+  }
+  
+  const sql = `
+  INSERT INTO water_meters (
+    meter_id, 
+    user_id,
+    room,
+    source,
+    simulated_data
+    )  
+  VALUES
+    ($1, $2, $3, $4, $5)
+  RETURNING *;`
+  const { user_id, room, source } = newWaterMeter;
+  let newRecord = await pool.query(sql, [newMeterId, user_id, room, source, simulated_data]);
+  newRecord = camelcaseKeys(newRecord.rows[0]);
+  return newRecord;
+}
+
+async function fixHashing(){
+  const sqlGetPassword = `SELECT user_id, password FROM users;`;
+  let users = await pool.query(sqlGetPassword);
+  users = users.rows;
+  for(let i=0; i<users.length;i++){
+    let user = users[i];
+    let password = user.password;
+    let hash = await bcrypt.hashSync(password, 10);
+    if(bcrypt.compareSync(password, hash)){
+      console.log('passwords already hashed');
+    }else{
+      const sql = `UPDATE users SET password='${hash}' WHERE user_id = ${user.user_id};` 
+      await pool.query(sql);
+    }
+  }
+}
+
+async function fixColWaterMeters(){
+  const sql = 'ALTER TABLE water_meters ADD simulated_data boolean;';
+  await pool.query(sql);
+}
+
 
 
 module.exports = {
@@ -144,6 +206,9 @@ module.exports = {
   createNewUser,
   getWaterUsage,
   updateWaterMetering,
-  // getWaterMeterInfo,
-  getFacts
+  getFacts,
+  getWaterMetersByUser,
+  insertNewWaterMeter,
+  fixHashing,
+  fixColWaterMeters
 }

@@ -1,96 +1,78 @@
+//Plugins
 import React from "react";
 
-import { Button, Container, ListGroup, Row, Col } from "react-bootstrap";
-
-import { Link } from "react-router-dom";
+//Bootstrap
+import { Container, ListGroup, Row, Col } from "react-bootstrap";
 
 //LOCAL
-import { getWaterUsageAll } from "../services/water";
+import { getWaterMeters } from "../services/watermeters";
+import Errorview from './Errorview.js'
 
 class RoomsAndMeters extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      waterMeter: []
+      waterMeters: [],
+      error: null
     };
+  }
+
+  compileByMeterId(arrayOfWaterData) {
+    return Object.entries(arrayOfWaterData.reduce((result, value) => {
+      result[value.room] = result[value.room] || [];
+      result[value.room].push({ source: value.source, meterId: value.meterId })
+      return result;
+    },
+      {}
+    ))
   }
 
   async componentDidMount() {
     try {
-      const waterMeters = await getWaterUsageAll();
-      function compileByMeterId(arrayOfWaterData) {
-        const reduceToMeterId = Object.values(
-          arrayOfWaterData.reduce(
-            (r, { meterId, room, source }) => {
-              r[meterId] = r[meterId] || {
-                meterId,
-                room,
-                source
-              };
-              return r;
-            },
-            {}
-          )
-        );
-
-        return Object.entries(reduceToMeterId.reduce((result, value) => {
-          result[value.room] = result[value.room] || [];
-          result[value.room].push({source: value.source, meterId: value.meterId })
-          return result;
-        },
-        {}
-        ))
-      }
-      console.log(compileByMeterId(waterMeters))
+      const arrayOfWaterData = await getWaterMeters();
+      const waterMeters = this.compileByMeterId(arrayOfWaterData) 
+      if(waterMeters.error){throw new Error(waterMeters.error)}
       this.setState({
-        waterMeter: compileByMeterId(waterMeters)
+        waterMeters
       })
     } catch (error) {
-      console.log(error);
+      this.setState({error})
     }
   }
 
   render() {
-    const { waterMeter } = this.state;
-    const meter = waterMeter.map((room) => {
+    const { waterMeters, error } = this.state;
+
+    if(error){
+      return <Errorview error={error}/>
+    }
+    const meter = waterMeters.map((room) => {
       return (
-        <main className="meters-align">
-        <Row className="justify-content-md-center">
-        <Col xs lg="2">
-            <strong>{room[0]}</strong> 
-            
-            <p>{room[1].length > 1 ? room[1].length + " water meters" : room[1].length + " water meter" } </p> 
-         </Col> 
-         </Row>
-         <Row className="justify-content-md-center">
-         <Col xs lg="2" >
-            <ListGroup variant="horizontal-left">
-              {room[1].map((source) => <ListGroup.Item>{source.source}</ListGroup.Item> )}
-            </ListGroup>
+        <div className="meters-align" key={room}>
+          <Row className="justify-content-md-center">
+            <Col xs lg="2">
+              <h3>{room[0]}</h3>
             </Col>
-            </Row>
-        </main>
+          </Row>
+          <Row className="justify-content-md-center">
+            <Col xs lg="2" >
+              <ListGroup variant="horizontal-left">
+                {room[1].map((source) => <ListGroup.Item key={source.meterId}>{source.source}{source.simulatedData? `(simulated)`:``}</ListGroup.Item>)}
+              </ListGroup>
+            </Col>
+          </Row>
+        </div>
       )
     })
 
     return (
-      <div>
-        
-        <h4>Rooms and Water Meters</h4>
-        
+      <main>
+        <h2>Rooms and Water Meters</h2>
         <Container>
-
-        {meter}
-
-          <Button variant="primary" size="sm">
-            <Link to="/addMeter" style={{ color: "white" }}>
-            ADD WATER METER
-            </Link>
-          </Button>
+          {meter}
         </Container>
-     
-      </div>
+      </main>
     );
   }
 }

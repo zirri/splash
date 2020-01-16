@@ -1,64 +1,76 @@
+//PLUGINS
 import React from 'react';
-import { createSession } from '../services/session';
+import { Link } from 'react-router-dom'
 import { Formik } from 'formik';
 import * as yup from 'yup';
+
+//BOOTSTRAP COMPONENTS
 import { Form, Button, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+
+
+//LOCALE IMPORTS
+import { createSession } from '../services/session';
+import Errorview from './Errorview';
 
 const schema = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().min(6, 'Password too short (must consist of 6 characters)').required(),
-  });
+  email: yup.string().email().required(),
+  password: yup.string().min(6, 'Password too short (must consist of 6 characters)').required(),
+});
 
 class LoginFormik extends React.Component {
-    state = {
-        error: null
+  constructor(props){
+    super(props);
+
+    this.state = {
+      error: null
     }
-    render() {
-        return (
-            <main>
-                 <h1 className="animated">splash</h1>
-                 <div></div>
-                <Formik 
-                validationSchema={schema}
-                initialValues={{
-                email: '',
-                password: '',
-        }}
-        onSubmit={async ({email, password}) => {
+  }
+  
+
+  render() {
+    const { error } = this.state;
+    
+    if(error){
+      return <Errorview error={error}/>
+    }
+
+    return (
+      <main>
+        <h1 className="animated">splash</h1>
+        <Formik
+          validationSchema={schema}
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          onSubmit={async ({ email, password }) => {
             try {
-            const { history } = this.props;
-            const { token } = await createSession({email, password})
-            
-            console.log(email, password)
-            console.log(history)
-            localStorage.setItem('json_web_token', token)
-            history.push('/home')
-            } catch(error) {
-                this.setState({
-                    error
-                })
-                console.log(error)
+              const { history } = this.props;
+              const { token, error } = await createSession({ email, password });
+              if(error){throw new Error(error)}
+              localStorage.setItem('json_web_token', token)
+              history.push('/home')
+            } catch (error) {
+              this.setState({
+                error
+              })
             }
-
-
-        }}
+          }}
         >
-               
-                {({
-          handleSubmit,
-          handleChange,
-          isValid,
-          handleBlur,
-          values,
-          touched,
-          errors,
-        }) => (
+          {({
+            handleSubmit,
+            handleChange,
+            isValid,
+            handleBlur,
+            values,
+            touched,
+            errors,
+          }) => (
             <Form noValidate onSubmit={handleSubmit} className="container">
-                <h1>Login</h1>
-                <br />
+              <h1>Login</h1>
+              <br />
               <Form.Row>
-              <Form.Group as={Col} md="4" controlId="validationFormikEmail">
+                <Form.Group as={Col} md="4" controlId="validationFormikEmail">
                   <Form.Label>email</Form.Label>
           
                     <Form.Control
@@ -68,15 +80,15 @@ class LoginFormik extends React.Component {
                       value={values.email}
                       onChange={handleChange}
                       isValid={touched.email && !errors.email}
-                      isInvalid={!!errors.email}
+                      isInvalid={touched.email && !!errors.email}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.email}
                     </Form.Control.Feedback>
                
                 </Form.Group>
-                </Form.Row>
-                <Form.Row>
+              </Form.Row>
+              <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationFormikUsername">
                   <Form.Label>password</Form.Label>
           
@@ -87,7 +99,7 @@ class LoginFormik extends React.Component {
                       value={values.password}
                       onChange={handleChange}
                       isValid={touched.password && !errors.password}
-                      isInvalid={!!errors.password}
+                      isInvalid={touched.password && !!errors.password}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.password}
@@ -95,18 +107,13 @@ class LoginFormik extends React.Component {
                
                 </Form.Group>
               </Form.Row>
-              
               <Button type="submit">Log in</Button>
             </Form>)}
-            </Formik>
-            <Link to='/signup'>Sign up</Link>
-            </main>
-        
-        )
-        
-    }
-   
+        </Formik>
+        <Link to='/signup'>Sign up</Link>
+      </main>
+    )
+  }
 }
-
 
 export default LoginFormik;

@@ -17,7 +17,7 @@ function validateUserInput(user){
 } 
 
 const meterIdSchema = {
-    waterMeterId: Joi.number().integer().positive().required()
+    waterMeterId: Joi.number().integer().required()
 };
 
 function validateMeterId(waterMeterId){
@@ -28,10 +28,9 @@ function validateMeterId(waterMeterId){
     return {error: null};
 } 
 
-
 const waterDataSchema = {
     timestamp: Joi.string(),//Joi.date().timestamp().required(),
-    amount: Joi.number().positive().required(),
+    amount: Joi.number().positive().required()
 };
 
 function validateMeteringData(meteringData){
@@ -42,8 +41,22 @@ function validateMeteringData(meteringData){
     return {error: null};
 } 
 
+const waterMeterSchema = {
+    room: Joi.string().required(),
+    source: Joi.string().required()
+};
+
+function validateWaterMeterData(waterMeterData){
+    const result = Joi.validate({...waterMeterData}, waterMeterSchema);
+    if(result.error){
+        return {error: `Validation of water meter data (body) failed: ${result.error.details[0].message}`};
+    }
+    return {error: null};
+}
+
 module.exports = {
     validateUserInput, 
     validateMeterId, 
-    validateMeteringData
+    validateMeteringData,
+    validateWaterMeterData
 }

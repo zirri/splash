@@ -1,31 +1,45 @@
 require('dotenv').config();
+
+//Quickfix for database updates
+const {fixHashing} = require('./src/server/services/databaseServices');
+//Remove comment below to fix hashed password in database
+fixHashing();
+
+//Imports npm packages
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+
+//Import files
 const sessionApi = require('./src/server/sessionApi.js');
 const userApi = require('./src/server/userApi.js');
 const waterUsageApi = require('./src/server/waterusageApi.js');
+const waterMetersApi = require('./src/server/watermetersApi.js');
 const factApi = require('./src/server/factApi.js');
+
+//Initialize server
 const app = express();
 
+
+//Serving static files
+app.use(express.static('build'));
+
 //Middleware
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+//Logging to console
 app.use((req, res, next)=>{
   const { method, path } = req;
   console.log(`New request of type ${method} to endpoint '${path}'`)
   next();
 })
 
-//Serving static files
-app.use(express.static('build'));
-
 //Routing
 app.use('/api/user', userApi);
 app.use('/api/session', sessionApi);
 app.use('/api/waterusage', waterUsageApi);
+app.use('/api/watermeters', waterMetersApi);
 app.use('/api/facts', factApi);
 
 //Listening to port
