@@ -114,7 +114,7 @@ class TabRegister extends React.Component {
                   </Accordion.Collapse>
                   <Accordion.Collapse eventKey="0">
                     <InputGroup type="number" name="minutesShower" className=" mb-3">
-                      <p className="data-registration custom-reg">Custom shower time: </p>
+                      <div className="data-registration custom-reg">Custom shower time: </div>
                       <FormControl
                   
                         placeholder="minutes"
