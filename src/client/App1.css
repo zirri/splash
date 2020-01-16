@@ -334,10 +334,12 @@ h2.meters-align {
   }
  
   .containerChartDWeek {
+    position: relative;
     align-content: center;
-    width: 50vh;
+    width: 45vh;
     padding: 0;
     margin: 0;
+    right: 1rem;
   }
   
   .containerChartBToday {
