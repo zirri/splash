@@ -1,4 +1,4 @@
-/* CUSTOM ROOT */ 
+/* CUSTOM ROOT */
 :root {
   --lightest-blue: rgba(189, 212, 231, 0.281);
   --light-blue: #bce0fd;
@@ -24,38 +24,35 @@ header {
   padding: 0;
   background-color: var(--darkest-blue);
   max-width: 100vw !important;
+}
 
+.nav.nav-tabs {
+  height: fit-content;
 }
 
 .tab-content {
   height: 85vh;
   text-align: center;
   max-width: 100vw !important;
-
-}
-
-.tab-content *{
-  text-align: center;
 }
 
 /* CONTENT */
 /* header*/
 .navbar-in-header {
- height: 100%;
- text-align: left;
+  height: 100%;
+  text-align: left;
 }
 
-.navbar-light .navbar-nav .nav-link{
- color: white;
+.navbar-light .navbar-nav .nav-link {
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link.active {
-  color:white;
+  color: white;
   font-size: 1.2rem;
 }
 .navbar-inside {
   align-items: flex-start;
-
 }
 
 .profile-img {
@@ -63,7 +60,7 @@ header {
 }
 
 .logoname {
-   font-family: "Comfortaa";
+  font-family: "Comfortaa";
   font-size: 2.8rem;
   padding: 0;
   text-align: center;
@@ -71,29 +68,37 @@ header {
 }
 
 .logoname a {
-  color: white
+  color: white;
 }
 
-.navbar-in-header * {
-  text-align: left;
+.logoname {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  margin: auto;
+  margin-top: -8px;
+  padding: 0;
 }
 
 .navbar-in-header button {
   border: none;
   position: relative;
-
 }
 
-
-.navbar-in-header a img{
-   
+.navbar-in-header a img {
   height: 3rem;
   margin-block-end: 1rem;
   margin-inline-end: 1rem;
 }
 
 .navbar-in-header .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+  z-index: 9;
 }
 
 /* tab */
@@ -101,24 +106,23 @@ nav a {
   color: var(--darkest-blue);
 }
 
-.nav-item.nav-link.active{
+.nav-item.nav-link.active {
   background-color: var(--dark-blue);
   color: white;
   border: 1px solid var(--dark-blue);
   border-radius: 0;
 }
-.nav-item.nav-link{
+.nav-item.nav-link {
   border: 1px solid var(--dark-blue);
 
   border-radius: 0;
 }
 
-
-
 /* tab-content */
 .carousel-item.active {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
 /* carousel component insise tab-content */
@@ -126,76 +130,68 @@ nav a {
   width: 100%;
   height: 100%;
 }
-
-.carousel-slide > div {
-  margin-top: 1rem
-}
-
-
-.carousel-slide ol {
-  margin-bottom: 2rem;
+.carousel-inner {
+  height: 100%;
 }
 
 .carousel-slide ol li {
   height: 1rem;
   width: 1rem;
   border-radius: 50%;
-  background-color: #1f65a1;
+  background-color: var(--dark-blue);
 }
 
 .carousel-slide a {
   visibility: hidden;
 }
 
-
-.response-box p {
-   margin-block-end: 2rem;
-  margin-block-start: 2rem;
-}
-.response-box span {
-  color: var(--light-blue)
-}
-
-.carousel-inner {
-  height: 100%;
-}
-/* Bar chart */
-.containerChartBToday {
-  width: 90vw;
-  height: 10vh;
-  padding-top: 2rem;
-  margin-block-end: 2rem;
-}
-
-.fact-box {
-  height: 40%;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 20px;
-  margin: auto;
-  border-radius: 2rem;
-  box-sizing: border-box;
-  background-color: var(--lightest-blue);
-}
-
-.fact-box * {
-  padding: 0;
-  margin: auto;
-}
-
-.fact-box svg {
-  margin: auto;
-}
 .active {
   height: 100%;
 }
 
+/* slide-page-1 */
+.slide-page-1 h2 {
+  padding-block-start: 4rem;
+}
+
+.slide-page-1 div {
+  padding-block-start: 2rem;
+}
+
+.response-box span svg {
+  color: var(--light-blue);
+}
+
+.response-box p {
+  font-size: 1rem;
+  padding: 1rem;
+  width: 100%;
+  padding-block-start: 8rem;
+}
+
+div.space {
+  padding: 1rem;
+}
+
+/* Bar chart */
+.containerChartBToday {
+  width: 90vw;
+  height: 10vh;
+  margin-right: -2rem;
+}
+
+/* slide-page-2 */
+.slide-page-2 h2 {
+  padding-block-start: 4rem;
+}
+
+.slide-page-2 div.space {
+  padding: 4.5rem;
+}
+
 /* Doughnut chart*/
-.containerChartDToday  {
+.containerChartDToday {
   align-content: center;
-  margin-bottom: -5rem
 }
 
 ol {
@@ -203,12 +199,42 @@ ol {
   margin-block-start: 0;
 }
 
+/* slide-page-3 */
+.slide-page-3 h2 {
+  padding-block-start: 4rem;
+}
+
+.slide-page-3 div.space {
+  padding: 4rem;
+}
+
+.slide-page-3.active {
+  margin: 0;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+cite {
+  font-size: 1.2rem;
+}
+
+.fact-box {
+  height: 40%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-sizing: border-box;
+  background-color: var(--lightest-blue);
+}
 
 /* MEDIA QUERIES */
-@media only screen and (max-width:375px) {
+@media only screen and (max-width: 375px) {
   .containerChartBToday {
     margin-left: 2rem;
-
   }
 
   p {
@@ -216,11 +242,15 @@ ol {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 376px) {
+  .containerChartBToday {
+    margin: auto;
+  }
+}
 
+@media only screen and (max-width: 768px) {
 }
 @media only screen and (max-width: 992px) {
-
 }
 @media only screen and (min-width: 1200px) {
   .navbar-in-header a img {
@@ -228,7 +258,14 @@ ol {
     visibility: hidden;
   }
 
-  .navbar-in-header  {
+  header {
+    min-height: 64px;
+    padding: 0;
+    background-color: var(--darkest-blue);
+    width: 100vw !important;
+  }
+
+  .navbar-in-header {
     display: inline-block;
     flex-direction: column-reverse;
     justify-content: left;
@@ -236,7 +273,6 @@ ol {
 
   #basic-navbar-nav {
     justify-content: row;
-    
   }
 
   .navbar-in-header div {
@@ -250,4 +286,14 @@ ol {
     font-size: 1rem;
     border: 1px solid;
   }
+
+  span.logoname.text.navbar-brand {
+
+    width: 100vw;
+  }
+
+  .navbar-in-header div {
+    z-index: 999;
+  }
+ 
 }

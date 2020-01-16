@@ -36,14 +36,14 @@ class Navigation extends React.Component {
               <Navbar.Toggle />
 
               <Navbar.Brand className="logoname text" >
-                <NavLink to="/home">splash</NavLink>
+                <Link style={{textDecoration: "none"}}to="/home">splash</Link>
               </Navbar.Brand>
               <Container fluid>
               <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav style={{margin:0, padding:0}} className="navbar-inside mr-auto "  >
                   <img src={profile} alt="Logo" className="profile-img"/> 
-                  <Nav.Link as={Link} to="/" style={{pointerEvents: "none", fontWeight:"bold"}} className="disabled-link" >{user.fullName} </Nav.Link>
-                  <Nav.Link as={Link} to="/home" eventKey="home" style={{fontWeight: "bold"}}>Home</Nav.Link>
+                  <Nav.Link as={Link} to="/" style={{pointerEvents: "none", fontWeight:"bold", fontSize:"1.2rem"}} className="disabled-link" >{user.fullName} </Nav.Link>
+                  <Nav.Link as={Link} to="/home" eventKey="home" style={{fontWeight: "bold", fontSize:"1.2rem", textDecoration:"underline"}}>Home</Nav.Link>
                   <Nav.Link as={Link} eventKey="settings" to="/settings" > 
                     <img src={settings} alt="Logo"/>
                     Settings

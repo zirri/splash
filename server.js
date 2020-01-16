@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 //Remove comment below to fix hashed password in database
-//const {fixHashing} = require('./src/server/services/databaseServices');
-//fixHashing();
+// const {fixHashing} = require('./src/server/services/databaseServices');
+// fixHashing();
 
 
 //Imports npm packages
