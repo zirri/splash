@@ -22,7 +22,7 @@ class TabWeek extends React.Component {
   render() {
     const { usageAll, color, averageWaterConsumption, user } = this.props;
     const averageWaterConsumptionHousehold = averageWaterConsumption*user.noInHousehold*7
-
+    console.log(averageWaterConsumptionHousehold)
     //THISWEEK DATA
     const recordsThisWeek = getWaterRecordsThisWeek(usageAll);
     const usageThisWeek = compileByMeterId(recordsThisWeek);
@@ -147,7 +147,7 @@ class TabWeek extends React.Component {
         //
         // Should be one of: afterDraw, afterDatasetsDraw, beforeDatasetsDraw
         // See http://www.chartjs.org/docs/#advanced-usage-creating-plugins
-        drawTime: "afterDraw", // (default)
+        drawTime: "beforeDatasetsDraw", // (default)
 
         // Mouse events to enable on each annotation.
         // Should be an array of one or more browser-supported mouse events
@@ -169,7 +169,7 @@ class TabWeek extends React.Component {
             type: "line",
             mode: "horizontal",
             scaleID: "y-axis",
-            value: averageWaterConsumptionHousehold ,
+            value: averageWaterConsumptionHousehold,
             borderColor: "red",
             borderWidth: 1,
 
@@ -185,11 +185,14 @@ class TabWeek extends React.Component {
     return (
       <>
         <Container fluid>
-          <h2> Your water usage: </h2>
+          <h2> Your water usage </h2>
+  
           <p>
-              {totalUsageThisWeek} / {averageWaterConsumptionHousehold}L <br></br>
-              {user.noInHousehold === 1 ? "" : `(${averageWaterConsumptionHousehold} / ${user.noInHousehold}L/person)`}
-            </p>
+              
+              {user.noInHousehold === 1 ? "" : `Total for household (${user.noInHousehold} pers)`}
+              <br></br>
+              {totalUsageThisWeek} / {averageWaterConsumptionHousehold}L*
+          </p>
        
           <Container className="containerChartDWeek">
             <Doughnut
@@ -197,15 +200,18 @@ class TabWeek extends React.Component {
               options={optionHalfDoughnut}
             />
           </Container>
+          <p className="info-p2">* Your water consumption compared to avarage Oslo citizen; 180L water per day</p>
         </Container>
-
+      
         <Container fluid style={{ backgroundColor: "#CBDFF1" }}>
           <h3> Week comparison</h3>
           <Container className="containerChartBWeek">
             <Bar data={dataCompareWeeks} options={optionCompareWeeks} />
-            <h6>- Average water consumption</h6>
+            <h6 style={{color: "red", display:"inline"}}>- </h6><h6 style={{display:"inline"}}>Average water consumption</h6>
           </Container>
         </Container>
+     
+
       </>
     );
   }

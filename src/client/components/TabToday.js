@@ -117,19 +117,19 @@ class TabToday extends React.Component {
         {
           label: "waterUage",
           data: [
-            averageWaterConsumption - totalUsageToday < 0 ? 0 : totalUsageToday
+            averageWaterConsumptionHousehold - totalUsageToday < 0 ? 0 : totalUsageToday
           ],
           backgroundColor: `${"#7FC4FD"}`
         },
         {
           label: "comparedData",
           data: [
-            averageWaterConsumption - totalUsageToday < 0
+            averageWaterConsumptionHousehold - totalUsageToday < 0
               ? 180
-              : averageWaterConsumption - totalUsageToday
+              : averageWaterConsumptionHousehold - totalUsageToday
           ],
           backgroundColor: `${
-            totalUsageToday > averageWaterConsumption ? "red" : "#D5DEE5"
+            totalUsageToday > averageWaterConsumptionHousehold ? "red" : "#D5DEE5"
           } `
         }
       ]
@@ -139,10 +139,12 @@ class TabToday extends React.Component {
       <>
         <Carousel interval="10000000" className="carousel-slide">
           <Carousel.Item className="slide-page-1">
-            <h2> Your water usage: </h2>
+            <h2> Your water usage </h2>
             <p>
-              {totalUsageToday} / {averageWaterConsumption}L <br></br>
-              {user.noInHousehold === 1 ? "" : `(${averageWaterConsumption} / ${user.noInHousehold}L/person)`}
+              
+              Total for household ({user.noInHousehold} pers)<br />
+              <br />
+              {totalUsageToday} / {averageWaterConsumptionHousehold}L* 
             </p>
             <div className="space"></div>
             
@@ -152,7 +154,7 @@ class TabToday extends React.Component {
             <div className="space"></div>
 
             <Container className="response-box">
-              {totalUsageToday < averageWaterConsumption ? (
+              {totalUsageToday < averageWaterConsumptionHousehold ? (
                 <span>
                   <FaGrinBeam size={64} />
                 </span>
@@ -164,7 +166,7 @@ class TabToday extends React.Component {
 
             <div className="space"></div>
             
-              <p>The avarage citizen in Oslo consumes 180L water per day</p>
+              <p className="info-p">* Your water consumption compared to avarage Oslo citizen; 180L water per day</p>
             </Container>
           </Carousel.Item>
           <Carousel.Item className="slide-page-2">

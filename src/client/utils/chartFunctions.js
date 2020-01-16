@@ -72,14 +72,15 @@ export function getWaterHistorySixWeeks(waterDataAll) {
 export function compileByMeterId(arrayOfWaterData) {
   return Object.values(
     arrayOfWaterData.reduce(
-      (r, { meterId, room, source, userId, amount, timestamp }) => {
+      (r, { meterId, room, source, userId, amount, timestamp, simulated_data }) => {
         r[meterId] = r[meterId] || {
           meterId,
           room,
           source,
           userId,
           amount: 0,
-          timestamp
+          timestamp,
+          simulated_data
         };
         r[meterId].amount += +amount;
         return r;
