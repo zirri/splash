@@ -185,19 +185,13 @@ async function fixHashing(){
     let password = user.password;
     let hash = await bcrypt.hashSync(password, 10);
     if(bcrypt.compareSync(password, hash)){
-      console.log('passwords already hashed');
+      //console.log('passwords already hashed');
     }else{
       const sql = `UPDATE users SET password='${hash}' WHERE user_id = ${user.user_id};` 
       await pool.query(sql);
     }
   }
 }
-
-async function fixColWaterMeters(){
-  const sql = 'ALTER TABLE water_meters ADD simulated_data boolean;';
-  await pool.query(sql);
-}
-
 
 
 module.exports = {
@@ -210,5 +204,4 @@ module.exports = {
   getWaterMetersByUser,
   insertNewWaterMeter,
   fixHashing,
-  fixColWaterMeters
 }
