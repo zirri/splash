@@ -5,7 +5,6 @@ const {fixHashing} = require('./src/server/services/databaseServices');
 //Remove comment below to fix hashed password in database
 fixHashing();
 
-
 //Imports npm packages
 const express = require('express');
 const bodyParser = require('body-parser');
