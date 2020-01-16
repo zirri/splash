@@ -1,11 +1,9 @@
 require('dotenv').config();
 
 //Quickfix for database updates
-const {fixHashing, fixColWaterMeters} = require('./src/server/services/databaseServices');
+const {fixHashing} = require('./src/server/services/databaseServices');
 //Remove comment below to fix hashed password in database
-// fixHashing();
-// //Remove comment below to fix new column in water_meters
-// fixColWaterMeters();
+fixHashing();
 
 //Imports npm packages
 const express = require('express');
