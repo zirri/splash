@@ -295,7 +295,10 @@ h2.meters-align {
   .containerChartBToday {
     margin-left: 2rem;
   }
-
+  h1.animated, main, .container {
+    text-align: center;
+  }
+  
   p {
     font-size: 1.2rem;
   }
@@ -312,10 +315,14 @@ h2.meters-align {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
+  .row {
+    margin: 0;
+  }
   .split {
-      width: 150px;
-      align-items: left;
-      padding: 5px;
+    width: 150px;
+    align-items: left;
+    padding: 4px;
+   
   }
   .pad {
       margin-right: 10px;
