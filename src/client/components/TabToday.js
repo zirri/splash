@@ -107,7 +107,7 @@ class TabToday extends React.Component {
           formatter: function(value) {
             return value + "L";
           },
-          color: "black",
+          color: "white",
         }
       }
     };
@@ -141,35 +141,35 @@ class TabToday extends React.Component {
           <Carousel.Item className="slide-page-1">
             <h2> Your water usage: </h2>
             <p>
-              {totalUsageToday} / {averageWaterConsumption}L <br></br>(
-              {averageWaterConsumption / user.noInHousehold}L/person)
+              {totalUsageToday} / {averageWaterConsumption}L <br></br>
+              {user.noInHousehold === 1 ? "" : `(${averageWaterConsumption} / ${user.noInHousehold}L/person)`}
             </p>
-            {user ? (
-              <p>
-                {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
-                {user.noInHousehold}
-              </p>
-            ) : (
-              ""
-            )}
+            <div className="space"></div>
+            
             <Container className="containerChartBToday">
               <HorizontalBar data={dataBar} options={optionBarChart} />
             </Container>
+            <div className="space"></div>
+
             <Container className="response-box">
               {totalUsageToday < averageWaterConsumption ? (
                 <span>
-                  <FaGrinBeam size={48} />
+                  <FaGrinBeam size={64} />
                 </span>
               ) : (
                 <span>
-                  <FaFrownOpen size={48} />
+                  <FaFrownOpen size={64} />
                 </span>
               )}
+
+            <div className="space"></div>
+            
               <p>The avarage citizen in Oslo consumes 180L water per day</p>
             </Container>
           </Carousel.Item>
           <Carousel.Item className="slide-page-2">
-            <h3>Overview per source</h3>
+            <h2>Overview per source</h2>
+            <div className="space"></div>
 
             <Container
               className="containerChartDToday"
@@ -183,11 +183,14 @@ class TabToday extends React.Component {
           </Carousel.Item>
 
           <Carousel.Item className="slide-page-3">
+          <h2> Your water usage: </h2>
+          <div className="space"></div>
+
             <Jumbotron className="fact-box">
               <h4>Fact #{randomFact ? randomFact.id : ""}</h4>
+              
               <p>{randomFact ? randomFact.fact : ""}</p>
               <cite>{randomFact ? randomFact.sourceDisplayName : ""} </cite>
-              <FaRegCommentDots />
             </Jumbotron>
           </Carousel.Item>
         </Carousel>

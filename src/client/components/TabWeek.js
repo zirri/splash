@@ -185,19 +185,12 @@ class TabWeek extends React.Component {
     return (
       <>
         <Container fluid>
-          <h3> Your water usage: </h3>
+          <h2> Your water usage: </h2>
           <p>
               {totalUsageThisWeek} / {averageWaterConsumptionHousehold}L <br></br>
-              ({averageWaterConsumption/user.noInHousehold}L/person)
+              {user.noInHousehold === 1 ? "" : `(${averageWaterConsumptionHousehold} / ${user.noInHousehold}L/person)`}
             </p>
-          {user ? (
-            <p>
-              {user.noInHousehold > 1 ? <FaUsers /> : <FaUser />}
-              {user.noInHousehold}
-            </p>
-          ) : (
-            ""
-          )}
+       
           <Container className="containerChartDWeek">
             <Doughnut
               data={transformDataForCharts(usageThisWeek, color)}

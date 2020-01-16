@@ -7,7 +7,6 @@ const {fixHashing, fixColWaterMeters} = require('./src/server/services/databaseS
 //Remove comment below to fix new column in water_meters
 //fixColWaterMeters();
 
-
 //Imports npm packages
 const express = require('express');
 const bodyParser = require('body-parser');
