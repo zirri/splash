@@ -21,17 +21,20 @@ class RoomsAndMeters extends React.Component {
   compileByMeterId(arrayOfWaterData) {
     return Object.entries(arrayOfWaterData.reduce((result, value) => {
       result[value.room] = result[value.room] || [];
-      result[value.room].push({ source: value.source, meterId: value.meterId })
+      result[value.room].push({ source: value.source, meterId: value.meterId, simulatedData: value.simulatedData })
       return result;
     },
       {}
     ))
   }
 
+
   async componentDidMount() {
     try {
       const arrayOfWaterData = await getWaterMeters();
       const waterMeters = this.compileByMeterId(arrayOfWaterData) 
+      console.log(waterMeters)
+
       if(waterMeters.error){throw new Error(waterMeters.error)}
       this.setState({
         waterMeters
@@ -43,7 +46,7 @@ class RoomsAndMeters extends React.Component {
 
   render() {
     const { waterMeters, error } = this.state;
-
+    console.log(waterMeters)
     if(error){
       return <Errorview error={error}/>
     }
@@ -58,7 +61,7 @@ class RoomsAndMeters extends React.Component {
           <Row className="justify-content-md-center">
             <Col xs lg="2" >
               <ListGroup variant="horizontal-left">
-                {room[1].map((source) => <ListGroup.Item key={source.meterId}>{source.source}{source.simulatedData? `(simulated)`:``}</ListGroup.Item>)}
+                {room[1].map((source) => <ListGroup.Item key={source.meterId}>{source.source}{source.simulatedData ? ` (manual registration)`:` (automatic registration)`}</ListGroup.Item>)}
               </ListGroup>
             </Col>
           </Row>
@@ -69,6 +72,7 @@ class RoomsAndMeters extends React.Component {
     return (
       <main>
         <h2>Rooms and Water Meters</h2>
+       
         <Container>
           {meter}
         </Container>
