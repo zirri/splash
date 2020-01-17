@@ -1,70 +1,273 @@
+/* CUSTOM ROOT */
 :root {
-  --lightest-blue: rgb(213, 232, 248);
+  --lightest-blue: rgba(189, 212, 231, 0.281);
   --light-blue: #bce0fd;
   --dark-blue: #80acd2;
   --darkest-blue: #1f65a1;
 }
 
-/*GREEN-BLUE*/
-/* .App {
-    text-align: center;
-}
+/*
+containerChartDToday
+containerChartDWeek
+containerChartBWeek
+*/
 
-.App h1 {
-    margin: 30px auto 10px auto;
-    font-family: 'Comfortaa';
-    font-size: 8rem;
-    color: rgba(248, 248, 200, 0.534);
-    background-image: url('services/hiclipart.com.png');
-    background-size: 800px;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-repeat: repeat-x;
-    animation: water 15s linear infinite;
-}
-
-
-
-@keyframes water {
-     from {background-position: left 0 top -115px;}
-     to {background-position: left 800px top -115px;}
-}
-
-p {
-    font-family: 'Comfortaa';
-    color: rgb(19, 219, 186);
-} */
-
+/* MAIN CONTAINER*/
 .App {
-  height: 100vh;
-  width: 100vw;
-  text-align: center;
-   
-  overflow: hidden;
+  height: 100vh !important;
+  max-width: 100vw !important;
 }
 
-/* HEADER */
+/* MAIN SUB-CONTAINER */
 header {
-    min-height: 10vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
+  min-height: 5vh;
+  padding: 0;
+  background-color: var(--darkest-blue);
+  max-width: 100vw !important;
 }
 
+.nav.nav-tabs {
+  height: fit-content;
+}
+
+.tab-content {
+  height: 85vh;
+  text-align: center;
+  max-width: 100vw !important;
+}
+
+/* CONTENT */
+/* header*/
+.navbar-in-header {
+  height: 100%;
+  text-align: left;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: white;
+  font-size: 1.2rem;
+}
+.navbar-inside {
+  align-items: flex-start;
+}
+
+.profile-img {
+  height: 3.5rem;
+}
 
 .logoname {
   font-family: "Comfortaa";
   font-size: 2.8rem;
-  margin: 0;
-  text-align: center;
-  width: 100%;
-  z-index: 2;
-
   padding: 0;
-} 
+  text-align: center;
+  align-items: center;
+}
 
-/*ZARA STYLE*/
+.logoname a {
+  color: white;
+}
+
+.logoname {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  margin: auto;
+  margin-top: -8px;
+  padding: 0;
+}
+
+.navbar-in-header button {
+  border: none;
+  position: relative;
+}
+
+.navbar-in-header a img {
+  height: 3rem;
+  margin-block-end: 1rem;
+  margin-inline-end: 1rem;
+}
+
+.navbar-in-header .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+
+.navbar-toggler {
+  z-index: 9;
+}
+
+.home-icon svg{
+  color: var(--light-blue);
+
+}
+
+a.home-icon.nav-link {
+  font-size: 60px; 
+}
+a.home-icon.nav-link.active svg{
+  font-size: 60px; 
+  border: none;
+}
+
+/* tab */
+nav a {
+  color: var(--darkest-blue);
+}
+
+.nav-item.nav-link.active {
+  background-color: var(--dark-blue);
+  color: white;
+  border: 1px solid var(--dark-blue);
+  border-radius: 0;
+}
+.nav-item.nav-link {
+  border: 1px solid var(--dark-blue);
+
+  border-radius: 0;
+}
+
+/* tab-content */
+
+.info-p {
+  top: 35rem;
+  position: absolute;
+  text-align: center;
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+
+.carousel-item.active {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* TODAY-TAB */
+/* carousel component insise tab-content */
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+}
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-slide ol li {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background-color: var(--dark-blue);
+}
+
+.carousel-slide a {
+  visibility: hidden;
+}
+
+.active {
+  height: 100%;
+}
+
+/* slide-page-1 */
+.slide-page-1 h2 {
+  padding-block-start: 4rem;
+}
+
+.slide-page-1 div {
+  padding-block-start: 2rem;
+}
+
+.response-box span svg {
+  color: var(--light-blue);
+}
+
+
+
+div.space {
+  padding: 1rem;
+}
+
+/* Bar chart */
+.containerChartBToday {
+  width: 90vw;
+  height: 10vh;
+  margin-right: -2rem;
+}
+
+/* slide-page-2 */
+.slide-page-2 h2 {
+  padding-block-start: 4rem;
+}
+
+.slide-page-2 div.space {
+  padding: 4.5rem;
+}
+
+/* Doughnut chart*/
+
+ol {
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+
+/* slide-page-3 */
+.slide-page-3 h2 {
+  padding-block-start: 4rem;
+}
+
+.slide-page-3 div.space {
+  padding: 4rem;
+}
+
+.slide-page-3.active {
+  margin: 0;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+cite {
+  font-size: 1.2rem;
+}
+
+.fact-box {
+  height: 40%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2rem;
+  margin-top: -1rem;
+  border-radius: 2rem;
+  box-sizing: border-box;
+  background-color: var(--lightest-blue);
+}
+
+/* WEEK-TAB */
+h2 {
+  padding-block-start: 4rem;
+}
+
+h3 {
+  padding-block-end: 2rem;
+}
+
+.week-comparison {
+  margin-block-start: 2.5rem;
+  height: 100%;
+}
+
+
+/*animation*/
 .animated {
   margin: 30px auto 10px auto;
   font-family: "Comfortaa";
@@ -78,10 +281,15 @@ header {
   animation: water 8s linear infinite;
 }
 
-/* ZARA STYLING */
+/*tab-register*/
 .meters-align {
   text-align: left;
   margin-bottom: 40px;
+}
+
+h2.meters-align {
+  padding-top: 64px;
+  padding-bottom: 10px;
 }
 
 .data-registration {
@@ -116,19 +324,36 @@ header {
     background-position: left 800px top 0;
   }
 }
-p {
-  font-family: "Comfortaa";
-  color: rgb(12, 140, 179);
-}
 
-.containerChartBar {
+/* MEDIA QUERIES */
+@media only screen and (max-width: 375px) {
+  .containerChartDToday {
+    align-content: center;
+    width: 50vh;
+    right: 1rem;
+  }
+ 
+  .containerChartDWeek {
     position: relative;
-    overflow: hidden;
-}
-
-@media only screen and (max-width: 380px) {
-  /*ZARA STYLE */
-  .animated {
+    align-content: center;
+    width: 45vh;
+    padding: 0;
+    margin: 0;
+    right: 1rem;
+  }
+  
+  .containerChartBToday {
+    margin-left: 2rem;
+  }
+  h1.animated, main, .container {
+    text-align: center;
+  }
+  
+  p {
+    font-size: 1.2rem;
+  }
+   /*ZARA STYLE small screen*/
+   .animated {
     margin: 30px auto 10px auto;
     font-family: "Comfortaa";
     font-size: 5rem;
@@ -140,10 +365,14 @@ p {
     background-repeat: repeat-x;
     animation: water 8s linear infinite;
   }
+  .row {
+    margin: 0;
+  }
   .split {
-      width: 150px;
-      align-items: left;
-      padding: 5px;
+    width: 150px;
+    align-items: left;
+    padding: 4px;
+   
   }
   .pad {
       margin-right: 10px;
@@ -155,273 +384,99 @@ p {
     }
 
     /*END ZARA STYLE */
-    .list-group-item {
-        height: 50px;
-    }
 }
 
-  .containerChartBar {
-      position: relative;
-      height: 60px;
-      overflow: hidden;
-  }
-  .jumbotron {
-      height: 100%;
-  }
-
-
-/* TABS */
-div .tab-content {
-    height: 60vh;
-}
- 
-/* CAROUSEL */
-.carousel {
-  background-color: lightgray;
-  height: 55vh;
-  padding: 0;
+/* ROOMS AND WATER METERS */
+h2 {
+  padding: 1rem;
+  padding-block-start: 2rem;
 }
 
-.carousel-indicators li {
-  background-color: var(--dark-blue);
-  border-radius: 50%;
-  width: 0.8rem;
-  height: 0.8rem;
+h3 {
+  padding-block-end:0;
+  padding-block-start: 1rem;
 }
 
-.carousel-control-prev-icon {
-  visibility: hidden;
-}
-
-.carousel-control-next-icon {
-  visibility: hidden;
-}
-
-/* COPMONENTS INSIDE CAROUSEL */
-div .containerChart {
+@media only screen and (min-width: 376px) {
+  .containerChartBToday {
     margin: auto;
-    overflow: hidden;
-    height: 10vh;
+  }
 }
 
-
-div .tab-content {
-    height: 100%;
+@media only screen and (max-width: 768px) {
 }
-
-div .tab-content div .jumbotron .jumbotron-fluid {
-    height: 100%;
-    margin: 0;
+@media only screen and (max-width: 992px) {
 }
+@media only screen and (min-width: 1200px) {
 
-.tab-content div .jumbotron {
-    padding: 1rem;
-}
-
-.smile-icon {
-    padding: 1rem;
-} 
-
-
-
-
-
-
-/* NAVBAR */
-.navbar {
-width: 100vw;
-  background-color: var(--darkest-blue);
-  padding: 0;
-}
-
-.container {
- margin: auto;
-}
-
-nav a {
-  color: var(--light-blue);
-}
-
-.navbar-toggler {
-  border: none;
-  color: white;
-}
-
-.navbar img {
-  height: 1.8rem;
-  margin-inline-end: 10px;
-}
-
-.navbar-light .navbar-nav .nav-link.active,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .show > .nav-link {
-  color: white;
-}
-.navbar .profile-img {
-    height: 2.5rem;
-    margin: auto;
-
-}
-.navbar-nav {
-  flex-flow: column;
-  color: white;
-  text-transform: capitalize;
-  font-size: 1.5rem;
-}
-
-.navbar-light .navbar-nav .nav-link {
-  color: white;
-}
-
-
-
-
-@media only screen and (max-width: 300px) {
-    div .containerChart  {
-        margin-left: 1rem;
-        width: 100%;
-    }
-
-    div .tab-content {
-        height: 100vh;
-    }
-    
-    nav .nav .nav-tabs {
-        display: block;
-        height: 30vh;
-    }
-
-    h3 {
-        font-size: 1.2rem;
-    }
-
-    h4 {
-        font-size: 1.1rem;
-    }
-
-    h6 {
-        font-size: 0.8rem;
-        margin :0;
-    }
-
-    .tab-content {
-        height: 100vh;
-    }
-
-    .smile-icon span svg{
-        padding: 3px;
-    }
-
-    p {
-        font-size: 0.8rem;
-        margin-block-end: 0.2rem;
-    }
-
-    .carousel-indicators {
-        margin-block-end: 0.2rem;
-    }
-
-    .tab-content div .jumbotron {
-        padding: 0;
-    }
-
-    div .containerChart {
-        height: 8vh;
-    }
-}
-
-.carousel-inner {
-    height: 100%;
-}
-
-div .containerChart {
-    overflow: visible;
-    height: 300px;
-}
-
-@media only screen and (min-width: 768px) {
-    .containerChartBar {
-        height: 150px;
-    }
-
-    .form-row {
-      justify-content: center;
-    }
-  
-    .col-md-4 {
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-  
-    .navbar a img {
-      display: none;
-    }
-
-}
- 
-
-
-header {
-    min-height: 10vh;
-    display: block;
-    background-color: var(--darkest-blue);
-}
-
-nav .nav .nav-tabs {
-    height: 5vh;
-}
-
-div .tab-content  {
-    min-height: 85vh;
-}
-
-@media only screen and (min-width: 1200px){
-
-  a img {
+  /* Header content*/
+  .navbar-in-header a img {
     display: none;
+    visibility: hidden;
   }
 
-  .navbar-expand-xl {
-    flex-flow: column;
-    display: flex;
+  header {
+    height: 64px;
+    padding: 0;
+    background-color: var(--darkest-blue);
+    width: 100vw !important;
   }
 
-  .navbar-light .navbar-brand {
+  .navbar-in-header {
+    display: inline-block;
+  }
+
+  #basic-navbar-nav {
+    justify-content: row;
+  }
+
+  .navbar-in-header div {
+    padding: 0;
+  }
+
+  .profile-img {
+    height: 3rem;
+  }
+  .navbar-light .navbar-nav .nav-link.active {
+    font-size: 1rem;
+    border: 1px solid;
+  }
+
+  span.logoname.text.navbar-brand {
+
+    width: 100vw;
+  }
+
+  .navbar-in-header div {
+    z-index: 999;
+  }
+ 
+
+  .home-icon * {
+    width: 64px;
+    height: 30px;
     margin: auto;
   }
 
-  div .containerChart {
-    overflow: hidden;
-    width: 85vw;
-    min-height: 10vh;
-    max-height: 10vh;
-}
-div .containerChart  {
-    position: relative;
-    height: 100%;
-}
+  .home-icon.navbar-light.navbar-nav.nav-link.active{
+    font-size: 30px; 
+    border: none;
+  }
+  a.home-icon.nav-link {
+    font-size: 20px;
+  }
+
+  .navbar-inside.mr-auto.navbar-nav {
+    align-items: center;
+  }
+
+  /* slide-3 facts*/
+  h4, cite {
+    font-size: 2.2rem;
+  }
 
 
-    div.jumbotron .jumbotron-fluid {
-        background-color: white;
-    }
-} 
-
-#uncontrolled-tab-example-tabpane-week {
-    height: 100%;
-}
-
-#uncontrolled-tab-example-tabpane-week div{
-    height: 45%;
-    margin-block-end: 1rem;
-    
-}
-
-#uncontrolled-tab-example-tabpane-today{
-    height: 100%;
-  
-}
-  
-.list-group-item {
-    height: 50px;
+  p {
+    font-size: 2rem;
+  }
 }
