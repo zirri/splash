@@ -386,6 +386,17 @@ h2.meters-align {
     /*END ZARA STYLE */
 }
 
+/* ROOMS AND WATER METERS */
+h2 {
+  padding: 1rem;
+  padding-block-start: 2rem;
+}
+
+h3 {
+  padding-block-end:0;
+  padding-block-start: 1rem;
+}
+
 @media only screen and (min-width: 376px) {
   .containerChartBToday {
     margin: auto;
