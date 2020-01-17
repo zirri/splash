@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, HashRouter, Switch } from 'react-router-dom';
 import './App1.css';
 
 //Components
@@ -34,14 +34,14 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Router >
+        <HashRouter >
           <Switch>
             <Route exact path="/" component={Authenticate}></Route>
             <Route path="/login" component={LoginFormik}></Route>
             <Route path="/signup" component={Signup}></Route>
             <Route component={ DefaultContainer }></Route>
           </Switch>
-        </Router>
+        </HashRouter>
       </div>
     );
   }
