@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
 import { Route, HashRouter, Switch } from 'react-router-dom';
-import './App1.css';
+import './App.css';
 
 //Components
 import Navigation from './components/Navigation';
